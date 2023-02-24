@@ -4,8 +4,8 @@
 #include <iostream>
 #include <vector>
 
-void enumerate_face(Face *face) {
-    Edge *start = face->edge;
+void enumerate_face(const Face &face) {
+    Edge *start = face.edge;
     auto cur = start->next;
     std::vector<Vertex *> vertices;
     vertices.push_back(start->origin);
@@ -19,7 +19,7 @@ void enumerate_face(Face *face) {
 }
 
 // The angle swept by a counterclockwise rotation from bc to ba
-double angle(Point &a, Point &b, Point &c) {
+double angle(const Point &a, const Point &b, const Point &c) {
     auto mag_ba =
         std::sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
     auto mag_bc =
@@ -36,6 +36,7 @@ double angle(Point &a, Point &b, Point &c) {
         }
     } else if (sin_theta > 0) {
         return std::acos(cos_theta) * 180 / M_PI;
+    } else {
+        return 360.0 - (std::acos(cos_theta) * 180 / M_PI);
     }
-    return 360.0 - (std::acos(cos_theta) * 180 / M_PI);
 }

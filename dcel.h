@@ -27,8 +27,8 @@ class Vertex {
     Edge *incident_edge;
 };
 
-void enumerate_face(Face *face);
+void enumerate_face(const Face &face);
 
-double angle(Point &a, Point &b, Point &c);
+double angle(const Point &a, const Point &b, const Point &c);
 
 #endif // DCEL_H
