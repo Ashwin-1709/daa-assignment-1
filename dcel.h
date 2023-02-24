@@ -16,14 +16,19 @@ class Edge {
     Edge *prev;
 };
 
-class Vertex {
+class Point {
   public:
     double x, y;
+};
+
+class Vertex {
+  public:
+    Point p;
     Edge *incident_edge;
 };
 
 void enumerate_face(Face *face);
 
-double angle(Vertex *v1, Vertex *v2, Vertex *v3);
+double angle(Point &a, Point &b, Point &c);
 
 #endif // DCEL_H

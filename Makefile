@@ -1,2 +1,2 @@
 default:
-	g++ dcel.h test.cpp -o test.out
+	g++ dcel.h dcel.cc test.cpp -o test.out

@@ -1,8 +1,8 @@
 #include "dcel.h"
-#include <cmath>
-#include <vector>
 #include <array>
+#include <cmath>
 #include <iostream>
+#include <vector>
 
 void enumerate_face(Face *face) {
     Edge *start = face->edge;
@@ -14,23 +14,28 @@ void enumerate_face(Face *face) {
         cur = cur->next;
     }
     for (auto &u : vertices) {
-        std::cout << u->x << " " << u->y << "\n";
+        std::cout << u->p.x << " " << u->p.y << "\n";
     }
 }
 
-double angle(Vertex *v1, Vertex *v2, Vertex *v3) {
-    std::vector<std::array<double, 2>> coords;
-    for (auto v : {v1, v2, v3}) {
-        coords.push_back({v->x, v->y});
-    }
-    auto dot = (coords[0][0] - coords[1][0]) * (coords[2][0] - coords[1][0]) +
-               (coords[0][1] - coords[1][1]) * (coords[2][1] - coords[1][1]);
-    auto mag_ba = std::sqrt(
-        (coords[0][0] - coords[1][0]) * (coords[0][0] - coords[1][0]) +
-        (coords[0][1] - coords[1][1]) * (coords[0][1] - coords[1][1]));
-    auto mag_bc = std::sqrt(
-        (coords[2][0] - coords[1][0]) * (coords[2][0] - coords[1][0]) +
-        (coords[2][1] - coords[1][1]) * (coords[2][1] - coords[1][1]));
+// The angle swept by a counterclockwise rotation from bc to ba
+double angle(Point &a, Point &b, Point &c) {
+    auto mag_ba =
+        std::sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+    auto mag_bc =
+        std::sqrt((c.x - b.x) * (c.x - b.x) + (c.y - b.y) * (c.y - b.y));
+    auto dot = (a.x - b.x) * (c.x - b.x) + (a.y - b.y) * (c.y - b.y);
     auto cos_theta = dot / (mag_ba * mag_bc);
-    return std::acos(cos_theta) * 180 / M_PI;
+    auto cross = (a.x - b.x) * (c.y - b.y) - (a.y - b.y) * (c.x - b.x);
+    auto sin_theta = cross / (mag_ba * mag_bc);
+    if (sin_theta == 0) {
+        if (cos_theta > 0) {
+            return 0.0;
+        } else {
+            return 180.0;
+        }
+    } else if (sin_theta > 0) {
+        return std::acos(cos_theta) * 180 / M_PI;
+    }
+    return 360.0 - (std::acos(cos_theta) * 180 / M_PI);
 }
