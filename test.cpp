@@ -38,4 +38,5 @@ int main() {
     Face f;
     f.edge = &e1;
     enumerate_face(&f);
+    std::cout << angle(&v1 , &v2 , &v3) << '\n';
 }
