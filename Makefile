@@ -1,2 +1,4 @@
+C++ = clang++
+CXXFLAGS = -Weverything -Wextra -Wshadow -Wconversion -Wpedantic -Werror -Wno-c++98-compat -Wno-float-equal
 default:
-	g++ dcel.h dcel.cc test.cpp -o test.out
+	$(C++) dcel.hh dcel.cc test.cpp $(CXXFLAGS)

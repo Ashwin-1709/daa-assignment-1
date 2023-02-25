@@ -1,4 +1,4 @@
-#include "dcel.h"
+#include "dcel.hh"
 #include <array>
 #include <cmath>
 #include <iostream>
