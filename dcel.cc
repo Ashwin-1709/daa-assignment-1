@@ -38,7 +38,7 @@ double angle(const Point &a, const Point &b, const Point &c) {
     }
 }
 
-std::deque<Vertex *> get_notches(std::deque<Vertex *> &polygon) {
+std::deque<Vertex *> get_notches(std::deque<Vertex *> polygon) {
     std::deque<Vertex *> notches;
     int n = (int)polygon.size();
     if (n < 3)
@@ -48,11 +48,12 @@ std::deque<Vertex *> get_notches(std::deque<Vertex *> &polygon) {
         Vertex *left = polygon[(i - 1 + n) % n];
         Vertex *right = polygon[(i + 1) % n];
         if (angle(left->point, base->point, right->point) > 180)
-            notches.push_front(base);
+            notches.push_back(base);
     }
     return notches;
 }
 
+// rectangle with minimum area that encloses vertices of list L
 std::array<Point, 2> get_rectangle(std::deque<Vertex *> &L) {
     Point minimum, maximum;
     minimum.x = 1e9, minimum.y = 1e9;
@@ -119,4 +120,65 @@ DCEL::DCEL(std::deque<Point> &point_list) {
         prev = cur;
         cur = f->twin->origin;
     }
+}
+
+std::array<double, 3> get_line(const Point &a, const Point &b) {
+    // x1x + y1y + c = 0
+    std::array<double, 3> coefficients;
+    coefficients[0] = b.y - a.y;
+    coefficients[1] = a.x - b.x;
+    coefficients[2] = -(coefficients[0] * a.x + coefficients[1] * a.y);
+    return coefficients;
+}
+
+bool same_side_semiplane(std::array<double, 3> &coef, const Point &a,
+                         const Point &b) {
+    double L1 = coef[0] * a.x + coef[1] * a.y + coef[2];
+    double L2 = coef[0] * b.x + coef[1] * b.y + coef[2];
+    if ((L1 * L2) > 0)
+        return true;
+    return false;
+}
+
+Vertex *next_vertex(Vertex *v) {
+    Edge *nxt_edge = v->incident_edge->next;
+    return nxt_edge->origin;
+}
+
+bool check_notch(Vertex *a, Vertex *b, Vertex *c, Vertex *start,
+                 Vertex *second) {
+    double angle_b = angle(a->point, b->point, c->point);
+    double angle_c = angle(b->point, c->point, start->point);
+    double angle_start = angle(c->point, start->point, second->point);
+    return angle_b <= 180 and angle_c <= 180 and angle_start <= 180;
+}
+
+void decompose(const DCEL &dcel) {
+    int n = dcel.n;
+    // std::deque<std::deque<Vertex *>> L;
+    // std::deque<Vertex *> cur, notches = get_notches(dcel.polygon);
+    // cur.push_front(dcel.polygon[0]);
+    // L.push_front(cur);
+    // int m = 1;
+    // while (n > 3) {
+    //     Vertex *v1 = L[m - 1].back();
+    //     Vertex *v2 = next_vertex(v1);
+    //     cur.clear();
+    //     cur.push_back(v1);
+    //     cur.push_back(v2);
+
+    //     Vertex *pre = v1;
+    //     Vertex *now = v2;
+    //     Vertex *nxt = next_vertex(v2);
+    //     while (check_notch(pre, now, nxt, v1, v2)) {
+    //         cur.push_back(nxt);
+    //         pre = now;
+    //         now = nxt;
+    //         nxt = next_vertex(nxt);
+    //     }
+
+    //     if ((int)cur.size() != n) {
+            
+    //     }
+    // }
 }

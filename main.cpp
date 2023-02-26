@@ -31,4 +31,18 @@ int main() {
     }
     DCEL *polygon = new DCEL(points);
     dbg(polygon);
+    Point a, b;
+    a.x = 3.25, a.y = 1.4;
+    b.x = 2.8, b.y = -2.3;
+
+    auto x = get_line(a, b);
+    cout << x[0] << ' ' << x[1] << ' ' << x[2] << '\n';
+    Point c, d;
+    c.x = 3.5, c.y = 2;
+    d.x = 2.5, d.y = -5;
+    cout << same_side_semiplane(x, c, d) << '\n';
+    c.x = 3.3, c.y = 2;
+    cout << same_side_semiplane(x, c, d) << '\n';
+    d.x = 3, d.y = 2;
+    cout << same_side_semiplane(x, c, d) << '\n';
 }
