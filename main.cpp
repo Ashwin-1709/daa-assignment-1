@@ -3,15 +3,15 @@ using namespace std;
 
 // Debug Polygon
 void dbg(DCEL *x) {
-    Vertex *start = x->P[0];
-    cout << "Starting at " << start->idx << endl;
+    Vertex *start = x->polygon[0];
+    cout << "Starting at " << start->index << endl;
     Vertex *cur = start->incident_edge->next->origin;
     while (cur != start) {
-        cout << "Currently at  " << cur->idx
-             << " Previous : " << cur->incident_edge->prev->origin->idx
-             << " Next Vertex: " << cur->incident_edge->next->origin->idx
+        cout << "Currently at  " << cur->index
+             << " Previous : " << cur->incident_edge->prev->origin->index
+             << " Next Vertex: " << cur->incident_edge->next->origin->index
              << "\n";
-        cout << "Twin Vertex at " << cur->incident_edge->twin->origin->idx
+        cout << "Twin Vertex at " << cur->incident_edge->twin->origin->index
              << "\n";
         cur = cur->incident_edge->next->origin;
     }

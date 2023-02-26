@@ -25,17 +25,17 @@ class Point {
 
 class Vertex {
   public:
-    Point p;
-    int idx;
+    Point point;
+    int index;
     Edge *incident_edge;
-    Vertex(Point &pt, int &id) : p(pt), idx(id) {}
+    Vertex(Point &pt, int &id) : point(pt), index(id) {}
 };
 
 class DCEL {
   public:
-    std::deque<Vertex *> P;
+    std::deque<Vertex *> polygon;
     int n;
-    DCEL(std::deque<Point> &Polygon);
+    DCEL(std::deque<Point> &point_list);
 
   private:
     std::deque<std::array<Edge *, 2>> EdgeList;
@@ -44,7 +44,7 @@ class DCEL {
 void enumerate_face(const Face &face);
 
 double angle(const Point &a, const Point &b, const Point &c);
-std::deque<Vertex *> get_notches(std::deque<Vertex *> &P);
+std::deque<Vertex *> get_notches(std::deque<Vertex *> &polygon);
 std::array<Point, 2> get_rectangle(std::deque<Vertex *> &L);
-bool inside_rect(std::array<Point, 2> &rect, const Point &p);
+bool inside_rectangle(std::array<Point, 2> &rectangle, const Point &point);
 #endif // DCEL_H

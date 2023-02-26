@@ -11,7 +11,7 @@ void enumerate_face(const Face &face) {
         cur = cur->next;
     }
     for (auto &u : vertices) {
-        std::cout << u->p.x << " " << u->p.y << "\n";
+        std::cout << u->point.x << " " << u->point.y << "\n";
     }
 }
 
@@ -38,16 +38,16 @@ double angle(const Point &a, const Point &b, const Point &c) {
     }
 }
 
-std::deque<Vertex *> get_notches(std::deque<Vertex *> &P) {
+std::deque<Vertex *> get_notches(std::deque<Vertex *> &polygon) {
     std::deque<Vertex *> notches;
-    int n = (int)P.size();
+    int n = (int)polygon.size();
     if (n < 3)
         return notches;
     for (int i = 0; i < n; i++) {
-        Vertex *base = P[i];
-        Vertex *left = P[(i - 1 + n) % n];
-        Vertex *right = P[(i + 1) % n];
-        if (angle(left->p, base->p, right->p) > 180)
+        Vertex *base = polygon[i];
+        Vertex *left = polygon[(i - 1 + n) % n];
+        Vertex *right = polygon[(i + 1) % n];
+        if (angle(left->point, base->point, right->point) > 180)
             notches.push_front(base);
     }
     return notches;
@@ -58,26 +58,26 @@ std::array<Point, 2> get_rectangle(std::deque<Vertex *> &L) {
     minimum.x = 1e9, minimum.y = 1e9;
     maximum.x = -1e9, maximum.y = -1e9;
     for (auto &v : L) {
-        minimum.x = std::min(minimum.x, v->p.x);
-        minimum.y = std::min(minimum.y, v->p.y);
-        maximum.x = std::max(maximum.x, v->p.x);
-        maximum.y = std::max(maximum.y, v->p.y);
+        minimum.x = std::min(minimum.x, v->point.x);
+        minimum.y = std::min(minimum.y, v->point.y);
+        maximum.x = std::max(maximum.x, v->point.x);
+        maximum.y = std::max(maximum.y, v->point.y);
     }
     return {minimum, maximum};
 }
 
-bool inside_rect(std::array<Point, 2> &rect, const Point &p) {
-    if (p.x >= rect[0].x and p.x <= rect[1].x and p.y >= rect[0].y and
-        p.y <= rect[1].y)
+bool inside_rectangle(std::array<Point, 2> &rectangle, const Point &point) {
+    if (point.x >= rectangle[0].x and point.x <= rectangle[1].x and
+        point.y >= rectangle[0].y and point.y <= rectangle[1].y)
         return true;
     return false;
 }
 
-DCEL::DCEL(std::deque<Point> &Polygon) {
+DCEL::DCEL(std::deque<Point> &point_list) {
     Edge *front = NULL, *back = NULL;
-    n = (int)Polygon.size();
+    n = (int)point_list.size();
     for (int i = 0; i < n; i++) {
-        Vertex *v = new Vertex(Polygon[i], i);
+        Vertex *v = new Vertex(point_list[i], i);
         Edge *f = new Edge();
         Edge *b = new Edge();
         f->origin = v;
@@ -89,7 +89,7 @@ DCEL::DCEL(std::deque<Point> &Polygon) {
         b->origin = NULL;
 
         EdgeList.push_back({f, b});
-        P.push_back(v);
+        polygon.push_back(v);
         v->incident_edge = f;
         if (front)
             front->next = f;
@@ -100,9 +100,9 @@ DCEL::DCEL(std::deque<Point> &Polygon) {
     }
     front->next = EdgeList[0][0];
     EdgeList[0][1]->next = back;
-    back->origin = P[0];
-    Vertex *prev = P.back();
-    Vertex *cur = P[0];
+    back->origin = polygon[0];
+    Vertex *prev = polygon.back();
+    Vertex *cur = polygon[0];
     for (int i = 0; i < n; i++) {
         Edge *e = cur->incident_edge;
         Edge *f = prev->incident_edge;
@@ -110,8 +110,8 @@ DCEL::DCEL(std::deque<Point> &Polygon) {
         prev = cur;
         cur = cur->incident_edge->next->origin;
     }
-    prev = P[0];
-    cur = P.back();
+    prev = polygon[0];
+    cur = polygon.back();
     for (int i = 0; i < n; i++) {
         Edge *e = prev->incident_edge->twin;
         Edge *f = cur->incident_edge->twin;
