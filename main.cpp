@@ -1,8 +1,7 @@
 #include "dcel.hh"
 using namespace std;
 
-
-//Debug Polygon
+// Debug Polygon
 void dbg(DCEL *x) {
     Vertex *start = x->P[0];
     cout << "Starting at " << start->idx << endl;

@@ -28,7 +28,7 @@ class Vertex {
     Point p;
     int idx;
     Edge *incident_edge;
-    Vertex(Point& pt, int &id): p(pt), idx(id) {}
+    Vertex(Point &pt, int &id) : p(pt), idx(id) {}
 };
 
 class DCEL {
@@ -36,6 +36,7 @@ class DCEL {
     std::deque<Vertex *> P;
     int n;
     DCEL(std::deque<Point> &Polygon);
+
   private:
     std::deque<std::array<Edge *, 2>> EdgeList;
 };

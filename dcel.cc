@@ -73,7 +73,7 @@ bool inside_rect(std::array<Point, 2> &rect, const Point &p) {
     return false;
 }
 
-DCEL::DCEL(std::deque<Point>&Polygon) {
+DCEL::DCEL(std::deque<Point> &Polygon) {
     Edge *front = NULL, *back = NULL;
     n = (int)Polygon.size();
     for (int i = 0; i < n; i++) {
@@ -112,7 +112,7 @@ DCEL::DCEL(std::deque<Point>&Polygon) {
     }
     prev = P[0];
     cur = P.back();
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         Edge *e = prev->incident_edge->twin;
         Edge *f = cur->incident_edge->twin;
         e->next = f;
