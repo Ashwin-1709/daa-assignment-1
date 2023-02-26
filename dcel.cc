@@ -155,30 +155,76 @@ bool check_notch(Vertex *a, Vertex *b, Vertex *c, Vertex *start,
 
 void decompose(const DCEL &dcel) {
     int n = dcel.n;
-    // std::deque<std::deque<Vertex *>> L;
-    // std::deque<Vertex *> cur, notches = get_notches(dcel.polygon);
-    // cur.push_front(dcel.polygon[0]);
-    // L.push_front(cur);
-    // int m = 1;
-    // while (n > 3) {
-    //     Vertex *v1 = L[m - 1].back();
-    //     Vertex *v2 = next_vertex(v1);
-    //     cur.clear();
-    //     cur.push_back(v1);
-    //     cur.push_back(v2);
+    std::deque<std::deque<Vertex *>> L;
+    std::deque<Vertex *> cur, notches = get_notches(dcel.polygon) , P = dcel.polygon;
+    cur.push_front(dcel.polygon[0]);
+    L.push_front(cur);
+    int m = 1;
+    while(n > 3) {
+        Vertex *v1 = L[m - 1].back();
+        Vertex *v2 = next_vertex(v2);
+        cur.clear();
+        cur.push_back(v1); cur.push_back(v2);
+        L.push_back(cur); // L[m] inserted
+        
 
-    //     Vertex *pre = v1;
-    //     Vertex *now = v2;
-    //     Vertex *nxt = next_vertex(v2);
-    //     while (check_notch(pre, now, nxt, v1, v2)) {
-    //         cur.push_back(nxt);
-    //         pre = now;
-    //         now = nxt;
-    //         nxt = next_vertex(nxt);
-    //     }
+        Vertex *pre = v1;
+        Vertex *now = v2;
+        Vertex *nxt = next_vertex(v2);
+        while (check_notch(pre, now, nxt, v1, v2) and (int)L[m].size() < n) {
+            L[m].push_back(nxt);
+            pre = now;
+            now = nxt;
+            nxt = next_vertex(nxt);
+        }    
 
-    //     if ((int)cur.size() != n) {
-            
-    //     }
-    // }
+        if((int)L[m].size() != n) {
+            std::deque<Vertex*>LPVS;
+            for(auto notch : notches) {
+                bool in = false;
+                for(auto v : L[m]) {
+                    if(v == notch) {
+                        in = true;
+                        break;
+                    }
+                }
+                if(!in) LPVS.push_back(notch);
+            }
+            while(!LPVS.empty()) {
+                auto rect = get_rectangle(L[m]);
+                bool backward = false;
+                do {
+                    Vertex *v = LPVS.front();
+                    if(!inside_rectangle(rect , v->point)) 
+                        LPVS.pop_front();
+                } while(!backward and !LPVS.empty());
+
+                if(!LPVS.empty()) {
+                    Vertex *v = LPVS.front();
+                    // Inside rectangle not sure ? 
+                    if(inside_rectangle(rect , v->point)) {
+                        std::deque<Vertex*> VTR;
+                        auto line = get_line(v1->point , v->point);
+                        auto bck = L[m].back();
+                        for(auto u : L[m]) {
+                            if(same_side_semiplane(line , u->point , bck->point))
+                                VTR.push_back(u);
+                        }
+                        L[m] = VTR;
+                        backward = true;
+                        LPVS.pop_front();
+                    }
+                }
+            }
+
+            if(L[m].back() != v2) {
+
+                
+                int sz = (int)L[m].size();
+                n = n - sz + 2;
+            }
+            m++;
+        }
+
+    }
 }
