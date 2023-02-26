@@ -28,10 +28,7 @@ class Vertex {
     Point p;
     int idx;
     Edge *incident_edge;
-    Vertex(Point &pt, int &id) {
-        this->p = pt;
-        this->idx = id;
-    }
+    Vertex(Point& pt, int &id): p(pt), idx(id) {}
 };
 
 class DCEL {
