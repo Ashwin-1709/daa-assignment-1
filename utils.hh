@@ -1,13 +1,14 @@
 #ifndef UTILS_H
 #define UTILS_H
 #include "dcel.hh"
-#include <bits/stdc++.h>
+#include "bits/stdc++.h"
 using namespace std;
 
 void enumerate_face(const Face &face);
 
 double angle(const Point &a, const Point &b, const Point &c);
 deque<Vertex *> get_notches(deque<Vertex *> polygon);
+deque<Vertex*> get_LPVS(deque<Vertex*> &notches , deque<Vertex*> &L , deque<Vertex*> &P);
 array<Point, 2> get_rectangle(deque<Vertex *> &L);
 bool inside_rectangle(array<Point, 2> &rectangle, const Point &point);
 array<double, 3> get_line(const Point &a, const Point &b);

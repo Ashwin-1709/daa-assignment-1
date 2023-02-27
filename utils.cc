@@ -1,5 +1,5 @@
 #include "utils.hh"
-#include <bits/stdc++.h>
+#include "bits/stdc++.h"
 
 // The angle swept by a counterclockwise rotation from bc to ba
 double angle(const Point &a, const Point &b, const Point &c) {
@@ -8,7 +8,8 @@ double angle(const Point &a, const Point &b, const Point &c) {
     auto mag_bc =
         std::sqrt((c.x - b.x) * (c.x - b.x) + (c.y - b.y) * (c.y - b.y));
     auto dot = (a.x - b.x) * (c.x - b.x) + (a.y - b.y) * (c.y - b.y);
-    auto cos_theta = dot / (mag_ba * mag_bc);
+    auto cos_theta = min(1.0 , dot / (mag_ba * mag_bc));
+    cos_theta = max(cos_theta , -1.0);
     auto cross = (a.x - b.x) * (c.y - b.y) - (a.y - b.y) * (c.x - b.x);
     auto sin_theta = cross / (mag_ba * mag_bc);
     if (sin_theta == 0) {
@@ -85,9 +86,12 @@ Vertex *next_vertex(Vertex *v) {
 
 bool check_notch(Vertex *a, Vertex *b, Vertex *c, Vertex *start,
                  Vertex *second) {
+    // dbg(a->point.x , a->point.y , b->point.x , b->point.y , c->point.x , c->point.y);
+    // dbg(start->point.x , start->point.y , second->point.x , second->point.y);
     double angle_b = angle(a->point, b->point, c->point);
     double angle_c = angle(b->point, c->point, start->point);
     double angle_start = angle(c->point, start->point, second->point);
+    // dbg(angle_b , angle_c , angle_start);
     return angle_b <= 180 and angle_c <= 180 and angle_start <= 180;
 }
 
@@ -137,4 +141,18 @@ void add_edge(Vertex *v1, Vertex *vr) {
     Face *polygon = new Face();
     polygon->edge = v1_vr;
     update_face(v1_vr , polygon);
+}
+
+deque<Vertex*> get_LPVS(deque<Vertex*> &notches , deque<Vertex*> &L , deque<Vertex*> &P) {
+    deque<Vertex*> LPVS;
+    for(auto notch : notches) {
+        bool in_P = false , in_L = false;
+        for(auto cur : L) 
+            in_L |= (cur == notch);
+        for(auto cur : P)
+            in_P |= (cur == notch);
+        if(in_P and !in_L)
+            LPVS.push_back(notch);
+    }
+    return LPVS;
 }

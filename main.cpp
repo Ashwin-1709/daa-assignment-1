@@ -1,5 +1,6 @@
 #include "dcel.hh"
 #include "utils.hh"
+#include "decomp.hh"
 using namespace std;
 
 void Traverse(Polygon p) {
@@ -18,12 +19,15 @@ void Traverse(Polygon p) {
     cout << "Number of polygons : " << polygons.size() << '\n';
     for(auto y : polygons) {
         Edge *s = y->edge;
-        cout << s->origin->index << ' ';
+        vector<array<double , 2>>c;
+        c.push_back({s->origin->point.x , s->origin->point.y});
         Edge *start = s->next;
         while(start->origin != s->origin) {
-            cout << start->origin->index << ' ';
+            c.push_back({start->origin->point.x , start->origin->point.y});
             start = start->next;
         }
+        for(auto u : c) 
+            cout << "(" << u[0] << "," << u[1] << ") ";
         cout << '\n';
     }
 }
@@ -39,7 +43,12 @@ int main() {
         points.push_back(p);
     }
     Polygon *polygon = new Polygon(points);
-    add_edge(polygon->vertices[1] , polygon->vertices[7]);
-    add_edge(polygon->vertices[7] , polygon->vertices[11]);
-    Traverse(*polygon);
+    auto p = decompose(polygon);
+    cout << p.size() << '\n';
+    for(int i = 1 ; i < p.size() ; i++) {
+        if(p[i].size() <= 2) continue;
+        for(auto y : p[i])
+            cout << "(" << y->point.x << "," << y->point.y << ") ";
+        cout << '\n';
+    }
 }
