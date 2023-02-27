@@ -10,3 +10,6 @@
 /.cache/
 *.cmake
 /_deps/
+./Makefile
+/build/
+compile_commands.json
