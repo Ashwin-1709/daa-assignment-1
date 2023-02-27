@@ -20,7 +20,7 @@ void Traverse(Polygon p) {
         Edge *s = y->edge;
         cout << s->origin->index << ' ';
         Edge *start = s->next;
-        while(start != s) {
+        while(start->origin != s->origin) {
             cout << start->origin->index << ' ';
             start = start->next;
         }
@@ -40,6 +40,6 @@ int main() {
     }
     Polygon *polygon = new Polygon(points);
     add_edge(polygon->vertices[1] , polygon->vertices[7]);
-    add_edge(polygon->vertices[0] , polygon->vertices[10]);
+    add_edge(polygon->vertices[7] , polygon->vertices[11]);
     Traverse(*polygon);
 }
