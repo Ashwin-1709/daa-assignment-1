@@ -45,6 +45,15 @@ void Traverse(Polygon p) {
 }
 
 int main() {
-    deque<Point> points = {{2, -2}, {-2, -4}, {-4, 0}, {-2, 1}, {0, 2}, {2, 0}};
+    int n; cin >> n;
+    deque<Point>points;
+    for(int i = 0 ; i < n ; i++) {
+        double x , y; cin >> x >> y;
+        Point p;
+        p.x = x;
+        p.y = y;
+        points.push_back(p);
+    }
     Polygon *polygon = new Polygon(points);
+    Traverse(*polygon);
 }
