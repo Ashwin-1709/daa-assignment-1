@@ -1,0 +1,42 @@
+[
+{
+  "directory": "/home/chinmay/acads/assignments/DAA-Assignment-1",
+  "command": "/usr/bin/c++ -I/home/chinmay/acads/assignments/DAA-Assignment-1/src -I/home/chinmay/acads/assignments/DAA-Assignment-1/test -Wextra -Wshadow -Wconversion -Wpedantic -Werror -Wno-float-equal -g -std=gnu++20 -o CMakeFiles/polygon_decomp.dir/src/dcel.cc.o -c /home/chinmay/acads/assignments/DAA-Assignment-1/src/dcel.cc",
+  "file": "/home/chinmay/acads/assignments/DAA-Assignment-1/src/dcel.cc"
+},
+{
+  "directory": "/home/chinmay/acads/assignments/DAA-Assignment-1",
+  "command": "/usr/bin/c++ -I/home/chinmay/acads/assignments/DAA-Assignment-1/src -I/home/chinmay/acads/assignments/DAA-Assignment-1/test -Wextra -Wshadow -Wconversion -Wpedantic -Werror -Wno-float-equal -g -std=gnu++20 -o CMakeFiles/polygon_decomp.dir/src/main.cpp.o -c /home/chinmay/acads/assignments/DAA-Assignment-1/src/main.cpp",
+  "file": "/home/chinmay/acads/assignments/DAA-Assignment-1/src/main.cpp"
+},
+{
+  "directory": "/home/chinmay/acads/assignments/DAA-Assignment-1",
+  "command": "/usr/bin/c++ -I/home/chinmay/acads/assignments/DAA-Assignment-1/src -I/home/chinmay/acads/assignments/DAA-Assignment-1/test -Wextra -Wshadow -Wconversion -Wpedantic -Werror -Wno-float-equal -g -std=gnu++20 -o CMakeFiles/polygon_decomp.dir/src/utils.cc.o -c /home/chinmay/acads/assignments/DAA-Assignment-1/src/utils.cc",
+  "file": "/home/chinmay/acads/assignments/DAA-Assignment-1/src/utils.cc"
+},
+{
+  "directory": "/home/chinmay/acads/assignments/DAA-Assignment-1",
+  "command": "/usr/bin/c++ -I/home/chinmay/acads/assignments/DAA-Assignment-1/src -I/home/chinmay/acads/assignments/DAA-Assignment-1/test -isystem /home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googletest/include -isystem /home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googletest -Wextra -Wshadow -Wconversion -Wpedantic -Werror -Wno-float-equal -g -std=gnu++20 -o CMakeFiles/test_snake.dir/test/test_snake.cc.o -c /home/chinmay/acads/assignments/DAA-Assignment-1/test/test_snake.cc",
+  "file": "/home/chinmay/acads/assignments/DAA-Assignment-1/test/test_snake.cc"
+},
+{
+  "directory": "/home/chinmay/acads/assignments/DAA-Assignment-1",
+  "command": "/usr/bin/c++ -I/home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googlemock/include -I/home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googlemock -isystem /home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googletest/include -isystem /home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googletest -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -Wextra -Wshadow -Wconversion -Wpedantic -Werror -Wno-float-equal -g -std=c++20 -o _deps/googletest-build/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o -c /home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googlemock/src/gmock-all.cc",
+  "file": "/home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googlemock/src/gmock-all.cc"
+},
+{
+  "directory": "/home/chinmay/acads/assignments/DAA-Assignment-1",
+  "command": "/usr/bin/c++ -isystem /home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googlemock/include -isystem /home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googlemock -isystem /home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googletest/include -isystem /home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googletest -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -Wextra -Wshadow -Wconversion -Wpedantic -Werror -Wno-float-equal -g -std=c++20 -o _deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googlemock/src/gmock_main.cc",
+  "file": "/home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googlemock/src/gmock_main.cc"
+},
+{
+  "directory": "/home/chinmay/acads/assignments/DAA-Assignment-1",
+  "command": "/usr/bin/c++ -I/home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googletest/include -I/home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googletest -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -Wextra -Wshadow -Wconversion -Wpedantic -Werror -Wno-float-equal -g -std=c++20 -o _deps/googletest-build/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googletest/src/gtest-all.cc",
+  "file": "/home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googletest/src/gtest-all.cc"
+},
+{
+  "directory": "/home/chinmay/acads/assignments/DAA-Assignment-1",
+  "command": "/usr/bin/c++ -isystem /home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googletest/include -isystem /home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googletest -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -Wextra -Wshadow -Wconversion -Wpedantic -Werror -Wno-float-equal -g -std=c++20 -o _deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googletest/src/gtest_main.cc",
+  "file": "/home/chinmay/acads/assignments/DAA-Assignment-1/_deps/googletest-src/googletest/src/gtest_main.cc"
+}
+]

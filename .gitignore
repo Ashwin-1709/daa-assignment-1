@@ -3,3 +3,10 @@
 .vscode
 .cph
 *.txt
+/polygon_decomp
+/cmake_install.cmake
+/build.ninja
+/CMakeFiles/
+/.cache/
+*.cmake
+/_deps/
