@@ -16,12 +16,11 @@ void enumerate_face(const Face &face) {
     }
 }
 
-
-Polygon::Polygon(deque<Point>&point_list) {
+Polygon::Polygon(deque<Point> &point_list) {
     n = (int)point_list.size();
     open_end = new Face();
     int cur_id = 0;
-    Vertex *start = new Vertex(point_list[0] , cur_id);
+    Vertex *start = new Vertex(point_list[0], cur_id);
     Edge *fwd = new Edge();
     Edge *rev = new Edge();
     fwd->twin = rev;
@@ -31,9 +30,9 @@ Polygon::Polygon(deque<Point>&point_list) {
     fwd->left_face = open_end;
     open_end->edge = fwd;
     vertices.push_back(start);
-    for(int i = 1 ; i < n ; i++) {
-        Vertex *cur = new Vertex(point_list[i] , i);
-        Edge* cur_fwd = new Edge();
+    for (int i = 1; i < n; i++) {
+        Vertex *cur = new Vertex(point_list[i], i);
+        Edge *cur_fwd = new Edge();
         Edge *cur_rev = new Edge();
         cur_fwd->twin = cur_rev;
         cur_rev->twin = cur_fwd;
@@ -52,11 +51,12 @@ Polygon::Polygon(deque<Point>&point_list) {
 
     vertices[n - 1]->incident_edge->next = vertices[0]->incident_edge;
     vertices[0]->incident_edge->prev = vertices[n - 1]->incident_edge;
-    vertices[n - 1]->incident_edge->twin->prev = vertices[0]->incident_edge->twin;
-    vertices[0]->incident_edge->twin->next = vertices[n - 1]->incident_edge->twin;
+    vertices[n - 1]->incident_edge->twin->prev =
+        vertices[0]->incident_edge->twin;
+    vertices[0]->incident_edge->twin->next =
+        vertices[n - 1]->incident_edge->twin;
     vertices[n - 1]->incident_edge->twin->origin = vertices[0];
 }
-
 
 // void add_edge(Vertex *v1 , Vertex *vr) {
 //     //edge from v1 to vr updating everything
@@ -70,9 +70,9 @@ Polygon::Polygon(deque<Point>&point_list) {
 //     std::cout << "back vr : " << back_vr->origin->index << '\n';
 //     std::cout << "back twin v1 : " << back_v1->twin->origin->index << '\n';
 //     std::cout << "back twin vr : " << back_vr->twin->origin->index << '\n';
-//     std::cout << "back twin v1 : " << back_v1->twin->next->origin->index << '\n';
-//     std::cout << "back twin vr : " << back_vr->twin->next->origin->index << '\n';
-//     Edge *v1_vr = new Edge();
+//     std::cout << "back twin v1 : " << back_v1->twin->next->origin->index <<
+//     '\n'; std::cout << "back twin vr : " <<
+//     back_vr->twin->next->origin->index << '\n'; Edge *v1_vr = new Edge();
 //     Edge *vr_v1 = new Edge();
 //     // Half Edge from v1 to vr
 //     v1_vr->twin = vr_v1;
@@ -91,7 +91,7 @@ Polygon::Polygon(deque<Point>&point_list) {
 //     std::cout << "twin v1 : " << from_v1->origin->index << '\n';
 //     std::cout << "twin vr : " << from_vr->origin->index << '\n';
 //     //next of new edges to corresponding edges
-  
+
 //     back_v1 = back_v1->twin;
 //     back_v1->prev = vr_v1;
 //     vr_v1->next = back_v1;
@@ -103,23 +103,20 @@ Polygon::Polygon(deque<Point>&point_list) {
 //     std::cout << "back twin vr : " << back_vr->origin->index << '\n';
 //     std::cout << "back twin v1 : " << back_v1->next->origin->index << '\n';
 //     std::cout << "back twin vr : " << back_vr->next->origin->index << '\n';
-    
+
 // }
 
 // void decompose(const DCEL &dcel) {
 //     int n = dcel.n;
 //     std::deque<std::deque<Vertex *>> L;
-//     std::deque<Vertex *> cur, notches = get_notches(dcel.polygon) , P = dcel.polygon;
-//     cur.push_front(dcel.polygon[0]);
-//     L.push_front(cur);
-//     int m = 1;
-//     while(n > 3) {
+//     std::deque<Vertex *> cur, notches = get_notches(dcel.polygon) , P =
+//     dcel.polygon; cur.push_front(dcel.polygon[0]); L.push_front(cur); int m =
+//     1; while(n > 3) {
 //         Vertex *v1 = L[m - 1].back();
 //         Vertex *v2 = next_vertex(v2);
 //         cur.clear();
 //         cur.push_back(v1); cur.push_back(v2);
 //         L.push_back(cur); // L[m] inserted
-        
 
 //         Vertex *pre = v1;
 //         Vertex *now = v2;
@@ -129,7 +126,7 @@ Polygon::Polygon(deque<Point>&point_list) {
 //             pre = now;
 //             now = nxt;
 //             nxt = next_vertex(nxt);
-//         }    
+//         }
 
 //         if((int)L[m].size() != n) {
 //             std::deque<Vertex*>LPVS;
@@ -148,19 +145,20 @@ Polygon::Polygon(deque<Point>&point_list) {
 //                 bool backward = false;
 //                 do {
 //                     Vertex *v = LPVS.front();
-//                     if(!inside_rectangle(rect , v->point)) 
+//                     if(!inside_rectangle(rect , v->point))
 //                         LPVS.pop_front();
 //                 } while(!backward and !LPVS.empty());
 
 //                 if(!LPVS.empty()) {
 //                     Vertex *v = LPVS.front();
-//                     // Inside rectangle not sure ? 
+//                     // Inside rectangle not sure ?
 //                     if(inside_rectangle(rect , v->point)) {
 //                         std::deque<Vertex*> VTR;
 //                         auto line = get_line(v1->point , v->point);
 //                         auto bck = L[m].back();
 //                         for(auto u : L[m]) {
-//                             if(same_side_semiplane(line , u->point , bck->point))
+//                             if(same_side_semiplane(line , u->point ,
+//                             bck->point))
 //                                 VTR.push_back(u);
 //                         }
 //                         L[m] = VTR;
@@ -172,7 +170,6 @@ Polygon::Polygon(deque<Point>&point_list) {
 
 //             if(L[m].back() != v2) {
 
-                
 //                 int sz = (int)L[m].size();
 //                 n = n - sz + 2;
 //             }

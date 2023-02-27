@@ -1,7 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
-#include <bits/stdc++.h>
 #include "dcel.hh"
+#include <bits/stdc++.h>
 using namespace std;
 
 void enumerate_face(const Face &face);
@@ -17,6 +17,6 @@ bool same_side_semiplane(array<double, 3> &coef, const Point &a,
 Vertex *next_vertex(Vertex *v);
 bool check_notch(Vertex *a, Vertex *b, Vertex *c, Vertex *start,
                  Vertex *second);
-void add_edge(Vertex *v1 , Vertex *vr);
+void add_edge(Vertex *v1, Vertex *vr);
 
 #endif

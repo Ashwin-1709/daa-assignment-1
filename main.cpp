@@ -6,18 +6,20 @@ void Traverse(Polygon p) {
     // cycle using next
     cout << "Starting at " << start->index << '\n';
     start = start->incident_edge->next->origin;
-    while(start != p.vertices[0]) {
+    while (start != p.vertices[0]) {
         cout << start->index << '\n';
-        cout << "Face ? " << (start->incident_edge->left_face == p.open_end) << '\n';
+        cout << "Face ? " << (start->incident_edge->left_face == p.open_end)
+             << '\n';
         start = start->incident_edge->next->origin;
     }
     // cycle using prev
     start = p.vertices[0];
     cout << "Starting at " << start->index << '\n';
     start = start->incident_edge->prev->origin;
-    while(start != p.vertices[0]) {
+    while (start != p.vertices[0]) {
         cout << start->index << '\n';
-        cout << "Face ? " << (start->incident_edge->left_face == p.open_end) << '\n';
+        cout << "Face ? " << (start->incident_edge->left_face == p.open_end)
+             << '\n';
         start = start->incident_edge->prev->origin;
     }
     // cycle using twin next
@@ -25,7 +27,7 @@ void Traverse(Polygon p) {
     start = ss->origin;
     cout << "Starting at " << start->index << '\n';
     ss = ss->next;
-    while(ss->origin != start) {
+    while (ss->origin != start) {
         cout << ss->origin->index << '\n';
         cout << "Face ? " << (ss->left_face == p.open_end) << '\n';
         ss = ss->next;
@@ -35,7 +37,7 @@ void Traverse(Polygon p) {
     start = s->origin;
     cout << "Starting at " << start->index << '\n';
     s = s->prev;
-    while(s->origin != start) {
+    while (s->origin != start) {
         cout << s->origin->index << '\n';
         cout << "Face ? " << (s->left_face == p.open_end) << '\n';
         s = s->prev;
@@ -43,6 +45,6 @@ void Traverse(Polygon p) {
 }
 
 int main() {
-    deque<Point> points = {{2 , -2} , {-2 , -4} , {-4 , 0} , {-2 , 1} , {0 , 2} , {2 , 0}};
+    deque<Point> points = {{2, -2}, {-2, -4}, {-4, 0}, {-2, 1}, {0, 2}, {2, 0}};
     Polygon *polygon = new Polygon(points);
 }

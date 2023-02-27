@@ -60,7 +60,6 @@ bool inside_rectangle(std::array<Point, 2> &rectangle, const Point &point) {
     return false;
 }
 
-
 std::array<double, 3> get_line(const Point &a, const Point &b) {
     // x1x + y1y + c = 0
     std::array<double, 3> coefficients;
