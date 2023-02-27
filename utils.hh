@@ -19,4 +19,4 @@ bool check_notch(Vertex *a, Vertex *b, Vertex *c, Vertex *start,
                  Vertex *second);
 void add_edge(Vertex *v1, Vertex *vr);
 
-#endif
+#endif // UTILS_H

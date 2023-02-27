@@ -26,10 +26,10 @@ double angle(const Point &a, const Point &b, const Point &c) {
 
 std::deque<Vertex *> get_notches(std::deque<Vertex *> polygon) {
     std::deque<Vertex *> notches;
-    int n = (int)polygon.size();
+    usize n = polygon.size();
     if (n < 3)
         return notches;
-    for (int i = 0; i < n; i++) {
+    for (usize i = 0; i < n; i++) {
         Vertex *base = polygon[i];
         Vertex *left = polygon[(i - 1 + n) % n];
         Vertex *right = polygon[(i + 1) % n];

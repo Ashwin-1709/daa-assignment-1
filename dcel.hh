@@ -1,5 +1,6 @@
 #ifndef DCEL_H
 #define DCEL_H
+#include "typedefs.hh"
 #include <bits/stdc++.h>
 
 class Vertex;
@@ -26,16 +27,16 @@ class Point {
 class Vertex {
   public:
     Point point;
-    int index;
+    usize index;
     Edge *incident_edge;
-    Vertex(Point &pt, int &id) : point(pt), index(id) {}
+    Vertex(Point &pt, usize &id) : point(pt), index(id) {}
 };
 
 class Polygon {
   public:
     Face *open_end;
     std::deque<Vertex *> vertices;
-    int n;
+    usize n_vertices;
     Polygon(std::deque<Point> &point_list);
 
   private:
