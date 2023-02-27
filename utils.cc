@@ -91,23 +91,23 @@ bool check_notch(Vertex *a, Vertex *b, Vertex *c, Vertex *start,
     return angle_b <= 180 and angle_c <= 180 and angle_start <= 180;
 }
 
-void update_face(Edge *e , Face *f) {
+void update_face(Edge *e, Face *f) {
     e->left_face = f;
     Edge *nxt = e->next;
-    while(nxt != e) {
+    while (nxt != e) {
         nxt->left_face = f;
         nxt = nxt->next;
     }
 }
 
 void add_edge(Vertex *v1, Vertex *vr) {
-    //edge from v1 to vr updating everything
+    // edge from v1 to vr updating everything
     Edge *from_v1 = v1->incident_edge;
     Edge *from_vr = vr->incident_edge;
 
     Edge *back_v1 = from_v1->prev;
     Edge *back_vr = from_vr->prev;
- 
+
     Edge *v1_vr = new Edge();
     Edge *vr_v1 = new Edge();
     // Half Edge from v1 to vr
@@ -116,7 +116,7 @@ void add_edge(Vertex *v1, Vertex *vr) {
     v1_vr->origin = v1;
     vr_v1->origin = vr;
 
-    //next of old edges to joint edges
+    // next of old edges to joint edges
     from_vr = from_vr->twin;
     from_vr->next = vr_v1;
     vr_v1->prev = from_vr;
@@ -124,7 +124,7 @@ void add_edge(Vertex *v1, Vertex *vr) {
     from_v1 = from_v1->twin;
     from_v1->next = v1_vr;
     v1_vr->prev = from_v1;
-    //next of new edges to corresponding edges
+    // next of new edges to corresponding edges
 
     back_v1 = back_v1->twin;
     back_v1->prev = vr_v1;
@@ -136,5 +136,19 @@ void add_edge(Vertex *v1, Vertex *vr) {
 
     Face *polygon = new Face();
     polygon->edge = v1_vr;
-    update_face(v1_vr , polygon);
+    update_face(v1_vr, polygon);
 }
+
+// void enumerate_face(const Face &face) {
+//     Edge *start = face.edge;
+//     auto cur = start->next;
+//     std::vector<Vertex *> vertices;
+//     vertices.push_back(start->origin);
+//     while (cur != start) {
+//         vertices.push_back(cur->origin);
+//         cur = cur->next;
+//     }
+//     for (auto &u : vertices) {
+//         std::cout << u->point.x << " " << u->point.y << "\n";
+//     }
+// }

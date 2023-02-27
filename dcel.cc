@@ -1,23 +1,8 @@
 #include "dcel.hh"
 #include "typedefs.hh"
 #include <bits/stdc++.h>
-using namespace std;
 
-void enumerate_face(const Face &face) {
-    Edge *start = face.edge;
-    auto cur = start->next;
-    std::vector<Vertex *> vertices;
-    vertices.push_back(start->origin);
-    while (cur != start) {
-        vertices.push_back(cur->origin);
-        cur = cur->next;
-    }
-    for (auto &u : vertices) {
-        std::cout << u->point.x << " " << u->point.y << "\n";
-    }
-}
-
-Polygon::Polygon(deque<Point> &point_list) {
+Polygon::Polygon(std::deque<Point> &point_list) {
     n_vertices = point_list.size();
     open_end = new Face();
     usize cur_id = 0;
