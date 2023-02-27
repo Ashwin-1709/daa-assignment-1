@@ -21,3 +21,20 @@ TEST_F(DcelFixture, snake_1) {
         {{1, 7, 6, 5, 4, 3, 2}, {7, 11, 10, 9, 8}});
     check(2, indices);
 }
+
+TEST_F(DcelFixture, comb_1) {
+    n_vertices_ = 10;
+
+    points_ = std::deque<Point>{
+        Point(8, 0),  Point(7, 10), Point(6, 0),  Point(5, 10), Point(4, 0),
+        Point(3, 10), Point(2, 0),  Point(1, 10), Point(0, 0),  Point(4, -2),
+    };
+
+    polygon_ = Polygon(points_);
+    add_edge(polygon_.vertices[4], polygon_.vertices[9]);
+
+    polygons_ = std::set<Face *>();
+    auto indices = std::vector<std::vector<usize>>(
+        {{9, 0, 1, 2, 3, 4}, {9, 4, 5, 6, 7, 8}});
+    check(1, indices);
+}
