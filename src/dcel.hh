@@ -22,6 +22,8 @@ class Edge {
 class Point {
   public:
     double x, y;
+    Point() {}
+    Point(double x_arg, double y_arg) : x(x_arg), y(y_arg) {}
 };
 
 class Vertex {
@@ -38,6 +40,7 @@ class Polygon {
     std::deque<Vertex *> vertices;
     usize n_vertices;
     Polygon(std::deque<Point> &point_list);
+    Polygon();
 
   private:
     std::deque<std::array<Edge *, 2>> EdgeList;

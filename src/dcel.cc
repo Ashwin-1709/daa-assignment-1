@@ -2,6 +2,7 @@
 #include "typedefs.hh"
 #include <bits/stdc++.h>
 
+Polygon::Polygon() {}
 Polygon::Polygon(std::deque<Point> &point_list) {
     n_vertices = point_list.size();
     open_end = new Face();
