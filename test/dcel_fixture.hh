@@ -13,7 +13,7 @@ class DcelFixture : public ::testing::Test {
     std::deque<Point> points_;
     std::set<Face *> polygons_;
     Polygon polygon_;
-    void check(usize n, std::vector<std::vector<usize>> indices);
+    void check(const usize &n, const std::vector<std::vector<usize>> &indices);
     // DcelFixture();
     // void SetUp();
     // DcelFixture(usize n, std::deque<Point> pts)

@@ -31,7 +31,7 @@ class Vertex {
     Point point;
     usize index;
     Edge *incident_edge;
-    Vertex(Point &pt, usize &id) : point(pt), index(id) {}
+    Vertex(Point pt, usize id) : point(std::move(pt)), index(id) {}
 };
 
 class Polygon {
@@ -39,7 +39,7 @@ class Polygon {
     Face *open_end;
     std::deque<Vertex *> vertices;
     usize n_vertices;
-    Polygon(std::deque<Point> &point_list);
+    Polygon(const std::deque<Point> &point_list);
     Polygon();
 
   private:

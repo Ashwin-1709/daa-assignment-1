@@ -1,32 +1,32 @@
 #include "utils.hh"
+#include <algorithm>
 #include <bits/stdc++.h>
 
 // The angle swept by a counterclockwise rotation from bc to ba
 double angle(const Point &a, const Point &b, const Point &c) {
-    auto mag_ba =
+    const auto mag_ba =
         std::sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
-    auto mag_bc =
+    const auto mag_bc =
         std::sqrt((c.x - b.x) * (c.x - b.x) + (c.y - b.y) * (c.y - b.y));
-    auto dot = (a.x - b.x) * (c.x - b.x) + (a.y - b.y) * (c.y - b.y);
-    auto cos_theta = dot / (mag_ba * mag_bc);
-    auto cross = (a.x - b.x) * (c.y - b.y) - (a.y - b.y) * (c.x - b.x);
-    auto sin_theta = cross / (mag_ba * mag_bc);
-    if (sin_theta == 0) {
+    const auto dot = (a.x - b.x) * (c.x - b.x) + (a.y - b.y) * (c.y - b.y);
+    const auto cos_theta = std::clamp(dot / (mag_ba * mag_bc), -1.0, 1.0);
+    const auto cross = (a.x - b.x) * (c.y - b.y) - (a.y - b.y) * (c.x - b.x);
+    if (cross == 0) {
         if (cos_theta > 0) {
             return 0.0;
         } else {
             return 180.0;
         }
-    } else if (sin_theta > 0) {
+    } else if (cross > 0) {
         return std::acos(cos_theta) * 180 / M_PI;
     } else {
         return 360.0 - (std::acos(cos_theta) * 180 / M_PI);
     }
 }
 
-std::deque<Vertex *> get_notches(std::deque<Vertex *> polygon) {
+std::deque<Vertex *> get_notches(const std::deque<Vertex *> &polygon) {
     std::deque<Vertex *> notches;
-    usize n = polygon.size();
+    const usize n = polygon.size();
     if (n < 3)
         return notches;
     for (usize i = 0; i < n; i++) {
@@ -40,7 +40,7 @@ std::deque<Vertex *> get_notches(std::deque<Vertex *> polygon) {
 }
 
 // rectangle with minimum area that encloses vertices of list L
-std::array<Point, 2> get_rectangle(std::deque<Vertex *> &L) {
+std::array<Point, 2> get_rectangle(const std::deque<Vertex *> &L) {
     Point minimum, maximum;
     minimum.x = 1e9, minimum.y = 1e9;
     maximum.x = -1e9, maximum.y = -1e9;
@@ -53,7 +53,8 @@ std::array<Point, 2> get_rectangle(std::deque<Vertex *> &L) {
     return {minimum, maximum};
 }
 
-bool inside_rectangle(std::array<Point, 2> &rectangle, const Point &point) {
+bool inside_rectangle(const std::array<Point, 2> &rectangle,
+                      const Point &point) {
     if (point.x >= rectangle[0].x and point.x <= rectangle[1].x and
         point.y >= rectangle[0].y and point.y <= rectangle[1].y)
         return true;
@@ -69,7 +70,7 @@ std::array<double, 3> get_line(const Point &a, const Point &b) {
     return coefficients;
 }
 
-bool same_side_semiplane(std::array<double, 3> &coef, const Point &a,
+bool same_side_semiplane(const std::array<double, 3> &coef, const Point &a,
                          const Point &b) {
     double L1 = coef[0] * a.x + coef[1] * a.y + coef[2];
     double L2 = coef[0] * b.x + coef[1] * b.y + coef[2];
@@ -78,25 +79,24 @@ bool same_side_semiplane(std::array<double, 3> &coef, const Point &a,
     return false;
 }
 
-Vertex *next_vertex(Vertex *v) {
-    Edge *nxt_edge = v->incident_edge->next;
-    return nxt_edge->origin;
+Vertex *next_vertex(const Vertex *vertex) {
+    return vertex->incident_edge->next->origin;
 }
 
-bool check_notch(Vertex *a, Vertex *b, Vertex *c, Vertex *start,
-                 Vertex *second) {
+bool check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
+                 const Vertex *start, const Vertex *second) {
     double angle_b = angle(a->point, b->point, c->point);
     double angle_c = angle(b->point, c->point, start->point);
     double angle_start = angle(c->point, start->point, second->point);
     return angle_b <= 180 and angle_c <= 180 and angle_start <= 180;
 }
 
-void update_face(Edge *e, Face *f) {
-    e->left_face = f;
-    Edge *nxt = e->next;
-    while (nxt != e) {
-        nxt->left_face = f;
-        nxt = nxt->next;
+void update_face(Edge *edge, Face *face) {
+    edge->left_face = face;
+    Edge *next = edge->next;
+    while (next != edge) {
+        next->left_face = face;
+        next = next->next;
     }
 }
 

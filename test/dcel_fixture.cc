@@ -6,8 +6,8 @@
 #include <gtest/gtest.h>
 #include <vector>
 
-void DcelFixture::check(usize exp_polygons,
-                        std::vector<std::vector<usize>> exp_indices) {
+void DcelFixture::check(const usize &exp_polygons,
+                        const std::vector<std::vector<usize>> &exp_indices) {
     Vertex *vertex = polygon_.vertices[0];
 
     do {

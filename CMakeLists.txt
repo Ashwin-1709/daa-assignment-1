@@ -1,8 +1,9 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.22)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(polygon_decomposition)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(CMAKE_CXX_STANDARD 20)
+cmake_policy(SET CMP0135 NEW)
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 add_compile_options(-Wextra)
@@ -12,6 +13,7 @@ add_compile_options(-Wpedantic)
 add_compile_options(-Werror)
 add_compile_options(-Wno-float-equal)
 add_compile_options(-g)
+
 
 include(FetchContent)
 FetchContent_Declare(
@@ -32,6 +34,8 @@ file(GLOB all_SRCS
 )
 
 add_executable(polygon_decomp ${all_SRCS})
+
+add_custom_command(TARGET polygon_decomp POST_BUILD COMMAND cmake -E copy ${CMAKE_BINARY_DIR}/compile_commands.json ${CMAKE_SOURCE_DIR}/compile_commands.json)
 
 enable_testing()
 

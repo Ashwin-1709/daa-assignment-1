@@ -3,37 +3,37 @@
 #include <bits/stdc++.h>
 
 Polygon::Polygon() {}
-Polygon::Polygon(std::deque<Point> &point_list) {
+Polygon::Polygon(const std::deque<Point> &point_list) {
     n_vertices = point_list.size();
     open_end = new Face();
     usize cur_id = 0;
-    Vertex *start = new Vertex(point_list[0], cur_id);
-    Edge *fwd = new Edge();
-    Edge *rev = new Edge();
-    fwd->twin = rev;
-    rev->twin = fwd;
-    start->incident_edge = fwd;
-    fwd->origin = start;
-    fwd->left_face = open_end;
-    open_end->edge = fwd;
+    auto start = new Vertex(point_list[0], cur_id);
+    auto forward = new Edge(), reverse = new Edge();
+
+    forward->twin = reverse;
+    reverse->twin = forward;
+    start->incident_edge = forward;
+    forward->origin = start;
+    forward->left_face = open_end;
+    open_end->edge = forward;
     vertices.push_back(start);
+
     for (usize i = 1; i < n_vertices; i++) {
-        Vertex *cur = new Vertex(point_list[i], i);
-        Edge *cur_fwd = new Edge();
-        Edge *cur_rev = new Edge();
-        cur_fwd->twin = cur_rev;
-        cur_rev->twin = cur_fwd;
-        cur->incident_edge = cur_fwd;
-        cur_fwd->origin = cur;
-        cur_fwd->left_face = open_end;
+        auto current = new Vertex(point_list[i], i);
+        auto current_forward = new Edge(), current_reverse = new Edge();
+        current_forward->twin = current_reverse;
+        current_reverse->twin = current_forward;
+        current->incident_edge = current_forward;
+        current_forward->origin = current;
+        current_forward->left_face = open_end;
 
-        vertices[i - 1]->incident_edge->next = cur_fwd;
-        cur_fwd->prev = vertices[i - 1]->incident_edge;
-        vertices[i - 1]->incident_edge->twin->prev = cur_rev;
-        cur_rev->next = vertices[i - 1]->incident_edge->twin;
+        vertices[i - 1]->incident_edge->next = current_forward;
+        current_forward->prev = vertices[i - 1]->incident_edge;
+        vertices[i - 1]->incident_edge->twin->prev = current_reverse;
+        current_reverse->next = vertices[i - 1]->incident_edge->twin;
 
-        vertices[i - 1]->incident_edge->twin->origin = cur;
-        vertices.push_back(cur);
+        vertices[i - 1]->incident_edge->twin->origin = current;
+        vertices.push_back(current);
     }
 
     vertices[n_vertices - 1]->incident_edge->next = vertices[0]->incident_edge;

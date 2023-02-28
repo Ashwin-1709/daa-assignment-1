@@ -6,16 +6,17 @@
 // void enumerate_face(const Face &face);
 
 double angle(const Point &a, const Point &b, const Point &c);
-std::deque<Vertex *> get_notches(std::deque<Vertex *> polygon);
-std::array<Point, 2> get_rectangle(std::deque<Vertex *> &L);
-bool inside_rectangle(std::array<Point, 2> &rectangle, const Point &point);
+std::deque<Vertex *> get_notches(const std::deque<Vertex *> &polygon);
+std::array<Point, 2> get_rectangle(const std::deque<Vertex *> &L);
+bool inside_rectangle(const std::array<Point, 2> &rectangle,
+                      const Point &point);
 std::array<double, 3> get_line(const Point &a, const Point &b);
-bool same_side_semiplane(std::array<double, 3> &coef, const Point &a,
+bool same_side_semiplane(const std::array<double, 3> &coef, const Point &a,
                          const Point &b);
 // void decompose(const DCEL &dcel);
-Vertex *next_vertex(Vertex *v);
-bool check_notch(Vertex *a, Vertex *b, Vertex *c, Vertex *start,
-                 Vertex *second);
+Vertex *next_vertex(const Vertex *vertex);
+bool check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
+                 const Vertex *start, const Vertex *second);
 void add_edge(Vertex *v1, Vertex *vr);
-void update_face(Edge *e, Face *f);
+void update_face(Edge *edge, Face *face);
 #endif // UTILS_H
