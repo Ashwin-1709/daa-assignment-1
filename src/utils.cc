@@ -55,8 +55,8 @@ std::array<Point, 2> get_rectangle(const std::deque<Vertex *> &L) {
 
 bool inside_rectangle(const std::array<Point, 2> &rectangle,
                       const Point &point) {
-    if (point.x >= rectangle[0].x and point.x <= rectangle[1].x and
-        point.y >= rectangle[0].y and point.y <= rectangle[1].y)
+    if (point.x > rectangle[0].x and point.x < rectangle[1].x and
+        point.y > rectangle[0].y and point.y < rectangle[1].y)
         return true;
     return false;
 }

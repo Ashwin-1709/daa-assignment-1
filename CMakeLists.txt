@@ -1,9 +1,8 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.16)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(polygon_decomposition)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(CMAKE_CXX_STANDARD 20)
-cmake_policy(SET CMP0135 NEW)
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 add_compile_options(-Wextra)
@@ -12,6 +11,7 @@ add_compile_options(-Wconversion)
 add_compile_options(-Wpedantic)
 add_compile_options(-Werror)
 add_compile_options(-Wno-float-equal)
+add_compile_options(-Wno-variadic-macros)
 add_compile_options(-g)
 
 
