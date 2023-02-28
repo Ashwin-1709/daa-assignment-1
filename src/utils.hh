@@ -7,6 +7,8 @@
 
 double angle(const Point &a, const Point &b, const Point &c);
 std::deque<Vertex *> get_notches(const std::deque<Vertex *> &polygon);
+std::deque<Vertex *> get_LPVS(std::deque<Vertex *> &notches,
+                              std::deque<Vertex *> &L, std::deque<Vertex *> &P);
 std::array<Point, 2> get_rectangle(const std::deque<Vertex *> &L);
 bool inside_rectangle(const std::array<Point, 2> &rectangle,
                       const Point &point);

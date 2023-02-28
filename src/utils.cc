@@ -139,6 +139,22 @@ void add_edge(Vertex *v1, Vertex *vr) {
     update_face(v1_vr, polygon);
 }
 
+std::deque<Vertex *> get_LPVS(std::deque<Vertex *> &notches,
+                              std::deque<Vertex *> &L,
+                              std::deque<Vertex *> &P) {
+    std::deque<Vertex *> LPVS;
+    for (auto notch : notches) {
+        bool in_P = false, in_L = false;
+        for (auto cur : L)
+            in_L |= (cur == notch);
+        for (auto cur : P)
+            in_P |= (cur == notch);
+        if (in_P and !in_L)
+            LPVS.push_back(notch);
+    }
+    return LPVS;
+}
+
 // void enumerate_face(const Face &face) {
 //     Edge *start = face.edge;
 //     auto cur = start->next;
