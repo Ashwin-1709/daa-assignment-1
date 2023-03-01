@@ -1,0 +1,56 @@
+* Terminology
+A diagonal $d$ is essential for vertex $v$ if removing it makes $v$ reflex.
+* Sketch
+Every diagonal is considered in order and checked if it can be removed, taking into account that if polygons $P_s$ and $P_t$ have already been merged to $P_{s^{\star}}$ and   $P_{t^{\star}}$ then we need to check $P_s \cup P_{s^{\star}}$ and $P_t \cup P_{t^{\star}}$ for eligibility
+* Notation
++ $LLE$ : list of diagonals
++ $\forall v_j; LP_{v_j}$ is list of $(k,v_r)$ where $k$ is the index of a polygon containing $v_j$ as one of its vertices and $v_r = v_j \rightarrow next$ in said polygon but $v_rv_j$ is a vertex in the initial polygon
++ $LDP[i]$ = whether polygon $i$ is in final list
++ $LUP[i] = j$ means polygon $i$ is part of polygon $j$
++ $m$ = no. of diagonals in the polygon on which we want to apply the merging process.
++ $NP$ = no. of convex polygons used in the merging process
+** Initial values
++ $NP = m+1$ (no. of convex polygons = no. of diagonals + 1)
++ $LDP = [true; 1..=NP]$ (every polygon is in final list initially)
++ $LUP = [1, 2, ..., NP]$ (every polygon is part of itself)
+* Algorithm
+#+DOWNLOADED: screenshot @ 2023-03-02 00:37:32
+[[file:Algorithm/2023-03-02_00-37-32_screenshot.png]]
+#+BEGIN_SRC rust
+  for (vs, vt) in LLE { // LLE is list of diags
+      if (LP[vs].len() >= 3 && LP[vt].len() >= 3) ||
+         (LP[vs].len() >= 3 && LP[vt].is_convex()) ||
+         (LP[vs].is_convex() && LP[vt].len >= 3) ||
+         (LP[vs].is_convex() && LP[vt].is_convex()) {
+             // see figure for vertex notation
+             let (j2, i2) = (vt, vs);
+             let j3 = next_of(polygons[j], vt);
+             let i1 = prev_of(polygons[j], vs);
+             let (u, vs) = LP[vt].find(|(u, v)| v == vs);
+             let j1 = prev_of(polygons[u], vt);
+             let i3 = next_of(polygons[u], vs);
+             // if diagonal is removable
+             if angle(i1, i2, i3) <= 180 && angle(j1, j2, j3) <= 180 {
+                 np += 1;
+                 // not merge(polygons[j], polygons[u]) because
+                 // we need to merge (Ps U Ps*) with (Pt U Pt*),
+                 // not Ps with Pt
+                 polygons[np] = merge(polygons[LUP[j]], polygons[LUP[u]]);
+                 // remove constituent polygons from final list
+                 LDP[j] = false;
+                 LDP[u] = false;
+                 // add new polygon to list
+                 LDP[np] = true;
+                 // mark the old ones as merged into np
+                 LUP[j] = np;
+                 LUP[u] = np;
+                 // mark parts of old polygons as merged into np
+                 for h in 1..=(NP - 1) {
+                     if LUP[h] == j || LUP[h] == u {
+                         LUP[h] = np;
+                     }
+                 }
+             }
+      } 
+  }
+#+END_SRC
