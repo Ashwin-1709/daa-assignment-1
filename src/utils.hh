@@ -19,6 +19,6 @@ bool same_side_semiplane(const std::array<double, 3> &coef, const Point &a,
 Vertex *next_vertex(const Vertex *vertex);
 bool check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
                  const Vertex *start, const Vertex *second);
-void add_edge(Vertex *v1, Vertex *vr);
 void update_face(Edge *edge, Face *face);
+void Enumerate_Polygons(std::set<Face*> Polygons);
 #endif // UTILS_H

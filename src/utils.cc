@@ -24,6 +24,19 @@ double angle(const Point &a, const Point &b, const Point &c) {
     }
 }
 
+void Enumerate_Polygons(std::set<Face*> Polygons) {
+    usize cnt = 1;
+    for(auto &f : Polygons) {
+        std::cout << "Face " << cnt++ << ":\n";
+        Edge *now = f->edge;
+        do {
+            std::cout << "(" << now->origin->point.x << "," << now->origin->point.y << ") ";
+            now = now->next;
+        } while(now != f->edge);
+        std::cout << '\n';
+    }
+}
+
 std::deque<Vertex *> get_notches(const std::deque<Vertex *> &polygon) {
     std::deque<Vertex *> notches;
     const usize n = polygon.size();
@@ -98,45 +111,6 @@ void update_face(Edge *edge, Face *face) {
         next->left_face = face;
         next = next->next;
     }
-}
-
-void add_edge(Vertex *v1, Vertex *vr) {
-    // edge from v1 to vr updating everything
-    Edge *from_v1 = v1->incident_edge;
-    Edge *from_vr = vr->incident_edge;
-
-    Edge *back_v1 = from_v1->prev;
-    Edge *back_vr = from_vr->prev;
-
-    Edge *v1_vr = new Edge();
-    Edge *vr_v1 = new Edge();
-    // Half Edge from v1 to vr
-    v1_vr->twin = vr_v1;
-    vr_v1->twin = v1_vr;
-    v1_vr->origin = v1;
-    vr_v1->origin = vr;
-
-    // next of old edges to joint edges
-    from_vr = from_vr->twin;
-    from_vr->next = vr_v1;
-    vr_v1->prev = from_vr;
-
-    from_v1 = from_v1->twin;
-    from_v1->next = v1_vr;
-    v1_vr->prev = from_v1;
-    // next of new edges to corresponding edges
-
-    back_v1 = back_v1->twin;
-    back_v1->prev = vr_v1;
-    vr_v1->next = back_v1;
-
-    back_vr = back_vr->twin;
-    back_vr->prev = v1_vr;
-    v1_vr->next = back_vr;
-
-    Face *polygon = new Face();
-    polygon->edge = v1_vr;
-    update_face(v1_vr, polygon);
 }
 
 std::deque<Vertex *> get_LPVS(std::deque<Vertex *> &notches,

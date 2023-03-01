@@ -14,8 +14,6 @@ TEST_F(DcelFixture, snake_1) {
         Point(20, 20), Point(10, 10), Point(0, 20),  Point(0, 10),
     };
     polygon_ = Polygon(points_);
-    add_edge(polygon_.vertices[1], polygon_.vertices[7]);
-    add_edge(polygon_.vertices[7], polygon_.vertices[11]);
     polygons_ = std::set<Face *>();
     auto indices = std::vector<std::vector<usize>>(
         {{1, 7, 6, 5, 4, 3, 2}, {7, 11, 10, 9, 8}});
@@ -31,7 +29,6 @@ TEST_F(DcelFixture, comb_1) {
     };
 
     polygon_ = Polygon(points_);
-    add_edge(polygon_.vertices[4], polygon_.vertices[9]);
 
     polygons_ = std::set<Face *>();
     auto indices = std::vector<std::vector<usize>>(

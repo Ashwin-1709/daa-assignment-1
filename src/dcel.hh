@@ -37,6 +37,7 @@ class Vertex {
 class Polygon {
   public:
     Face *open_end;
+    Face *inner_end;
     std::deque<Vertex *> vertices;
     usize n_vertices;
     Polygon(const std::deque<Point> &point_list);
