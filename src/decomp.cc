@@ -1,6 +1,6 @@
 #include "decomp.hh"
+#include "dbg.hh"
 #include <deque>
-#include <dbg.h>
 
 std::deque<std::deque<Vertex *>> decompose(Polygon *polygon) {
     usize n = polygon->n_vertices, m = 1;

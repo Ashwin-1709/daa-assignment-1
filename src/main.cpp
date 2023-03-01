@@ -3,10 +3,10 @@
 #include "utils.hh"
 
 int main() {
-    int n;
+    usize n;
     std::cin >> n;
     std::deque<Point> points;
-    for (int i = 0; i < n; i++) {
+    for (usize i = 0; i < n; i++) {
         double x, y;
         std::cin >> x >> y;
         Point p;
