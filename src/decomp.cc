@@ -2,14 +2,15 @@
 #include "dbg.hh"
 #include <deque>
 
-std::deque<std::deque<Vertex *>> decompose(Polygon *polygon) {
+std::set<Face*> decompose(Polygon *polygon) {
     usize n = polygon->n_vertices, m = 1;
     std::deque<std::deque<Vertex *>> L;
     std::deque<Vertex *> cur,
         P(begin(polygon->vertices), end(polygon->vertices));
     cur.push_front(polygon->vertices[0]);
     L.push_front(cur); // L0 <- {v1}
-
+    std::set<Face*>decomposed_polygons = {polygon->inner_end};
+    Face *cur_polygon = polygon->inner_end;
     while (n > 3) {
         // dbg(n);
         usize i = 1;
@@ -91,8 +92,11 @@ std::deque<std::deque<Vertex *>> decompose(Polygon *polygon) {
         }
 
         if (L[m].back() != v2) {
-            // add_edge(L[m].front() , L[m].back());
-            // dbg("yes");
+            if(L[m].size() != n) {
+                Face *new_polygon = split_face(L[m].front() , L[m].back() , cur_polygon);
+                decomposed_polygons.insert(new_polygon);
+                cur_polygon = new_polygon;
+            }
             Vertex *first = L[m].front();
             Vertex *last = L[m].back();
             std::deque<Vertex *> nxt_iter;
@@ -111,8 +115,6 @@ std::deque<std::deque<Vertex *>> decompose(Polygon *polygon) {
         } else {
             Vertex *first = L[m].front();
             Vertex *last = L[m].back();
-            // dbg(first->point.x , first->point.y);
-            // dbg(last->point.x , last->point.y);
             P.pop_front();
             P.pop_front();
             P.push_back(first);
@@ -120,5 +122,5 @@ std::deque<std::deque<Vertex *>> decompose(Polygon *polygon) {
         }
         m++;
     }
-    return L;
+    return decomposed_polygons;
 }

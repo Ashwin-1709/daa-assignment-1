@@ -1,6 +1,7 @@
 #include "utils.hh"
 #include <algorithm>
 #include <bits/stdc++.h>
+#include <dbg.hh>
 
 // The angle swept by a counterclockwise rotation from bc to ba
 double angle(const Point &a, const Point &b, const Point &c) {
@@ -105,13 +106,63 @@ bool check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
     return angle_b <= 180 and angle_c <= 180 and angle_start <= 180;
 }
 
+Face *split_face(Vertex *v1 , Vertex *v2 , Face *cur) {
+    // dbg(v1->point.x, v1->point.y, v2->point.x, v2->point.y);
+    Edge *e1 , *e2;
+    Edge* now = cur->edge;
+    do {
+        
+        // dbg(now->origin->point.x , now->origin->point.y);
+        // dbg(now->twin->origin->point.x,now->twin->origin->point.y);
+
+            // dbg("HIHIHIHIHI");
+            //dbg(now->origin->index);
+        if(now->origin == v1) e1 = now;
+        else if(now->twin->origin == v2) {
+            // dbg("HIHIHIHIHI");
+            // dbg(now->origin->index);
+            e2 = now;
+        }
+        now = now->next;
+    } while(now != cur->edge);
+
+    Edge *e3 = new Edge();
+    Edge *e3_twin = new Edge();
+    e3->twin = e3_twin;
+    e3_twin->twin = e3;
+    e3->origin = v1;
+    e3_twin->origin = v2;
+    // dbg(e3->origin->index);
+    // dbg(e2->origin->index);
+
+    e1->prev->next = e3;
+    e3->prev = e1->prev;
+    e3->next = e2->next;
+    e2->next->prev = e3;
+    e3->left_face = cur;
+    update_face(e3 , cur);
+
+    e3_twin->next = e1;
+    e1->prev = e3_twin;
+    e2->next = e3_twin;
+    e3_twin->prev = e2;
+    Face *new_face = new Face();
+    update_face(e3_twin , new_face);
+    return new_face;
+}
+
 void update_face(Edge *edge, Face *face) {
+    face->edge = edge;
+    // dbg(edge->origin->point.x , edge->origin->point.y);
     edge->left_face = face;
     Edge *next = edge->next;
     while (next != edge) {
+        // dbg(next->origin->point.x , next->origin->point.y);
         next->left_face = face;
         next = next->next;
     }
+    next->left_face = face;
+    // dbg("--------------");
 }
 
 std::deque<Vertex *> get_LPVS(std::deque<Vertex *> &notches,

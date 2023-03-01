@@ -20,6 +20,7 @@ Vertex *next_vertex(const Vertex *vertex);
 bool check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
                  const Vertex *start, const Vertex *second);
 void update_face(Edge *edge, Face *face);
-void Enumerate_Polygons(std::set<Face *> Polygons);
+void Enumerate_Polygons(std::set<Face*> Polygons);
+Face *split_face(Vertex *v1 , Vertex *vr , Face *cur);
 bool is_collinear(const std::deque<Vertex *> &polygon);
 #endif // UTILS_H

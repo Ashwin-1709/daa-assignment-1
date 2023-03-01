@@ -15,7 +15,7 @@ int main() {
         points.push_back(p);
     }
     Polygon *polygon = new Polygon(points);
-    auto p = decompose(polygon);
-    std::set<Face*>faces = {polygon->open_end , polygon->inner_end};
-    Enumerate_Polygons(faces);
+    
+    auto decomposed_polygons = decompose(polygon);
+    Enumerate_Polygons(decomposed_polygons);
 }
