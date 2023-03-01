@@ -24,15 +24,16 @@ double angle(const Point &a, const Point &b, const Point &c) {
     }
 }
 
-void Enumerate_Polygons(std::set<Face*> Polygons) {
+void Enumerate_Polygons(std::set<Face *> Polygons) {
     usize cnt = 1;
-    for(auto &f : Polygons) {
+    for (auto &f : Polygons) {
         std::cout << "Face " << cnt++ << ":\n";
         Edge *now = f->edge;
         do {
-            std::cout << "(" << now->origin->point.x << "," << now->origin->point.y << ") ";
+            std::cout << "(" << now->origin->point.x << ","
+                      << now->origin->point.y << ") ";
             now = now->next;
-        } while(now != f->edge);
+        } while (now != f->edge);
         std::cout << '\n';
     }
 }
@@ -127,6 +128,19 @@ std::deque<Vertex *> get_LPVS(std::deque<Vertex *> &notches,
             LPVS.push_back(notch);
     }
     return LPVS;
+}
+
+bool is_collinear(const std::deque<Vertex *> &polygon) {
+    const auto line = get_line(polygon[0]->point, polygon[1]->point);
+    // line is ax + by + c = 0
+    bool collinear = true;
+    for (auto &vertex : polygon) {
+        auto &point = vertex->point;
+        if (line[0] * point.x + line[1] * point.y + line[2] != 0) {
+            collinear = false;
+        }
+    }
+    return collinear;
 }
 
 // void enumerate_face(const Face &face) {
