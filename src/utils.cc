@@ -28,13 +28,18 @@ double angle(const Point &a, const Point &b, const Point &c) {
 void Enumerate_Polygons(std::set<Face *> Polygons) {
     usize cnt = 1;
     for (auto &f : Polygons) {
-        std::cout << "Face " << cnt++ << ":\n";
+        std::deque<Vertex*>p;
         Edge *now = f->edge;
         do {
-            std::cout << "(" << now->origin->point.x << ","
-                      << now->origin->point.y << ") ";
+            p.push_back(now->origin);
             now = now->next;
         } while (now != f->edge);
+        
+        if(is_collinear(p)) continue;
+        std::cout << p.size() << '\n';
+        for(auto &vt : p) {
+            std::cout << vt->point.x << ' ' << vt->point.y << ' ';
+        }
         std::cout << '\n';
     }
 }
