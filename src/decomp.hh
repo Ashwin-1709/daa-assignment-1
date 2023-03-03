@@ -4,6 +4,6 @@
 #include "utils.hh"
 #include <deque>
 
-std::set<Face*> decompose(Polygon *polygon) ;
+std::set<Face *> decompose(Polygon *polygon);
 
 #endif // DECOMP_H

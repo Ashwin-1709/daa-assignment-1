@@ -106,25 +106,17 @@ bool check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
     return angle_b <= 180 and angle_c <= 180 and angle_start <= 180;
 }
 
-Face *split_face(Vertex *v1 , Vertex *v2 , Face *cur) {
-    // dbg(v1->point.x, v1->point.y, v2->point.x, v2->point.y);
-    Edge *e1 , *e2;
-    Edge* now = cur->edge;
-    do {
-        
-        // dbg(now->origin->point.x , now->origin->point.y);
-        // dbg(now->twin->origin->point.x,now->twin->origin->point.y);
+Face *split_face(Vertex *v1, Vertex *v2, Face *cur) {
 
-            // dbg("HIHIHIHIHI");
-            //dbg(now->origin->index);
-        if(now->origin == v1) e1 = now;
-        else if(now->twin->origin == v2) {
-            // dbg("HIHIHIHIHI");
-            // dbg(now->origin->index);
+    Edge *e1, *e2;
+    Edge *now = cur->edge;
+    do {
+        if (now->origin == v1)
+            e1 = now;
+        else if (now->twin->origin == v2)
             e2 = now;
-        }
         now = now->next;
-    } while(now != cur->edge);
+    } while (now != cur->edge);
 
     Edge *e3 = new Edge();
     Edge *e3_twin = new Edge();
@@ -132,37 +124,32 @@ Face *split_face(Vertex *v1 , Vertex *v2 , Face *cur) {
     e3_twin->twin = e3;
     e3->origin = v1;
     e3_twin->origin = v2;
-    // dbg(e3->origin->index);
-    // dbg(e2->origin->index);
 
     e1->prev->next = e3;
     e3->prev = e1->prev;
     e3->next = e2->next;
     e2->next->prev = e3;
     e3->left_face = cur;
-    update_face(e3 , cur);
+    update_face(e3, cur);
 
     e3_twin->next = e1;
     e1->prev = e3_twin;
     e2->next = e3_twin;
     e3_twin->prev = e2;
     Face *new_face = new Face();
-    update_face(e3_twin , new_face);
+    update_face(e3_twin, new_face);
     return new_face;
 }
 
 void update_face(Edge *edge, Face *face) {
     face->edge = edge;
-    // dbg(edge->origin->point.x , edge->origin->point.y);
     edge->left_face = face;
     Edge *next = edge->next;
     while (next != edge) {
-        // dbg(next->origin->point.x , next->origin->point.y);
         next->left_face = face;
         next = next->next;
     }
     next->left_face = face;
-    // dbg("--------------");
 }
 
 std::deque<Vertex *> get_LPVS(std::deque<Vertex *> &notches,
@@ -194,16 +181,22 @@ bool is_collinear(const std::deque<Vertex *> &polygon) {
     return collinear;
 }
 
-// void enumerate_face(const Face &face) {
-//     Edge *start = face.edge;
-//     auto cur = start->next;
-//     std::vector<Vertex *> vertices;
-//     vertices.push_back(start->origin);
-//     while (cur != start) {
-//         vertices.push_back(cur->origin);
-//         cur = cur->next;
-//     }
-//     for (auto &u : vertices) {
-//         std::cout << u->point.x << " " << u->point.y << "\n";
-//     }
-// }
+bool is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch) {
+    // Reference :
+    // https://www.eecs.umich.edu/courses/eecs380/HANDOUTS/PROJ2/InsidePoly.html
+    usize n = polygon.size();
+    if (n < 3)
+        return false;
+    usize i, j, c = 0;
+    double x = notch->point.x, y = notch->point.y;
+    for (i = 0, j = n - 1; i < n; j = i++) {
+        double ypi = polygon[i]->point.y;
+        double xpi = polygon[i]->point.x;
+        double ypj = polygon[j]->point.y;
+        double xpj = polygon[j]->point.x;
+        if ((((ypi <= y) && (y < ypj)) || ((ypj <= y) && (y < ypi))) &&
+            (x < (xpj - xpi) * (y - ypi) / (ypj - ypi) + xpi))
+            c = !c;
+    }
+    return c;
+}

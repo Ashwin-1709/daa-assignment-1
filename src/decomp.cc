@@ -2,17 +2,16 @@
 #include "dbg.hh"
 #include <deque>
 
-std::set<Face*> decompose(Polygon *polygon) {
+std::set<Face *> decompose(Polygon *polygon) {
     usize n = polygon->n_vertices, m = 1;
     std::deque<std::deque<Vertex *>> L;
     std::deque<Vertex *> cur,
         P(begin(polygon->vertices), end(polygon->vertices));
     cur.push_front(polygon->vertices[0]);
     L.push_front(cur); // L0 <- {v1}
-    std::set<Face*>decomposed_polygons = {polygon->inner_end};
+    std::set<Face *> decomposed_polygons = {polygon->inner_end};
     Face *cur_polygon = polygon->inner_end;
     while (n > 3) {
-        // dbg(n);
         usize i = 1;
         Vertex *v1 = L[m - 1].back();
         Vertex *v2 = P[i];
@@ -20,8 +19,8 @@ std::set<Face*> decompose(Polygon *polygon) {
         // dbg("Exploring....");
         // dbg(v1->point.x , v1->point.y);
         // dbg(v2->point.x , v2->point.y);
-        // for(usize i = 2 ; i < P.size() ; i++)
-        //     dbg(P[i]->point.x , P[i]->point.y);
+        // for(usize j = 2 ; j < P.size() ; j++)
+        //     dbg(P[j]->point.x , P[j]->point.y);
         cur.clear();
         cur.push_back(v1);
         cur.push_back(v2);
@@ -42,58 +41,79 @@ std::set<Face*> decompose(Polygon *polygon) {
                 bool backward = false;
                 auto rect = get_rectangle(L[m]);
                 // dbg("hhhh" , L[m].size());
-                for (auto x : LPVS)
+                // for (auto x : LPVS)
+                // dbg(x->point.x , x->point.y);
+                // dbg(rect[0].x , rect[0].y , rect[1].x , rect[1].y);
+                while (!backward and !LPVS.empty()) {
+                    // dbg(backward);
+                    while (!LPVS.empty() and
+                           !inside_rectangle(rect, LPVS.front()->point))
+                        LPVS.pop_front();
+                    // dbg("after popping\n");
+                    // for(auto l : LPVS) {
+                    // dbg(l->point.x , l->point.y);
+                    // }
+                    // dbg("L[m]");
+                    // for(auto x : L[m])
                     // dbg(x->point.x , x->point.y);
                     // dbg(rect[0].x , rect[0].y , rect[1].x , rect[1].y);
-                    while (!backward and !LPVS.empty()) {
-                        // dbg(backward);
-                        while (!LPVS.empty() and
-                               !inside_rectangle(rect, LPVS.front()->point))
-                            LPVS.pop_front();
-                        // dbg("here" , LPVS.size());
-                        if (!LPVS.empty()) {
-                            auto inside =
-                                inside_rectangle(rect, LPVS.front()->point);
-                            if (inside) {
-                                std::deque<Vertex *> VTR;
-                                auto line =
-                                    get_line(v1->point, LPVS.front()->point);
-                                // dbg("Line" , line[0] , line[1] , line[2]);
-                                auto bck = L[m].back();
-                                //  dbg("Back point" , LPVS.front()->point.x ,
-                                //  LPVS.front()->point.y); dbg("bck" ,
-                                //  bck->point.x , bck->point.y);
-                                for (auto u : L[m]) {
-                                    // dbg("U" , u->point.x , u->point.y);
-                                    // dbg("same side ? " ,
-                                    // same_side_semiplane(line , u->point ,
-                                    // bck->point));
-                                    if (!same_side_semiplane(line, u->point,
-                                                             bck->point) or
-                                        u == v1) {
-                                        VTR.push_back(u);
-                                    }
+                    if (!LPVS.empty()) {
+                        // dbg("is inside?");
+                        // dbg(LPVS.front()->point.x , LPVS.front()->point.y);
+                        auto inside = is_inside_polygon(L[m], LPVS.front());
+                        // dbg(inside);
+                        // bool on_polygon = false;
+                        // for (usize j = 0; j < L[m].size(); j++) {
+                        //     auto line = get_line(L[m][j]->point,
+                        //                          L[m][(j + 1) %
+                        //                          L[m].size()]->point);
+                        //     if (line[0] * LPVS.front()->point.x + line[1] *
+                        //     LPVS.front()->point.y +
+                        //             line[2] ==
+                        //         0)
+                        //         on_polygon = true;
+                        // }
+                        if (inside) {
+                            std::deque<Vertex *> VTR;
+                            auto line =
+                                get_line(v1->point, LPVS.front()->point);
+                            // dbg("Line" , line[0] , line[1] , line[2]);
+                            auto bck = L[m].back();
+                            //  dbg("Back point" , LPVS.front()->point.x ,
+                            //  LPVS.front()->point.y); dbg("bck" ,
+                            //  bck->point.x , bck->point.y);
+                            for (auto u : L[m]) {
+                                // dbg("U" , u->point.x , u->point.y);
+                                // dbg("same side ? " ,
+                                // same_side_semiplane(line , u->point ,
+                                // bck->point));
+                                if (!same_side_semiplane(line, u->point,
+                                                         bck->point) or
+                                    u == v1) {
+                                    VTR.push_back(u);
                                 }
-                                // dbg("After semiplane"   , L[m].size() ,
-                                // VTR.size()); for(auto x : VTR)
-                                //     dbg(x->point.x , x->point.y);
-                                L[m].swap(VTR);
-                                // dbg(VTR.size());
-                                backward = true;
-                                LPVS.pop_front();
-                                // for(auto x : LPVS)
-                                //     dbg(x->point.x , x->point.y);
                             }
+                            // dbg("After semiplane"   , L[m].size() ,
+                            // VTR.size()); for(auto x : VTR)
+                            // dbg(x->point.x , x->point.y);
+                            L[m].swap(VTR);
+                            // dbg(VTR.size());
+                            backward = true;
+                            LPVS.pop_front();
+                            // for(auto x : LPVS)
+                            // dbg(x->point.x , x->point.y);
                         }
                     }
+                }
                 if (LPVS.empty())
                     break;
             }
         }
 
         if (L[m].back() != v2) {
-            if(L[m].size() != n) {
-                Face *new_polygon = split_face(L[m].front() , L[m].back() , cur_polygon);
+            if (L[m].size() != n) {
+                Face *new_polygon =
+                    split_face(L[m].front(), L[m].back(), cur_polygon);
                 decomposed_polygons.insert(new_polygon);
                 cur_polygon = new_polygon;
             }

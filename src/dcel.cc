@@ -29,7 +29,7 @@ Polygon::Polygon(const std::deque<Point> &point_list) {
         current_forward->origin = current;
         current_forward->left_face = open_end;
         current_reverse->left_face = inner_end;
-        
+
         vertices[i - 1]->incident_edge->next = current_forward;
         current_forward->prev = vertices[i - 1]->incident_edge;
         vertices[i - 1]->incident_edge->twin->prev = current_reverse;
