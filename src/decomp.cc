@@ -5,6 +5,7 @@
 std::vector<std::array<Vertex* , 2>> LLE;
 std::map<Vertex* , std::vector<std::pair<usize , Vertex*>>>LP;
 std::map<Face* , usize>face_id;
+std::map<usize , Face*>inv_face_id;
 std::map<usize , bool>LDP;
 std::map<usize , usize>LUP;
 
@@ -20,7 +21,7 @@ std::set<Face *> decompose(Polygon *polygon) {
 
     usize cur_id = 0;
     face_id[cur_polygon] = cur_id++; 
-
+    inv_face_id[face_id[cur_polygon]] = cur_polygon;
     while (n > 3) {
         usize i = 1;
         Vertex *v1 = L[m - 1].back();
@@ -75,6 +76,7 @@ std::set<Face *> decompose(Polygon *polygon) {
                 decomposed_polygons.insert(new_polygon);
                 cur_polygon = new_polygon;
                 face_id[new_polygon] = cur_id++;
+                inv_face_id[face_id[new_polygon]] = new_polygon;
                 LLE.push_back({L[m].front() , L[m].back()});    
             }
             Vertex *first = L[m].front();
