@@ -2,6 +2,12 @@
 #include "dbg.hh"
 #include <deque>
 
+std::vector<std::array<Vertex* , 2>> LLE;
+std::map<Vertex* , std::vector<std::pair<usize , Vertex*>>>LP;
+std::map<Face* , usize>face_id;
+std::map<usize , bool>LDP;
+std::map<usize , usize>LUP;
+
 std::set<Face *> decompose(Polygon *polygon) {
     usize n = polygon->n_vertices, m = 1;
     std::deque<std::deque<Vertex *>> L;
@@ -11,6 +17,10 @@ std::set<Face *> decompose(Polygon *polygon) {
     L.push_front(cur); // L0 <- {v1}
     std::set<Face *> decomposed_polygons = {polygon->inner_end};
     Face *cur_polygon = polygon->inner_end;
+
+    usize cur_id = 0;
+    face_id[cur_polygon] = cur_id++; 
+
     while (n > 3) {
         usize i = 1;
         Vertex *v1 = L[m - 1].back();
@@ -64,6 +74,8 @@ std::set<Face *> decompose(Polygon *polygon) {
                     split_face(L[m].front(), L[m].back(), cur_polygon);
                 decomposed_polygons.insert(new_polygon);
                 cur_polygon = new_polygon;
+                face_id[new_polygon] = cur_id++;
+                LLE.push_back({L[m].front() , L[m].back()});    
             }
             Vertex *first = L[m].front();
             Vertex *last = L[m].back();
@@ -90,5 +102,26 @@ std::set<Face *> decompose(Polygon *polygon) {
         }
         m++;
     }
+
+    for(usize i = 0 ; i < cur_id ; i++) {
+        LDP[i] = true;
+        LUP[i] = i;
+    }
+
+    for(auto &faces : decomposed_polygons) {
+        Edge *now = faces->edge;
+        usize id = face_id[faces];
+        std::cout << "Face id : " << id << '\n';
+        do {
+            LP[now->origin].push_back({id , now->next->origin});
+        } while(now != faces->edge);
+    }
+    
+    for(auto vert : polygon->vertices) {
+        std::cout << LP[vert].size() << ' ';
+    }
+
+    std::cout << '\n';
+    std::cout << "LLE size " << LLE.size() << '\n';
     return decomposed_polygons;
 }
