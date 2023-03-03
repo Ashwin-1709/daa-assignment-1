@@ -4,7 +4,7 @@ A diagonal $d$ is essential for vertex $v$ if removing it makes $v$ reflex.
 Every diagonal is considered in order and checked if it can be removed, taking into account that if polygons $P_s$ and $P_t$ have already been merged to $P_{s^{\star}}$ and   $P_{t^{\star}}$ then we need to check $P_s \cup P_{s^{\star}}$ and $P_t \cup P_{t^{\star}}$ for eligibility
 * Notation
 + $LLE$ : list of diagonals
-+ $\forall v_j; LP_{v_j}$ is list of $(k,v_r)$ where $k$ is the index of a polygon containing $v_j$ as one of its vertices and $v_r = v_j \rightarrow next$ in said polygon but $v_rv_j$ is a vertex in the initial polygon
++ $\forall v_j; LP_{v_j}$ is list of $(k,v_r)$ where $k$ is the index of a polygon containing $v_j$ as one of its vertices and $v_r = v_j \rightarrow next$ in said polygon but $v_rv_j$ is a diagonal in the initial polygon
 + $LDP[i]$ = whether polygon $i$ is in final list
 + $LUP[i] = j$ means polygon $i$ is part of polygon $j$
 + $m$ = no. of diagonals in the polygon on which we want to apply the merging process.
