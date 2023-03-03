@@ -27,6 +27,7 @@ double angle(const Point &a, const Point &b, const Point &c) {
 
 void Enumerate_Polygons(std::set<Face *> Polygons) {
     usize cnt = 1;
+    std::vector<std::deque<Vertex*>>polygons;
     for (auto &f : Polygons) {
         std::deque<Vertex*>p;
         Edge *now = f->edge;
@@ -36,9 +37,12 @@ void Enumerate_Polygons(std::set<Face *> Polygons) {
         } while (now != f->edge);
         
         if(is_collinear(p)) continue;
-        std::cout << p.size() << '\n';
-        for(auto &vt : p) {
-            std::cout << vt->point.x << ' ' << vt->point.y << ' ';
+        polygons.push_back(p);
+    }
+    std::cout << polygons.size() << '\n';
+    for(auto &vt : polygons) {
+        for(auto &u : vt) {
+            std::cout << u->point.x << ' ' << u->point.y << ' ';
         }
         std::cout << '\n';
     }

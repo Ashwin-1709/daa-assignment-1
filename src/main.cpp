@@ -1,7 +1,7 @@
 #include "dcel.hh"
 #include "decomp.hh"
 #include "utils.hh"
-#include <dbg.hh>
+#include "dbg.hh"
 
 int main() {
     usize n;
