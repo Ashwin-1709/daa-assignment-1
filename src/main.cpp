@@ -24,7 +24,8 @@ int main() {
     // std::set<Face*>p(begin(decomposed_polygons) , end(decomposed_polygons));
     // p.erase(decomposed_polygons[10]);
     // merge_face(decomposed_polygons[7] , decomposed_polygons[10]);
-    std::cout << decomposed_polygons.size() << '\n';
-    for(auto &f : decomposed_polygons)
-        Enumerate_Face(f);
+    // std::cout << decomposed_polygons.size() << '\n';
+    // for(auto &f : decomposed_polygons)
+    //     Enumerate_Face(f);
+    Enumerate_Polygons(decomposed_polygons);
 }

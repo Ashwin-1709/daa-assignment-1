@@ -17,6 +17,8 @@ bool same_side_semiplane(const std::array<double, 3> &coef, const Point &a,
                          const Point &b);
 // void decompose(const DCEL &dcel);
 Vertex *next_vertex(const Vertex *vertex);
+Vertex *next_vertex(Vertex *v , Face *f);
+Vertex *prev_vertex(Vertex *v , Face *f);
 bool check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
                  const Vertex *start, const Vertex *second);
 void update_face(Edge *edge, Face *face);

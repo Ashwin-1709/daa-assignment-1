@@ -77,7 +77,7 @@ std::set<Face *> decompose(Polygon *polygon) {
                 cur_polygon = new_polygon;
                 face_id[new_polygon] = cur_id++;
                 inv_face_id[face_id[new_polygon]] = new_polygon;
-                LLE.push_back({L[m].front() , L[m].back()});    
+                LLE.push_back({L[m].front() , L[m].back()});   
             }
             Vertex *first = L[m].front();
             Vertex *last = L[m].back();
@@ -104,7 +104,6 @@ std::set<Face *> decompose(Polygon *polygon) {
         }
         m++;
     }
-
     for(auto &faces : decomposed_polygons) {
         Edge *now = faces->edge;
         usize id = face_id[faces];
@@ -139,8 +138,30 @@ std::set<Face *> merge(Polygon *polygon) {
 
     for(usize j = 0 ; j < M ; j++) {
         auto [Vs , Vt] = LLE[j];
-        Vertex *j2 = Vt , *i2 = Vs;
-        
+        Vertex *j2 = Vt , *i2 = Vs , *j3 = next_vertex(Vt , inv_face_id[j]) , *i1 = prev_vertex(Vs , inv_face_id[j]);
+        usize f_id = 0;
+        bool found = false;
+        for(auto &[id , vt] : LP[Vt]) {
+            if(vt == Vs) 
+                f_id = id , found = true;
+        }
+        Vertex *j1 = prev_vertex(Vt , inv_face_id[f_id]);
+        Vertex *i3 = next_vertex(Vs , inv_face_id[f_id]);
+        if(angle(i1->point , i2->point , i3->point) <= 180 and angle(j1->point , j2->point , j3->point) <= 180) {
+            NP++;
+            Face *new_face = merge_face(inv_face_id[LUP[j]] , inv_face_id[LUP[f_id]]);
+            faces.erase(inv_face_id[LUP[f_id]]);
+            LDP[j] = false;
+            LDP[f_id] = false;
+            LDP[NP] = true;
+            LUP[j] = NP;
+            inv_face_id[NP] = new_face;
+            LUP[f_id] = NP;
+            for(usize h = 0 ; h < NP - 1 ; h++) {
+                if(LUP[h] == j or LUP[h] == f_id) 
+                    LUP[h] = NP;
+            }
+        }
     }
 
     return faces;

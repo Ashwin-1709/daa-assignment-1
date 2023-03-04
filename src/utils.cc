@@ -256,3 +256,25 @@ bool is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch) {
     }
     return c;
 }
+
+Vertex *next_vertex(Vertex *v , Face *f) {
+    Edge *now = f->edge;
+    do {
+        if(now->origin == v)
+            return now->next->origin;
+        now = now->next;
+    } while(now != f->edge);
+    assert(true);
+    return now->origin;
+}
+
+Vertex *prev_vertex(Vertex *v , Face *f) {
+    Edge *now = f->edge;
+    do {
+        if(now->origin == v)
+            return now->prev->origin;
+        now = now->next;
+    } while(now != f->edge);
+    assert(true);
+    return now->origin;
+}
