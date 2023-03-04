@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 add_compile_options(-Wextra)
+add_compile_options(-D_GLIBCXX_DEBUG)
 add_compile_options(-Wshadow)
 add_compile_options(-Wconversion)
 add_compile_options(-Wpedantic)
