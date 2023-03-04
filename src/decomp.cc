@@ -44,10 +44,15 @@ std::set<Face *> decompose(Polygon *polygon) {
                 bool backward = false;
                 auto rect = get_rectangle(L[m]);
                 while (!backward and !LPVS.empty()) {
-                    // dbg(LPVS.size());
-                    while (!LPVS.empty() and
-                           !inside_rectangle(rect, LPVS.front()->point))
-                        LPVS.pop_front();
+                    dbg(LPVS.size());
+                    dbg(LPVS.front());
+                    while (!LPVS.empty()) {
+                        if (!inside_rectangle(rect, LPVS.front()->point)) {
+                            LPVS.pop_front();
+                        } else {
+                            break;
+                        }
+                    }
                     // dbg(LPVS.size());
                     if (!LPVS.empty()) {
                         auto inside = is_inside_polygon(L[m], LPVS.front());
@@ -68,7 +73,8 @@ std::set<Face *> decompose(Polygon *polygon) {
                             LPVS.pop_front();
                         }
                         backward = true;
-                        LPVS.pop_front();
+                        if (!LPVS.empty())
+                            LPVS.pop_front();
                     }
                 }
                 if (LPVS.empty())
