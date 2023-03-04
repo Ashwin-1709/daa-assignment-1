@@ -70,9 +70,7 @@ std::set<Face *> decompose(Polygon *polygon) {
                             }
                             L[m].swap(VTR);
                             backward = true;
-                            LPVS.pop_front();
                         }
-                        backward = true;
                         if (!LPVS.empty())
                             LPVS.pop_front();
                     }
