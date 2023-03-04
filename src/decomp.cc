@@ -116,6 +116,7 @@ std::set<Face *> decompose(Polygon *polygon) {
         std::cout << "Face id : " << id << '\n';
         do {
             LP[now->origin].push_back({id , now->next->origin});
+            now = now->next;
         } while(now != faces->edge);
     }
     
