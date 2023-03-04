@@ -147,7 +147,18 @@ std::set<Face *> merge(Polygon *polygon) {
         }
         Vertex *j1 = prev_vertex(Vt , inv_face_id[f_id]);
         Vertex *i3 = next_vertex(Vs , inv_face_id[f_id]);
-        if(angle(i1->point , i2->point , i3->point) <= 180 and angle(j1->point , j2->point , j3->point) <= 180) {
+        // dbg(Vs->point.x , Vs->point.y);
+        // dbg(j1->point.x , j1->point.y);
+        // dbg(j2->point.x , j2->point.y);
+        // dbg(j3->point.x , Vs->point.y);
+        // dbg(Vt->point.x , Vt->point.y);
+        // dbg(i1->point.x , i1->point.y);
+        // dbg(i2->point.x , i2->point.y);
+        // dbg(i3->point.x , i3->point.y);
+        auto ang_1 = angle(i1->point , i2->point , i3->point);
+        auto ang_2 = angle(j1->point , j2->point , j3->point);
+        // dbg(ang_1 , ang_2);
+        if(ang_1 > 180 and ang_2 > 180) {
             NP++;
             Face *new_face = merge_face(inv_face_id[LUP[j]] , inv_face_id[LUP[f_id]]);
             faces.erase(inv_face_id[LUP[f_id]]);

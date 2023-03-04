@@ -17,6 +17,9 @@ int main() {
     }
     Polygon *polygon = new Polygon(points);
 
+    // auto g = decompose(polygon);
+    // Enumerate_Polygons(g);
+    dbg("----------");
     // Polygon *test = new Polygon({{30 , 10} , {40 , 20} , {50 , 10} , {50 ,
     // 0}}); Point *test_point = new Point({40 , 10}); Vertex *notch = new
     // Vertex(*test_point , 10); dbg(is_inside_polygon(test->vertices , notch));
