@@ -41,11 +41,29 @@ void Enumerate_Polygons(std::set<Face *> Polygons) {
     }
     std::cout << polygons.size() << '\n';
     for(auto &vt : polygons) {
+        std::cout << vt.size() << '\n';
         for(auto &u : vt) {
             std::cout << u->point.x << ' ' << u->point.y << ' ';
         }
         std::cout << '\n';
     }
+}
+
+void Enumerate_Face(Face *f) {
+    std::deque<Vertex*>p;
+    Edge *now = f->edge;
+    do {
+        p.push_back(now->origin);
+        now = now->next;
+    } while(now != f->edge);
+
+    if(is_collinear(p)) 
+        return;
+    std::cout << p.size() << '\n';
+    for(auto &vt : p) {
+        std::cout << "(" << vt->point.x << "," << vt->point.y << ") ";
+    }
+    std::cout << '\n';
 }
 
 std::deque<Vertex *> get_notches(const std::deque<Vertex *> &polygon) {
@@ -148,6 +166,25 @@ Face *split_face(Vertex *v1, Vertex *v2, Face *cur) {
     Face *new_face = new Face();
     update_face(e3_twin, new_face);
     return new_face;
+}
+
+Face* merge_face(Face* f1 , Face* f2) {
+    Edge *e3;
+    Edge *now = f1->edge;
+    do {
+        if(now->left_face == f1 and now->twin->left_face == f2)  
+            e3 = now;
+        now = now->next;
+    } while(now != f1->edge);
+
+    Edge *e1 = e3->next , *e2 = e3->twin->next;
+    e3->prev->next = e2;
+    e2->prev = e3->prev;
+    e1->prev = e3->twin->prev;
+    e3->twin->prev->next = e1;
+    f1->edge = e1;
+    update_face(e1 , f1);
+    return f1;
 }
 
 void update_face(Edge *edge, Face *face) {

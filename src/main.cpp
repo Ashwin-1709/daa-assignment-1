@@ -21,5 +21,10 @@ int main() {
     // 0}}); Point *test_point = new Point({40 , 10}); Vertex *notch = new
     // Vertex(*test_point , 10); dbg(is_inside_polygon(test->vertices , notch));
     auto decomposed_polygons = decompose(polygon);
-    Enumerate_Polygons(decomposed_polygons);
+    // std::set<Face*>p(begin(decomposed_polygons) , end(decomposed_polygons));
+    // p.erase(decomposed_polygons[10]);
+    // merge_face(decomposed_polygons[7] , decomposed_polygons[10]);
+    std::cout << decomposed_polygons.size() << '\n';
+    for(auto &f : decomposed_polygons)
+        Enumerate_Face(f);
 }

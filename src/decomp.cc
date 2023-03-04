@@ -113,18 +113,11 @@ std::set<Face *> decompose(Polygon *polygon) {
     for(auto &faces : decomposed_polygons) {
         Edge *now = faces->edge;
         usize id = face_id[faces];
-        std::cout << "Face id : " << id << '\n';
         do {
-            LP[now->origin].push_back({id , now->next->origin});
+            if(now->next->origin != next_vertex(now->origin))
+                LP[now->origin].push_back({id , now->next->origin});
             now = now->next;
         } while(now != faces->edge);
     }
-    
-    for(auto vert : polygon->vertices) {
-        std::cout << LP[vert].size() << ' ';
-    }
-
-    std::cout << '\n';
-    std::cout << "LLE size " << LLE.size() << '\n';
     return decomposed_polygons;
 }
