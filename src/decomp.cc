@@ -105,11 +105,6 @@ std::set<Face *> decompose(Polygon *polygon) {
         m++;
     }
 
-    for(usize i = 0 ; i < cur_id ; i++) {
-        LDP[i] = true;
-        LUP[i] = i;
-    }
-
     for(auto &faces : decomposed_polygons) {
         Edge *now = faces->edge;
         usize id = face_id[faces];
@@ -120,4 +115,33 @@ std::set<Face *> decompose(Polygon *polygon) {
         } while(now != faces->edge);
     }
     return decomposed_polygons;
+}
+
+
+std::set<Face *> merge(Polygon *polygon) {
+    auto faces = decompose(polygon);
+    std::vector<Face*>remove;
+    for(auto &f : faces) {
+        if(is_collinear(f)) 
+            remove.push_back(f);
+    }
+
+    for(auto &f : remove)
+        faces.erase(f);
+    
+    usize M = LLE.size();
+    usize NP = M + 1;
+
+    for(usize i = 0 ; i < NP ; i++) {
+        LDP[i] = true;
+        LUP[i] = i;
+    }
+
+    for(usize j = 0 ; j < M ; j++) {
+        auto [Vs , Vt] = LLE[j];
+        Vertex *j2 = Vt , *i2 = Vs;
+        
+    }
+
+    return faces;
 }

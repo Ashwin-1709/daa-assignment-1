@@ -20,7 +20,7 @@ int main() {
     // Polygon *test = new Polygon({{30 , 10} , {40 , 20} , {50 , 10} , {50 ,
     // 0}}); Point *test_point = new Point({40 , 10}); Vertex *notch = new
     // Vertex(*test_point , 10); dbg(is_inside_polygon(test->vertices , notch));
-    auto decomposed_polygons = decompose(polygon);
+    auto decomposed_polygons = merge(polygon);
     // std::set<Face*>p(begin(decomposed_polygons) , end(decomposed_polygons));
     // p.erase(decomposed_polygons[10]);
     // merge_face(decomposed_polygons[7] , decomposed_polygons[10]);

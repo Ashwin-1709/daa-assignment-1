@@ -5,5 +5,6 @@
 #include <deque>
 
 std::set<Face *> decompose(Polygon *polygon);
+std::set<Face *> merge(Polygon *polygon);
 
 #endif // DECOMP_H

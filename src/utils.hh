@@ -23,6 +23,7 @@ void update_face(Edge *edge, Face *face);
 void Enumerate_Polygons(std::set<Face *> Polygons);
 Face *split_face(Vertex *v1, Vertex *vr, Face *cur);
 bool is_collinear(const std::deque<Vertex *> &polygon);
+bool is_collinear(Face *f);
 bool is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch);
 Face *merge_face(Face *f1 , Face *f2);
 void Enumerate_Face(Face *f);

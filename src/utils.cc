@@ -227,6 +227,16 @@ bool is_collinear(const std::deque<Vertex *> &polygon) {
     return collinear;
 }
 
+bool is_collinear(Face *f) {
+    std::deque<Vertex*>p;
+    Edge *now = f->edge;
+    do {
+        p.push_back(now->origin);
+        now = now->next;
+    } while(now != f->edge);
+    return is_collinear(p);
+}
+
 bool is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch) {
     // Reference :
     // https://www.eecs.umich.edu/courses/eecs380/HANDOUTS/PROJ2/InsidePoly.html
