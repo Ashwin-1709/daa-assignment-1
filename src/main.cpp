@@ -1,7 +1,7 @@
+#include "dbg.hh"
 #include "dcel.hh"
 #include "decomp.hh"
 #include "utils.hh"
-#include "dbg.hh"
 
 int main() {
     usize n;
@@ -19,7 +19,7 @@ int main() {
 
     // auto g = decompose(polygon);
     // Enumerate_Polygons(g);
-    dbg("----------");
+    // dbg("----------");
     // Polygon *test = new Polygon({{30 , 10} , {40 , 20} , {50 , 10} , {50 ,
     // 0}}); Point *test_point = new Point({40 , 10}); Vertex *notch = new
     // Vertex(*test_point , 10); dbg(is_inside_polygon(test->vertices , notch));
