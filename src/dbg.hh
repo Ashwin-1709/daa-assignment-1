@@ -18,7 +18,7 @@ std::ostream &operator<<(std::ostream &os, const T_container &v) {
     return os << '}';
 }
 template <typename T> void debug_out(std::string s, T t) {
-    std::cout << "[" << s << ": " << t << "]\n";
+    std::cerr << "[" << s << ": " << t << "]\n";
 }
 template <typename T, typename... U>
 void debug_out(std::string s, T t, U... u) {
@@ -32,7 +32,7 @@ void debug_out(std::string s, T t, U... u) {
             break;
         w++;
     }
-    std::cout << "[" << s.substr(0, w) << ": " << t << "] ";
+    std::cerr << "[" << s.substr(0, w) << ": " << t << "] ";
     debug_out(s.substr(w + 2, s.size() - w - 1), u...);
 }
 #define dbg(x...) debug_out(#x, x)

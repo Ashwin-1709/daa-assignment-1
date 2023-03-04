@@ -33,7 +33,12 @@ file(GLOB all_SRCS
         "${PROJECT_SOURCE_DIR}/src/main.cpp"
 )
 
+file(GLOB visualize_src
+  "${PROJECT_SOURCE_DIR}/utils/visualize.cc"
+)
+
 add_executable(polygon_decomp ${all_SRCS})
+add_executable(visualize ${visualize_src})
 
 add_custom_command(TARGET polygon_decomp POST_BUILD COMMAND cmake -E copy ${CMAKE_BINARY_DIR}/compile_commands.json ${CMAKE_SOURCE_DIR}/compile_commands.json)
 
