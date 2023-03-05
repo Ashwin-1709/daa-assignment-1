@@ -1,2 +1,5 @@
 #!/bin/bash
-ctest --test-dir build
+pushd .
+cd ./build
+ctest 
+popd
