@@ -44,8 +44,8 @@ std::set<Face *> decompose(Polygon *polygon) {
                 bool backward = false;
                 auto rect = get_rectangle(L[m]);
                 while (!backward and !LPVS.empty()) {
-                    dbg(LPVS.size());
-                    dbg(LPVS.front());
+                    // dbg(LPVS.size());
+                    // dbg(LPVS.front());
                     while (!LPVS.empty()) {
                         if (!inside_rectangle(rect, LPVS.front()->point)) {
                             LPVS.pop_front();
@@ -148,6 +148,12 @@ std::set<Face *> merge(Polygon *polygon) {
 
     for (usize j = 0; j < M; j++) {
         auto [Vs, Vt] = LLE[j];
+        auto cond_1 = (LP[Vs].size() > 2 and LP[Vt].size() > 2);
+        auto cond_2 = (LP[Vs].size() > 2 and is_convex(Vt));
+        auto cond_3 = (LP[Vt].size() > 2 and is_convex(Vs));
+        auto cond_4 = (is_convex(Vt) and is_convex(Vs));
+        auto eval = cond_1 or cond_2 or cond_3 or cond_4;
+        if(!eval) continue;
         Vertex *j2 = Vt, *i2 = Vs, *j3 = next_vertex(Vt, inv_face_id[j]),
                *i1 = prev_vertex(Vs, inv_face_id[j]);
         usize f_id = 0;

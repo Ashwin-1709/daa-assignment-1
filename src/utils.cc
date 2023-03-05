@@ -237,6 +237,12 @@ bool is_collinear(Face *f) {
     return is_collinear(p);
 }
 
+bool is_convex(Vertex *v) {
+    Vertex *nxt = v->incident_edge->next->origin;
+    Vertex *pre = v->incident_edge->prev->origin;
+    return angle(pre->point , v->point , nxt->point) <= 180;
+}
+
 bool is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch) {
     // Reference :
     // https://www.eecs.umich.edu/courses/eecs380/HANDOUTS/PROJ2/InsidePoly.html
