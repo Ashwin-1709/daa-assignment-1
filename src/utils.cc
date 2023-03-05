@@ -270,7 +270,7 @@ Vertex *next_vertex(Vertex *v , Face *f) {
             return now->next->origin;
         now = now->next;
     } while(now != f->edge);
-    assert(true);
+    assert(false);
     return now->origin;
 }
 
@@ -281,6 +281,6 @@ Vertex *prev_vertex(Vertex *v , Face *f) {
             return now->prev->origin;
         now = now->next;
     } while(now != f->edge);
-    assert(true);
+    assert(false);
     return now->origin;
 }
