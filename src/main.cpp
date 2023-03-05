@@ -6,6 +6,7 @@
 int main() {
     usize n;
     std::cin >> n;
+    std::cout << n <<"\n";
     std::deque<Point> points;
     for (usize i = 0; i < n; i++) {
         double x, y;
@@ -13,6 +14,7 @@ int main() {
         Point p;
         p.x = x;
         p.y = y;
+        std::cout << x << " " << y << "\n";
         points.push_back(p);
     }
     Polygon *polygon = new Polygon(points);

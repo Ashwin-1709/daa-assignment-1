@@ -4,33 +4,15 @@ using namespace std;
 typedef uintptr_t usize;
 
 int main() {
-    ifstream f;
-    string line;
-    f.open("input.txt");
-    bool b = 1;
     int num_vertices_initial;
     vector<double>  initial_x, initial_y;
-    if(f.is_open()){
-        while(getline(f, line)){
-            if(b){
-                num_vertices_initial = stoi(line);
-                b=0;
-            }
-            else{
-                int i = 0;
-                while((line[i]>='0'&&line[i]<='9')||(line[i]=='.')||line[i]=='-') i++;
-                double x = stod(line.substr(0, i));
-                while(line[i]==' '||line[i]=='\t')  i++;
-                int starty = i;
-                while((line[i]>='0'&&line[i]<='9')||(line[i]=='.')||line[i]=='-') i++;
-                int endy = i;
-                double y = stod(line.substr(starty, endy - starty));
-                initial_x.push_back(x);
-                initial_y.push_back(y);
-            }
-        }
+    cin >> num_vertices_initial;
+    for(int i = 0; i < num_vertices_initial; i++){
+        double x, y;
+        cin >> x >> y;
+        initial_x.push_back(x);
+        initial_y.push_back(y);
     }
-    f.close();
     usize n;
     cin >> n;
     string colors[] = {"indigo", "yellow", "blue", "red", "green"};
@@ -66,7 +48,7 @@ int main() {
         x *= scale, y *= scale;
         out += to_string(x) + "," + to_string(-y) + " ";
     }
-    out += "' style='fill:teal;stroke:black;stroke-width:0.1'/>\n</svg>\n<svg height='540' width='960' viewbox='0 " +
+    out += "' style='fill:teal;stroke:black;stroke-width:1'/>\n</svg>\n<svg height='540' width='960' viewbox='0 " +
         to_string(-rangey * scale) + " 960 540'>\n";
     for (usize i = 0; i < n; i++) {
         out += "<polygon points='";
