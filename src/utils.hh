@@ -29,4 +29,5 @@ bool is_collinear(Face *f);
 bool is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch);
 Face *merge_face(Face *f1 , Face *f2);
 void Enumerate_Face(Face *f);
+bool is_convex(Vertex *v);
 #endif // UTILS_H
