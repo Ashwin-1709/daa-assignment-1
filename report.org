@@ -1,0 +1,44 @@
+#+title: CS F364 Assignment 1
+* Problem statement
+Given an arbitrary polygon, decompose it into a set of convex polygons. We have been given the following paper to implement:
+Algorithms for the decomposition of a polygon into convex polygons, European Journal of Operational Research, 121(2), 330-342.
+The paper describes three different algorithms for the decomposition of the polygon, we have implement the $MP1$ algorithm as part of this assignment as well as the merging part that follows.
+
+* DCEL: Doubly Connected Edge List
+We have used the DCEL data structure to store our decomposed polygon. DCEL consists of three main sub-data-structures, namely
+Vertex, Edge and Face.
+** TODO Images reference
+#+DOWNLOADED: screenshot @ 2023-03-06 23:38:16
+[[file:DCEL:_Doubly_Connected_Edge_List/2023-03-06_23-38-16_screenshot.png]]
+
+
+#+DOWNLOADED: screenshot @ 2023-03-06 23:37:13
+[[file:DCEL:_Doubly_Connected_Edge_List/2023-03-06_23-37-13_screenshot.png]]
+
+** Polygon
+A decomposed polygon is represented by the Polygon class, which contains a list of vertices of the original polygon in clockwise order, and two Faces which represent the outer and inner faces of the initial, undecomposed polygon.
+** Vertex
+A vertex contains the coordinates of the point and an IncidentEdge - an edge which originates at the vertex.
+** Edge
+An edge contains
++ A pointer to its twin (edge with the source and destination swapped)
++ A pointer to its source vertex (called ~origin~)
++ A pointer to the face on its left
++ Pointers to its previous and next edges
+** Face
+A face contains a pointer to any one of the representative edges of the face (if we know one edge we can find all of them by traversing using the ~next~ field of the edge)
+* TODO Decomposition algorithm
+The algorithm relies on successive adding of vertices until the polygon formed by the vertices is not convex.
+** TODO define terminology
+** Time complexity analysis of helper functions
+*** ~angle(a,b,c)~: Given three vertices, find the angle between them
+Returns the angle swept by line segment $ba$ over $bc$ counterclockwise. For finding the angle, we calculate the magnitudes of $\vec{ba}$ and $\vec{bc}$, and their dot and cross products. We then return different values depending on the sign of the dot and cross products. The time complexity if $\mathcal{O}(1)$
+*** ~get_notches~: Given a polygon, return a list of notches
+We iterate over the vertices of the polygon in clockwise order, checking if the angle $v_{i-1},v_i,v_{i+1}$ (where $v_i$ is the current vertex) is reflex. If the angle is reflex, we add it to the list of notches. Finding the angle takes constant time, hence the time complexity for getting all the notches is $\mathcal{O}(n)$ where $n$ is the number of vertices in the polygon.
+*** ~split_face~: Given a diagonal and a face, split the face at the diagonal
+We iterate over the edges of the face and get the neighbouring edges incident to the diagonal vertices. We do the necessary updates to the =next= and =previous= of all the necessary edges. We then create a new face and update its edges so that their left face points to this face. Finally, we return the newly formed face. The time complexity for this process is $\mathcal{O}(n)$ where $n$ is the number of vertices in the polygon due to the linear nature of both the processes.
+*** ~merge_face~: Given two faces, merge and return their combination
+We iterate over edges of the first face to find the diagonal between the two faces and perform the necessary updates in the edges. After updation, the left faces of all the edges are updated to the first face and the first face is returned. The time complexity is $\mathcal{O}(n)$ where $n$ is the number of vertices in the polygon.
+*** =get_LPVS=: Given a list of notches, find the ones in the polygon made by points in $P \setminus L_m$
+We iterate over all the notches, and check whether they are present in the list $L_m$ (the polygon being made in the $m^{th}$ iteration) and not in $P$ (the undecomposed polygon we are currently working on). The time complexity is $\mathcal{O}(n^2)$ as we have to iterate over $L_m$ and $P$ for every notch.
+* Merging algorithm
