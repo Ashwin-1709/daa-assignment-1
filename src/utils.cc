@@ -120,7 +120,7 @@ auto get_line(const Point &a, const Point &b) -> std::array<double, 3> {
 }
 
 /// @brief Checks if two Points are on the same side of a line
-/// @param Coefficients of the equation of the line: [a,b,c] in ax+by+c=0
+/// @param coef Coefficients of the equation of the line: [a,b,c] in ax+by+c=0
 /// @param a The Point `a`
 /// @param b The Point `b`
 auto same_side_semiplane(const std::array<double, 3> &coef, const Point &a,
@@ -266,7 +266,7 @@ auto is_collinear(const std::deque<Vertex *> &polygon) -> bool {
 }
 
 /// @brief Checks if all the `Vertice`s of the polygon are collinear
-/// @param The Face representing the polygon
+/// @param f The Face representing the polygon
 auto is_collinear(Face *f) -> bool {
     std::deque<Vertex *> p;
     Edge *now = f->edge;

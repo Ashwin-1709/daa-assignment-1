@@ -4,11 +4,7 @@
 
 Polygon::Polygon() = default;
 
-/// @brief Constructer for the Polygon class, Given a list of points in
-/// clockwise order, It builds the DCEL structure for the polygon
-/// @param point_list
 Polygon::Polygon(const std::deque<Point> &point_list) {
-    //
     n_vertices = point_list.size();
     open_end = new Face();
     inner_end = new Face();

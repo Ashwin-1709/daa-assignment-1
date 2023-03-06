@@ -3,9 +3,10 @@
 #include "dbg.hh"
 #include <deque>
 
-/// @brief Given an input polygon , decompose it using the MP1 Algorithm
-/// @param polygon
-/// @return New Decomposed Polygon and some Required Exports
+/// @brief Decomposes a Polygon using the MP1 Algorithm
+/// @param polygon The polygon to decompose
+/// @return The decomposed polygon with other data structures required for
+/// merging: see DecompData
 auto decompose(const Polygon &polygon) -> DecompData {
     // init
     usize n = polygon.n_vertices;
