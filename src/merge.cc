@@ -53,7 +53,7 @@ auto merge(DecompData &decompdata) -> std::set<Face *> {
         usize f_id = 0;
         bool found = false;
         for (const auto &[id, vt] : LP.at(Vt)) {
-            if (vt == Vs) {
+            if (vt == Vs and id != j) {
                 f_id = id, found = true;
             }
         }
