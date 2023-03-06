@@ -3,6 +3,8 @@
 #include "typedefs.hh"
 #include "utils.hh"
 #include <deque>
+#include <map>
+#include <vector>
 
 struct DecompData {
     std::set<Face *> faces;
