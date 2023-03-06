@@ -2,6 +2,4 @@
 #define MERGE_H
 #include "decomp.hh"
 
-
-
 #endif

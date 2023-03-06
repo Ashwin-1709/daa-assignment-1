@@ -12,7 +12,7 @@ auto merge(DecompData &decompdata) -> std::set<Face *> {
     for (const auto &f : faces) {
         if (is_collinear(f)) {
             remove.push_back(f);
-}
+        }
     }
 
     for (auto &f : remove) {
@@ -50,7 +50,7 @@ auto merge(DecompData &decompdata) -> std::set<Face *> {
         for (const auto &[id, vt] : LP.at(Vt)) {
             if (vt == Vs) {
                 f_id = id, found = true;
-}
+            }
         }
         Vertex *j1 = prev_vertex(Vt, inv_face_id[f_id]);
         Vertex *i3 = next_vertex(Vs, inv_face_id[f_id]);
@@ -70,7 +70,7 @@ auto merge(DecompData &decompdata) -> std::set<Face *> {
             for (usize h = 0; h < NP - 1; h++) {
                 if (LUP[h] == j or LUP[h] == f_id) {
                     LUP[h] = NP;
-}
+                }
             }
         }
     }

@@ -85,12 +85,12 @@ auto decompose(const Polygon &polygon) -> DecompData {
                         }
                         if (!LPVS.empty()) {
                             LPVS.pop_front();
-}
+                        }
                     }
                 }
                 if (LPVS.empty()) {
                     break;
-}
+                }
             }
         }
 
@@ -112,10 +112,10 @@ auto decompose(const Polygon &polygon) -> DecompData {
                 bool in_L = false;
                 for (auto *s : L[m]) {
                     in_L |= (vert == s);
-}
+                }
                 if (in_L) {
                     continue;
-}
+                }
                 nxt_iter.push_back(vert);
             }
             nxt_iter.push_front(last);
@@ -140,7 +140,7 @@ auto decompose(const Polygon &polygon) -> DecompData {
         do {
             if (now->next->origin != next_vertex(now->origin)) {
                 LP[now->origin].push_back({id, now->next->origin});
-}
+            }
             now = now->next;
         } while (now != faces->edge);
     }
