@@ -3,6 +3,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(polygon_decomposition)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(CMAKE_CXX_STANDARD 20)
+option(BUILD_DOC "Build documentation" ON)
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 add_compile_options(-Wextra)
@@ -59,3 +60,14 @@ target_link_libraries(
 
 include(GoogleTest)
 gtest_discover_tests(test_dcel)
+
+find_package(Doxygen
+             REQUIRED dot
+             OPTIONAL_COMPONENTS mscgen dia)
+
+set(DOXYGEN_GENERATE_HTML YES)
+doxygen_add_docs(
+    doxygen
+    "${PROJECT_SOURCE_DIR}/src"
+    COMMENT "Generate html pages"
+)

@@ -1,8 +1,10 @@
+/** \file */
 #include "merge.hh"
 #include "decomp.hh"
 
-/// @brief List of Parameters That Are Passed to Merge Function including Face List and Face IDs and the decomposed polygon undergoes the mergin process
-/// @param decompdata 
+/// @brief List of Parameters That Are Passed to Merge Function including Face
+/// List and Face IDs and the decomposed polygon undergoes the mergin process
+/// @param decompdata
 /// @return Final decomposed polygon post merging
 auto merge(DecompData &decompdata) -> std::set<Face *> {
     std::vector<Face *> remove;
@@ -31,7 +33,7 @@ auto merge(DecompData &decompdata) -> std::set<Face *> {
         LDP[i] = true;
         LUP[i] = i;
     }
-    
+
     // Step 3
     for (usize j = 0; j < m; j++) {
         // 3.1

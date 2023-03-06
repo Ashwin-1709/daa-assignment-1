@@ -1,3 +1,4 @@
+/** \file */
 #include "utils.hh"
 #include <algorithm>
 #include <cassert>
@@ -5,11 +6,12 @@
 #include <dbg.hh>
 #include <vector>
 
-/// @brief Angle swept by a counterclockwise rotation from line segment ba to line segment bc
-/// @param a 
-/// @param b 
-/// @param c 
-/// @return Angle 
+/// @brief Angle swept by a counterclockwise rotation from line segment ba to
+/// line segment bc
+/// @param a
+/// @param b
+/// @param c
+/// @return Angle
 auto angle(const Point &a, const Point &b, const Point &c) -> double {
     const auto mag_ba =
         std::sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
@@ -31,7 +33,7 @@ auto angle(const Point &a, const Point &b, const Point &c) -> double {
     }
 }
 /// @brief Print the final set of decomposed polygons for visualization
-/// @param Polygons 
+/// @param Polygons
 void enumerate_polygons(const std::set<Face *> &Polygons) {
     usize cnt = 1;
     std::vector<std::deque<Vertex *>> polygons;
@@ -59,7 +61,7 @@ void enumerate_polygons(const std::set<Face *> &Polygons) {
 }
 
 /// @brief Get Notches present in a polygon
-/// @param polygon 
+/// @param polygon
 /// @return List of Notches present in the polygon
 auto get_notches(const std::deque<Vertex *> &polygon) -> std::deque<Vertex *> {
     std::deque<Vertex *> notches;
@@ -78,8 +80,9 @@ auto get_notches(const std::deque<Vertex *> &polygon) -> std::deque<Vertex *> {
     return notches;
 }
 
-/// @brief Given an input polygon L, the function returns the maximum and minimum x and y coordinates for rectangle enclosing L
-/// @param Polygon 
+/// @brief Given an input polygon L, the function returns the maximum and
+/// minimum x and y coordinates for rectangle enclosing L
+/// @param Polygon
 /// @return Minimum and Maximum of x and y coordinates of the rectangle
 auto get_rectangle(const std::deque<Vertex *> &L) -> std::array<Point, 2> {
     Point minimum;
@@ -94,9 +97,10 @@ auto get_rectangle(const std::deque<Vertex *> &L) -> std::array<Point, 2> {
     }
     return {minimum, maximum};
 }
-/// @brief Given a point, checking whether it is inside a given rectangle represented by its minimum and maximum x and y coordinates
-/// @param rectangle 
-/// @param point 
+/// @brief Given a point, checking whether it is inside a given rectangle
+/// represented by its minimum and maximum x and y coordinates
+/// @param rectangle
+/// @param point
 /// @return Boolean whether point lies inside the rectangle or not
 auto inside_rectangle(const std::array<Point, 2> &rectangle, const Point &point)
     -> bool {
@@ -104,9 +108,10 @@ auto inside_rectangle(const std::array<Point, 2> &rectangle, const Point &point)
            point.y > rectangle[0].y and point.y < rectangle[1].y;
 }
 /// @brief 2D Equation of a line joining two points
-/// @param a 
-/// @param b 
-/// @return Coeffiecient of the line equation ux + vy + w = 0 passing through point a and b
+/// @param a
+/// @param b
+/// @return Coeffiecient of the line equation ux + vy + w = 0 passing through
+/// point a and b
 auto get_line(const Point &a, const Point &b) -> std::array<double, 3> {
     // x1x + y1y + c = 0
     std::array<double, 3> coefficients;
@@ -118,9 +123,9 @@ auto get_line(const Point &a, const Point &b) -> std::array<double, 3> {
 
 /// @brief Check if Two Points are on same side of Plane
 /// @param coef (Line equation coefficients - ax + by + c = 0)
-/// @param a 
-/// @param b 
-/// @return Returns True if points are on same side, otherwise false. 
+/// @param a
+/// @param b
+/// @return Returns True if points are on same side, otherwise false.
 auto same_side_semiplane(const std::array<double, 3> &coef, const Point &a,
                          const Point &b) -> bool {
     double L1 = coef[0] * a.x + coef[1] * a.y + coef[2];
@@ -128,21 +133,20 @@ auto same_side_semiplane(const std::array<double, 3> &coef, const Point &a,
     return (L1 * L2) > 0;
 }
 
-
 /// @brief Returns the next vertex in the original undecomposed polygon
-/// @param vertex 
+/// @param vertex
 /// @return next vertex
 auto next_vertex(const Vertex *vertex) -> Vertex * {
     return vertex->incident_edge->next->origin;
 }
 
-
-/// @brief Checking whether any of the three angles made by (a , b , c) or (b , c , start) or (c , start , end) is a notch or not
-/// @param a 
-/// @param b 
-/// @param c 
-/// @param start 
-/// @param second 
+/// @brief Checking whether any of the three angles made by (a , b , c) or (b ,
+/// c , start) or (c , start , end) is a notch or not
+/// @param a
+/// @param b
+/// @param c
+/// @param start
+/// @param second
 /// @return returns True if any of the Three Points is a Notch or not
 
 auto check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
@@ -153,11 +157,11 @@ auto check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
     return angle_b <= 180 and angle_c <= 180 and angle_start <= 180;
 }
 
-
-/// @brief Function Used to Decompose Polygon into Two Faces using the DCEL structure with Diagonal from v1 to v2
-/// @param v1 
-/// @param v2 
-/// @param cur 
+/// @brief Function Used to Decompose Polygon into Two Faces using the DCEL
+/// structure with Diagonal from v1 to v2
+/// @param v1
+/// @param v2
+/// @param cur
 /// @return New Face Formed by splitting
 auto split_face(Vertex *v1, Vertex *v2, Face *cur) -> Face * {
     Edge *e1;
@@ -196,8 +200,8 @@ auto split_face(Vertex *v1, Vertex *v2, Face *cur) -> Face * {
 }
 
 /// @brief Merging two faces into one face using the DCEL structure
-/// @param f1 
-/// @param f2 
+/// @param f1
+/// @param f2
 /// @return New Merged Face
 auto merge_face(Face *f1, Face *f2) -> Face * {
     Edge *e3;
@@ -221,8 +225,8 @@ auto merge_face(Face *f1, Face *f2) -> Face * {
 }
 
 /// @brief Update the face of all edges of a polygon
-/// @param edge 
-/// @param face 
+/// @param edge
+/// @param face
 void update_face(Edge *edge, Face *face) {
     face->edge = edge;
     edge->left_face = face;
@@ -234,13 +238,11 @@ void update_face(Edge *edge, Face *face) {
     next->left_face = face;
 }
 
-
-
 /// @brief Gets Set of Notches which are present in the polygon formed by P \ L
-/// @param notches 
-/// @param L 
-/// @param P 
-/// @return 
+/// @param notches
+/// @param L
+/// @param P
+/// @return
 auto get_LPVS(std::deque<Vertex *> &notches, std::deque<Vertex *> &L,
               std::deque<Vertex *> &P) -> std::deque<Vertex *> {
     std::deque<Vertex *> LPVS;
@@ -260,9 +262,8 @@ auto get_LPVS(std::deque<Vertex *> &notches, std::deque<Vertex *> &L,
     return LPVS;
 }
 
-
 /// @brief Check Whether New Polygon has all points lying on the same line
-/// @param polygon 
+/// @param polygon
 /// @return true if collinear
 auto is_collinear(const std::deque<Vertex *> &polygon) -> bool {
     const auto line = get_line(polygon[0]->point, polygon[1]->point);
@@ -277,9 +278,9 @@ auto is_collinear(const std::deque<Vertex *> &polygon) -> bool {
     return collinear;
 }
 
-
-/// @brief Check whether the polygon with input Face has all points lying on the same line
-/// @param f 
+/// @brief Check whether the polygon with input Face has all points lying on the
+/// same line
+/// @param f
 /// @return true if collinear
 auto is_collinear(Face *f) -> bool {
     std::deque<Vertex *> p;
@@ -291,9 +292,9 @@ auto is_collinear(Face *f) -> bool {
     return is_collinear(p);
 }
 
-
-/// @brief Check Whether angle made by Vertex v in the original polygon is convex or not 
-/// @param v 
+/// @brief Check Whether angle made by Vertex v in the original polygon is
+/// convex or not
+/// @param v
 /// @return True if Convex
 auto is_convex(Vertex *v) -> bool {
     Vertex *nxt = v->incident_edge->next->origin;
@@ -302,8 +303,8 @@ auto is_convex(Vertex *v) -> bool {
 }
 
 /// @brief Check whether a given notch lies inside the input polygon
-/// @param polygon 
-/// @param notch 
+/// @param polygon
+/// @param notch
 /// @return true if notch lies in the interior of the polygon
 auto is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch)
     -> bool {
@@ -331,11 +332,10 @@ auto is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch)
     return c != 0U;
 }
 
-
 /// @brief Next Vertex of a Edge in Some Particular Face
-/// @param v 
-/// @param f 
-/// @return Next Vertex of v in Face f 
+/// @param v
+/// @param f
+/// @return Next Vertex of v in Face f
 auto next_vertex(Vertex *v, Face *f) -> Vertex * {
     Edge *now = f->edge;
     do {
@@ -349,9 +349,9 @@ auto next_vertex(Vertex *v, Face *f) -> Vertex * {
 }
 
 /// @brief Previous Vertex of a Edge in Some Given Face
-/// @param v 
-/// @param f 
-/// @return Previous Vertex of v in Face f 
+/// @param v
+/// @param f
+/// @return Previous Vertex of v in Face f
 auto prev_vertex(Vertex *v, Face *f) -> Vertex * {
     Edge *now = f->edge;
     do {
