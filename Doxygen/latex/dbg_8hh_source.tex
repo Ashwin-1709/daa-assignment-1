@@ -1,0 +1,51 @@
+\hypertarget{dbg_8hh_source}{}\doxysection{dbg.\+hh}
+\label{dbg_8hh_source}\index{src/dbg.hh@{src/dbg.hh}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef DBG\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define DBG\_H}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}typedefs.hh"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <bits/stdc++.h>}}
+\DoxyCodeLine{5 \textcolor{keyword}{template} <\textcolor{keyword}{typename} A, \textcolor{keyword}{typename} B>}
+\DoxyCodeLine{6 \textcolor{keyword}{auto} operator<<(std::ostream \&os, \textcolor{keyword}{const} std::pair<A, B> \&p) -\/> std::ostream \& \{}
+\DoxyCodeLine{7     \textcolor{keywordflow}{return} os << \textcolor{stringliteral}{"{}("{}} << p.first << \textcolor{stringliteral}{"{}, "{}} << p.second << \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{8 \}}
+\DoxyCodeLine{9 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T\_container,}
+\DoxyCodeLine{10           \textcolor{keyword}{typename} T = \textcolor{keyword}{typename} std::enable\_if<}
+\DoxyCodeLine{11               !std::is\_same<T\_container, std::string>::value,}
+\DoxyCodeLine{12               \textcolor{keyword}{typename} T\_container::value\_type>::type>}
+\DoxyCodeLine{13 \textcolor{keyword}{auto} operator<<(std::ostream \&os, \textcolor{keyword}{const} T\_container \&v) -\/> std::ostream \& \{}
+\DoxyCodeLine{14     os << \textcolor{charliteral}{'\{'};}
+\DoxyCodeLine{15     std::string sep;}
+\DoxyCodeLine{16     \textcolor{keywordflow}{for} (\textcolor{keyword}{const} T \&x : v) \{}
+\DoxyCodeLine{17         os << sep << x, sep = \textcolor{stringliteral}{"{}, "{}};}
+\DoxyCodeLine{18     \}}
+\DoxyCodeLine{19     \textcolor{keywordflow}{return} os << \textcolor{charliteral}{'\}'};}
+\DoxyCodeLine{20 \}}
+\DoxyCodeLine{21 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keywordtype}{void} debug\_out(std::string s, T t) \{}
+\DoxyCodeLine{22     std::cerr << \textcolor{stringliteral}{"{}["{}} << s << \textcolor{stringliteral}{"{}: "{}} << t << \textcolor{stringliteral}{"{}]\(\backslash\)n"{}};}
+\DoxyCodeLine{23 \}}
+\DoxyCodeLine{24 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, \textcolor{keyword}{typename}... U>}
+\DoxyCodeLine{25 \textcolor{keywordtype}{void} debug\_out(\textcolor{keyword}{const} std::string \&s, T t, U... u) \{}
+\DoxyCodeLine{26     usize w = 0;}
+\DoxyCodeLine{27     usize c = 0;}
+\DoxyCodeLine{28     \textcolor{keywordflow}{while} (w < s.size()) \{}
+\DoxyCodeLine{29         \textcolor{keywordflow}{if} (s[w] == \textcolor{charliteral}{'('}) \{}
+\DoxyCodeLine{30             c++;}
+\DoxyCodeLine{31         \}}
+\DoxyCodeLine{32         \textcolor{keywordflow}{if} (s[w] == \textcolor{charliteral}{')'}) \{}
+\DoxyCodeLine{33             c-\/-\/;}
+\DoxyCodeLine{34         \}}
+\DoxyCodeLine{35         \textcolor{keywordflow}{if} (!c and s[w] == \textcolor{charliteral}{','}) \{}
+\DoxyCodeLine{36             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{37         \}}
+\DoxyCodeLine{38         w++;}
+\DoxyCodeLine{39     \}}
+\DoxyCodeLine{40     std::cerr << \textcolor{stringliteral}{"{}["{}} << s.substr(0, w) << \textcolor{stringliteral}{"{}: "{}} << t << \textcolor{stringliteral}{"{}] "{}};}
+\DoxyCodeLine{41     debug\_out(s.substr(w + 2, s.size() -\/ w -\/ 1), u...);}
+\DoxyCodeLine{42 \}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#define dbg(x...) debug\_out(\#x, x)}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
