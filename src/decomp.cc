@@ -8,7 +8,8 @@ auto decompose(const Polygon &polygon) -> DecompData {
     std::deque<std::deque<Vertex *>> L;
 
     // Step 1
-    std::deque<Vertex *> cur, P(begin(polygon.vertices), end(polygon.vertices));
+    std::deque<Vertex *> cur;
+    std::deque<Vertex *> P(begin(polygon.vertices), end(polygon.vertices));
     // Step 2
     cur.push_front(polygon.vertices[0]);
     L.push_front(cur);
@@ -71,8 +72,8 @@ auto decompose(const Polygon &polygon) -> DecompData {
                             std::deque<Vertex *> VTR;
                             auto line =
                                 get_line(v1->point, LPVS.front()->point);
-                            auto bck = L[m].back();
-                            for (auto u : L[m]) {
+                            auto *bck = L[m].back();
+                            for (auto *u : L[m]) {
                                 if (!same_side_semiplane(line, u->point,
                                                          bck->point) or
                                     u == v1) {
@@ -82,12 +83,14 @@ auto decompose(const Polygon &polygon) -> DecompData {
                             L[m].swap(VTR);
                             backward = true;
                         }
-                        if (!LPVS.empty())
+                        if (!LPVS.empty()) {
                             LPVS.pop_front();
+}
                     }
                 }
-                if (LPVS.empty())
+                if (LPVS.empty()) {
                     break;
+}
             }
         }
 
@@ -105,12 +108,14 @@ auto decompose(const Polygon &polygon) -> DecompData {
             Vertex *first = L[m].front();
             Vertex *last = L[m].back();
             std::deque<Vertex *> nxt_iter;
-            for (auto vert : P) {
+            for (auto *vert : P) {
                 bool in_L = false;
-                for (auto s : L[m])
+                for (auto *s : L[m]) {
                     in_L |= (vert == s);
-                if (in_L)
+}
+                if (in_L) {
                     continue;
+}
                 nxt_iter.push_back(vert);
             }
             nxt_iter.push_front(last);
@@ -129,12 +134,13 @@ auto decompose(const Polygon &polygon) -> DecompData {
         m++;
     }
 
-    for (auto &faces : decomposed_polygons) {
+    for (const auto &faces : decomposed_polygons) {
         Edge *now = faces->edge;
         usize id = face_id[faces];
         do {
-            if (now->next->origin != next_vertex(now->origin))
+            if (now->next->origin != next_vertex(now->origin)) {
                 LP[now->origin].push_back({id, now->next->origin});
+}
             now = now->next;
         } while (now != faces->edge);
     }

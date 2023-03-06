@@ -9,9 +9,10 @@ auto merge(DecompData &decompdata) -> std::set<Face *> {
     auto &inv_face_id = decompdata.inv_face_id;
     const auto &LLE = decompdata.LLE;
     const auto &LP = decompdata.LP;
-    for (auto &f : faces) {
-        if (is_collinear(f))
+    for (const auto &f : faces) {
+        if (is_collinear(f)) {
             remove.push_back(f);
+}
     }
 
     for (auto &f : remove) {
@@ -40,13 +41,16 @@ auto merge(DecompData &decompdata) -> std::set<Face *> {
         if (!eval) {
             continue;
         }
-        Vertex *j2 = Vt, *i2 = Vs, *j3 = next_vertex(Vt, inv_face_id[j]),
-               *i1 = prev_vertex(Vs, inv_face_id[j]);
+        Vertex *j2 = Vt;
+        Vertex *i2 = Vs;
+        Vertex *j3 = next_vertex(Vt, inv_face_id[j]);
+        Vertex *i1 = prev_vertex(Vs, inv_face_id[j]);
         usize f_id = 0;
         bool found = false;
         for (const auto &[id, vt] : LP.at(Vt)) {
-            if (vt == Vs)
+            if (vt == Vs) {
                 f_id = id, found = true;
+}
         }
         Vertex *j1 = prev_vertex(Vt, inv_face_id[f_id]);
         Vertex *i3 = next_vertex(Vs, inv_face_id[f_id]);
@@ -64,8 +68,9 @@ auto merge(DecompData &decompdata) -> std::set<Face *> {
             inv_face_id[NP] = new_face;
             LUP[f_id] = NP;
             for (usize h = 0; h < NP - 1; h++) {
-                if (LUP[h] == j or LUP[h] == f_id)
+                if (LUP[h] == j or LUP[h] == f_id) {
                     LUP[h] = NP;
+}
             }
         }
     }

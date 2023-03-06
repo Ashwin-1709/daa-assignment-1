@@ -8,8 +8,9 @@ Polygon::Polygon(const std::deque<Point> &point_list) {
     open_end = new Face();
     inner_end = new Face();
     usize cur_id = 0;
-    auto start = new Vertex(point_list[0], cur_id);
-    auto forward = new Edge(), reverse = new Edge();
+    auto *start = new Vertex(point_list[0], cur_id);
+    auto *forward = new Edge();
+    auto *reverse = new Edge();
 
     forward->twin = reverse;
     reverse->twin = forward;
@@ -21,8 +22,9 @@ Polygon::Polygon(const std::deque<Point> &point_list) {
     vertices.push_back(start);
 
     for (usize i = 1; i < n_vertices; i++) {
-        auto current = new Vertex(point_list[i], i);
-        auto current_forward = new Edge(), current_reverse = new Edge();
+        auto *current = new Vertex(point_list[i], i);
+        auto *current_forward = new Edge();
+        auto *current_reverse = new Edge();
         current_forward->twin = current_reverse;
         current_reverse->twin = current_forward;
         current->incident_edge = current_forward;

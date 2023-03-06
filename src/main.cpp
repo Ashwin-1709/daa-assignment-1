@@ -10,7 +10,8 @@ auto main() -> int {
     std::cout << n << std::endl;
     std::deque<Point> points;
     for (usize i = 0; i < n; i++) {
-        double x, y;
+        double x;
+        double y;
         std::cin >> x >> y;
         Point point;
         point.x = x;
@@ -18,7 +19,7 @@ auto main() -> int {
         std::cout << x << " " << y << std::endl;
         points.push_back(point);
     }
-    auto polygon = new Polygon(points);
+    auto *polygon = new Polygon(points);
 
     auto decompdata = decompose(*polygon);
     auto decomposed_polygons = merge(decompdata);

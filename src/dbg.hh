@@ -13,8 +13,9 @@ template <typename T_container,
 auto operator<<(std::ostream &os, const T_container &v) -> std::ostream & {
     os << '{';
     std::string sep;
-    for (const T &x : v)
+    for (const T &x : v) {
         os << sep << x, sep = ", ";
+}
     return os << '}';
 }
 template <typename T> void debug_out(std::string s, T t) {
@@ -22,14 +23,18 @@ template <typename T> void debug_out(std::string s, T t) {
 }
 template <typename T, typename... U>
 void debug_out(std::string s, T t, U... u) {
-    usize w = 0, c = 0;
+    usize w = 0;
+    usize c = 0;
     while (w < s.size()) {
-        if (s[w] == '(')
+        if (s[w] == '(') {
             c++;
-        if (s[w] == ')')
+}
+        if (s[w] == ')') {
             c--;
-        if (!c and s[w] == ',')
+}
+        if (!c and s[w] == ',') {
             break;
+}
         w++;
     }
     std::cerr << "[" << s.substr(0, w) << ": " << t << "] ";

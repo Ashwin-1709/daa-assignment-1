@@ -15,9 +15,8 @@ auto angle(const Point &a, const Point &b, const Point &c) -> double {
     if (cross == 0) {
         if (cos_theta > 0) {
             return 0.0;
-        } else {
-            return 180.0;
-        }
+        }             return 180.0;
+       
     } else if (cross > 0) {
         return std::acos(cos_theta) * 180 / M_PI;
     } else {
@@ -28,7 +27,7 @@ auto angle(const Point &a, const Point &b, const Point &c) -> double {
 void enumerate_polygons(std::set<Face *> Polygons) {
     usize cnt = 1;
     std::vector<std::deque<Vertex *>> polygons;
-    for (auto &f : Polygons) {
+    for (const auto &f : Polygons) {
         std::deque<Vertex *> p;
         Edge *now = f->edge;
         do {
@@ -59,8 +58,9 @@ void enumerate_face(Face *f) {
         now = now->next;
     } while (now != f->edge);
 
-    if (is_collinear(p))
+    if (is_collinear(p)) {
         return;
+}
     std::cout << p.size() << '\n';
     for (auto &vt : p) {
         std::cout << "(" << vt->point.x << "," << vt->point.y << ") ";
@@ -71,24 +71,27 @@ void enumerate_face(Face *f) {
 auto get_notches(const std::deque<Vertex *> &polygon) -> std::deque<Vertex *> {
     std::deque<Vertex *> notches;
     const usize n = polygon.size();
-    if (n < 3)
+    if (n < 3) {
         return notches;
+}
     for (usize i = 0; i < n; i++) {
         Vertex *base = polygon[i];
         Vertex *left = polygon[(i - 1 + n) % n];
         Vertex *right = polygon[(i + 1) % n];
-        if (angle(left->point, base->point, right->point) > 180)
+        if (angle(left->point, base->point, right->point) > 180) {
             notches.push_back(base);
+}
     }
     return notches;
 }
 
 // rectangle with minimum area that encloses vertices of list L
 auto get_rectangle(const std::deque<Vertex *> &L) -> std::array<Point, 2> {
-    Point minimum, maximum;
+    Point minimum;
+    Point maximum;
     minimum.x = 1e9, minimum.y = 1e9;
     maximum.x = -1e9, maximum.y = -1e9;
-    for (auto &v : L) {
+    for (const auto &v : L) {
         minimum.x = std::min(minimum.x, v->point.x);
         minimum.y = std::min(minimum.y, v->point.y);
         maximum.x = std::max(maximum.x, v->point.x);
@@ -99,10 +102,8 @@ auto get_rectangle(const std::deque<Vertex *> &L) -> std::array<Point, 2> {
 
 auto inside_rectangle(const std::array<Point, 2> &rectangle, const Point &point)
     -> bool {
-    if (point.x > rectangle[0].x and point.x < rectangle[1].x and
-        point.y > rectangle[0].y and point.y < rectangle[1].y)
-        return true;
-    return false;
+    return point.x > rectangle[0].x and point.x < rectangle[1].x and
+        point.y > rectangle[0].y and point.y < rectangle[1].y;
 }
 
 auto get_line(const Point &a, const Point &b) -> std::array<double, 3> {
@@ -118,9 +119,7 @@ auto same_side_semiplane(const std::array<double, 3> &coef, const Point &a,
                          const Point &b) -> bool {
     double L1 = coef[0] * a.x + coef[1] * a.y + coef[2];
     double L2 = coef[0] * b.x + coef[1] * b.y + coef[2];
-    if ((L1 * L2) > 0)
-        return true;
-    return false;
+    return (L1 * L2) > 0;
 }
 
 auto next_vertex(const Vertex *vertex) -> Vertex * {
@@ -137,13 +136,15 @@ auto check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
 
 auto split_face(Vertex *v1, Vertex *v2, Face *cur) -> Face * {
 
-    Edge *e1, *e2;
+    Edge *e1;
+    Edge *e2;
     Edge *now = cur->edge;
     do {
-        if (now->origin == v1)
+        if (now->origin == v1) {
             e1 = now;
-        else if (now->twin->origin == v2)
+        } else if (now->twin->origin == v2) {
             e2 = now;
+}
         now = now->next;
     } while (now != cur->edge);
 
@@ -174,12 +175,14 @@ auto merge_face(Face *f1, Face *f2) -> Face * {
     Edge *e3;
     Edge *now = f1->edge;
     do {
-        if (now->left_face == f1 and now->twin->left_face == f2)
+        if (now->left_face == f1 and now->twin->left_face == f2) {
             e3 = now;
+}
         now = now->next;
     } while (now != f1->edge);
 
-    Edge *e1 = e3->next, *e2 = e3->twin->next;
+    Edge *e1 = e3->next;
+    Edge *e2 = e3->twin->next;
     e3->prev->next = e2;
     e2->prev = e3->prev;
     e1->prev = e3->twin->prev;
@@ -203,14 +206,18 @@ void update_face(Edge *edge, Face *face) {
 auto get_LPVS(std::deque<Vertex *> &notches, std::deque<Vertex *> &L,
               std::deque<Vertex *> &P) -> std::deque<Vertex *> {
     std::deque<Vertex *> LPVS;
-    for (auto notch : notches) {
-        bool in_P = false, in_L = false;
-        for (auto cur : L)
+    for (auto *notch : notches) {
+        bool in_P = false;
+        bool in_L = false;
+        for (auto *cur : L) {
             in_L |= (cur == notch);
-        for (auto cur : P)
+}
+        for (auto *cur : P) {
             in_P |= (cur == notch);
-        if (in_P and !in_L)
+}
+        if (in_P and !in_L) {
             LPVS.push_back(notch);
+}
     }
     return LPVS;
 }
@@ -219,7 +226,7 @@ auto is_collinear(const std::deque<Vertex *> &polygon) -> bool {
     const auto line = get_line(polygon[0]->point, polygon[1]->point);
     // line is ax + by + c = 0
     bool collinear = true;
-    for (auto &vertex : polygon) {
+    for (const auto &vertex : polygon) {
         auto &point = vertex->point;
         if (line[0] * point.x + line[1] * point.y + line[2] != 0) {
             collinear = false;
@@ -249,27 +256,33 @@ auto is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch)
     // Reference :
     // https://www.eecs.umich.edu/courses/eecs380/HANDOUTS/PROJ2/InsidePoly.html
     usize n = polygon.size();
-    if (n < 3)
+    if (n < 3) {
         return false;
-    usize i, j, c = 0;
-    double x = notch->point.x, y = notch->point.y;
+}
+    usize i;
+    usize j;
+    usize c = 0;
+    double x = notch->point.x;
+    double y = notch->point.y;
     for (i = 0, j = n - 1; i < n; j = i++) {
         double ypi = polygon[i]->point.y;
         double xpi = polygon[i]->point.x;
         double ypj = polygon[j]->point.y;
         double xpj = polygon[j]->point.x;
         if ((((ypi <= y) && (y < ypj)) || ((ypj <= y) && (y < ypi))) &&
-            (x < (xpj - xpi) * (y - ypi) / (ypj - ypi) + xpi))
-            c = !c;
+            (x < (xpj - xpi) * (y - ypi) / (ypj - ypi) + xpi)) {
+            c = static_cast<usize>(static_cast<usize>(c) == 0U);
+}
     }
-    return c;
+    return c != 0U;
 }
 
 auto next_vertex(Vertex *v, Face *f) -> Vertex * {
     Edge *now = f->edge;
     do {
-        if (now->origin == v)
+        if (now->origin == v) {
             return now->next->origin;
+}
         now = now->next;
     } while (now != f->edge);
     assert(false);
@@ -279,8 +292,9 @@ auto next_vertex(Vertex *v, Face *f) -> Vertex * {
 auto prev_vertex(Vertex *v, Face *f) -> Vertex * {
     Edge *now = f->edge;
     do {
-        if (now->origin == v)
+        if (now->origin == v) {
             return now->prev->origin;
+}
         now = now->next;
     } while (now != f->edge);
     assert(false);
