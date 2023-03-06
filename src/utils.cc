@@ -25,42 +25,44 @@ double angle(const Point &a, const Point &b, const Point &c) {
     }
 }
 
-void Enumerate_Polygons(std::set<Face *> Polygons) {
+void enumerate_polygons(std::set<Face *> Polygons) {
     usize cnt = 1;
-    std::vector<std::deque<Vertex*>>polygons;
+    std::vector<std::deque<Vertex *>> polygons;
     for (auto &f : Polygons) {
-        std::deque<Vertex*>p;
+        std::deque<Vertex *> p;
         Edge *now = f->edge;
         do {
             p.push_back(now->origin);
             now = now->next;
         } while (now != f->edge);
-        
-        if(is_collinear(p)) continue;
+
+        if (is_collinear(p)) {
+            continue;
+        }
         polygons.push_back(p);
     }
     std::cout << polygons.size() << '\n';
-    for(auto &vt : polygons) {
+    for (auto &vt : polygons) {
         std::cout << vt.size() << '\n';
-        for(auto &u : vt) {
+        for (auto &u : vt) {
             std::cout << u->point.x << ' ' << u->point.y << ' ';
         }
         std::cout << '\n';
     }
 }
 
-void Enumerate_Face(Face *f) {
-    std::deque<Vertex*>p;
+void enumerate_face(Face *f) {
+    std::deque<Vertex *> p;
     Edge *now = f->edge;
     do {
         p.push_back(now->origin);
         now = now->next;
-    } while(now != f->edge);
+    } while (now != f->edge);
 
-    if(is_collinear(p)) 
+    if (is_collinear(p))
         return;
     std::cout << p.size() << '\n';
-    for(auto &vt : p) {
+    for (auto &vt : p) {
         std::cout << "(" << vt->point.x << "," << vt->point.y << ") ";
     }
     std::cout << '\n';
@@ -168,22 +170,22 @@ Face *split_face(Vertex *v1, Vertex *v2, Face *cur) {
     return new_face;
 }
 
-Face* merge_face(Face* f1 , Face* f2) {
+Face *merge_face(Face *f1, Face *f2) {
     Edge *e3;
     Edge *now = f1->edge;
     do {
-        if(now->left_face == f1 and now->twin->left_face == f2)  
+        if (now->left_face == f1 and now->twin->left_face == f2)
             e3 = now;
         now = now->next;
-    } while(now != f1->edge);
+    } while (now != f1->edge);
 
-    Edge *e1 = e3->next , *e2 = e3->twin->next;
+    Edge *e1 = e3->next, *e2 = e3->twin->next;
     e3->prev->next = e2;
     e2->prev = e3->prev;
     e1->prev = e3->twin->prev;
     e3->twin->prev->next = e1;
     f1->edge = e1;
-    update_face(e1 , f1);
+    update_face(e1, f1);
     return f1;
 }
 
@@ -228,19 +230,19 @@ bool is_collinear(const std::deque<Vertex *> &polygon) {
 }
 
 bool is_collinear(Face *f) {
-    std::deque<Vertex*>p;
+    std::deque<Vertex *> p;
     Edge *now = f->edge;
     do {
         p.push_back(now->origin);
         now = now->next;
-    } while(now != f->edge);
+    } while (now != f->edge);
     return is_collinear(p);
 }
 
 bool is_convex(Vertex *v) {
     Vertex *nxt = v->incident_edge->next->origin;
     Vertex *pre = v->incident_edge->prev->origin;
-    return angle(pre->point , v->point , nxt->point) <= 180;
+    return angle(pre->point, v->point, nxt->point) <= 180;
 }
 
 bool is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch) {
@@ -263,24 +265,24 @@ bool is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch) {
     return c;
 }
 
-Vertex *next_vertex(Vertex *v , Face *f) {
+Vertex *next_vertex(Vertex *v, Face *f) {
     Edge *now = f->edge;
     do {
-        if(now->origin == v)
+        if (now->origin == v)
             return now->next->origin;
         now = now->next;
-    } while(now != f->edge);
+    } while (now != f->edge);
     assert(false);
     return now->origin;
 }
 
-Vertex *prev_vertex(Vertex *v , Face *f) {
+Vertex *prev_vertex(Vertex *v, Face *f) {
     Edge *now = f->edge;
     do {
-        if(now->origin == v)
+        if (now->origin == v)
             return now->prev->origin;
         now = now->next;
-    } while(now != f->edge);
+    } while (now != f->edge);
     assert(false);
     return now->origin;
 }
