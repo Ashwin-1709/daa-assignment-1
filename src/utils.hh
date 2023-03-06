@@ -19,7 +19,7 @@ auto prev_vertex(Vertex *v, Face *f) -> Vertex *;
 auto check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
                  const Vertex *start, const Vertex *second) -> bool;
 void update_face(Edge *edge, Face *face);
-void enumerate_polygons(std::set<Face *> Polygons);
+void enumerate_polygons(const std::set<Face *>& Polygons);
 auto split_face(Vertex *v1, Vertex *vr, Face *cur) -> Face *;
 auto is_collinear(const std::deque<Vertex *> &polygon) -> bool;
 auto is_collinear(Face *f) -> bool;

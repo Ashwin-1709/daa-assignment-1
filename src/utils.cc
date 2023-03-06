@@ -24,7 +24,7 @@ auto angle(const Point &a, const Point &b, const Point &c) -> double {
     }
 }
 
-void enumerate_polygons(std::set<Face *> Polygons) {
+void enumerate_polygons(const std::set<Face *>& Polygons) {
     usize cnt = 1;
     std::vector<std::deque<Vertex *>> polygons;
     for (const auto &f : Polygons) {

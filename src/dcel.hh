@@ -31,7 +31,7 @@ class Vertex {
     Point point;
     usize index;
     Edge *incident_edge;
-    Vertex(Point pt, usize id) : point(std::move(pt)), index(id) {}
+    Vertex(Point pt, usize id) : point(pt), index(id) {}
 };
 
 class Polygon {

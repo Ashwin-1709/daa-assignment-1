@@ -15,26 +15,26 @@ auto operator<<(std::ostream &os, const T_container &v) -> std::ostream & {
     std::string sep;
     for (const T &x : v) {
         os << sep << x, sep = ", ";
-}
+    }
     return os << '}';
 }
 template <typename T> void debug_out(std::string s, T t) {
     std::cerr << "[" << s << ": " << t << "]\n";
 }
 template <typename T, typename... U>
-void debug_out(std::string s, T t, U... u) {
+void debug_out(const std::string &s, T t, U... u) {
     usize w = 0;
     usize c = 0;
     while (w < s.size()) {
         if (s[w] == '(') {
             c++;
-}
+        }
         if (s[w] == ')') {
             c--;
-}
+        }
         if (!c and s[w] == ',') {
             break;
-}
+        }
         w++;
     }
     std::cerr << "[" << s.substr(0, w) << ": " << t << "] ";
