@@ -61,8 +61,6 @@ auto decompose(const Polygon &polygon) -> DecompData {
                 bool backward = false;
                 auto rect = get_rectangle(L[m]);
                 while (!backward and !LPVS.empty()) {
-                    dbg(LPVS.size());
-                    dbg(LPVS.front());
                     while (!LPVS.empty()) {
                         if (!inside_rectangle(rect, LPVS.front()->point)) {
                             LPVS.pop_front();
