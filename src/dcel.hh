@@ -22,7 +22,7 @@ class Edge {
 class Point {
   public:
     double x, y;
-    Point() {}
+    Point() = default;
     Point(double x_arg, double y_arg) : x(x_arg), y(y_arg) {}
 };
 

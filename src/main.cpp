@@ -4,7 +4,7 @@
 #include "utils.hh"
 #include <cstdio>
 
-int main() {
+auto main() -> int {
     usize n;
     std::cin >> n;
     std::cout << n << std::endl;

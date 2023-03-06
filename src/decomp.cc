@@ -139,5 +139,5 @@ auto decompose(const Polygon &polygon) -> DecompData {
         } while (now != faces->edge);
     }
 
-    return DecompData(decomposed_polygons, LP, LLE, inv_face_id, LDP, LUP);
+    return {decomposed_polygons, LP, LLE, inv_face_id, LDP, LUP};
 }
