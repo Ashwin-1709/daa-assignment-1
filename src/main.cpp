@@ -4,6 +4,7 @@
 #include "utils.hh"
 #include <cstdio>
 
+/// @brief Given list of points of input polygon in clockwise order, decomposes it to convex polygons
 auto main() -> int {
     usize n;
     std::cin >> n;

@@ -26,6 +26,5 @@ auto is_collinear(Face *f) -> bool;
 auto is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch)
     -> bool;
 auto merge_face(Face *f1, Face *f2) -> Face *;
-void enumerate_face(Face *f);
 auto is_convex(Vertex *v) -> bool;
 #endif // UTILS_H

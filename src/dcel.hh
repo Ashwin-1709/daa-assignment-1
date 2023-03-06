@@ -42,9 +42,6 @@ class Polygon {
     usize n_vertices;
     Polygon(const std::deque<Point> &point_list);
     Polygon();
-
-  private:
-    std::deque<std::array<Edge *, 2>> EdgeList;
 };
 
 #endif
