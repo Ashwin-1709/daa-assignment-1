@@ -4,7 +4,7 @@
 #include <dbg.hh>
 
 // The angle swept by a counterclockwise rotation from bc to ba
-double angle(const Point &a, const Point &b, const Point &c) {
+auto angle(const Point &a, const Point &b, const Point &c) -> double {
     const auto mag_ba =
         std::sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
     const auto mag_bc =
@@ -68,7 +68,7 @@ void enumerate_face(Face *f) {
     std::cout << '\n';
 }
 
-std::deque<Vertex *> get_notches(const std::deque<Vertex *> &polygon) {
+auto get_notches(const std::deque<Vertex *> &polygon) -> std::deque<Vertex *> {
     std::deque<Vertex *> notches;
     const usize n = polygon.size();
     if (n < 3)
@@ -84,7 +84,7 @@ std::deque<Vertex *> get_notches(const std::deque<Vertex *> &polygon) {
 }
 
 // rectangle with minimum area that encloses vertices of list L
-std::array<Point, 2> get_rectangle(const std::deque<Vertex *> &L) {
+auto get_rectangle(const std::deque<Vertex *> &L) -> std::array<Point, 2> {
     Point minimum, maximum;
     minimum.x = 1e9, minimum.y = 1e9;
     maximum.x = -1e9, maximum.y = -1e9;
@@ -97,15 +97,15 @@ std::array<Point, 2> get_rectangle(const std::deque<Vertex *> &L) {
     return {minimum, maximum};
 }
 
-bool inside_rectangle(const std::array<Point, 2> &rectangle,
-                      const Point &point) {
+auto inside_rectangle(const std::array<Point, 2> &rectangle, const Point &point)
+    -> bool {
     if (point.x > rectangle[0].x and point.x < rectangle[1].x and
         point.y > rectangle[0].y and point.y < rectangle[1].y)
         return true;
     return false;
 }
 
-std::array<double, 3> get_line(const Point &a, const Point &b) {
+auto get_line(const Point &a, const Point &b) -> std::array<double, 3> {
     // x1x + y1y + c = 0
     std::array<double, 3> coefficients;
     coefficients[0] = b.y - a.y;
@@ -114,8 +114,8 @@ std::array<double, 3> get_line(const Point &a, const Point &b) {
     return coefficients;
 }
 
-bool same_side_semiplane(const std::array<double, 3> &coef, const Point &a,
-                         const Point &b) {
+auto same_side_semiplane(const std::array<double, 3> &coef, const Point &a,
+                         const Point &b) -> bool {
     double L1 = coef[0] * a.x + coef[1] * a.y + coef[2];
     double L2 = coef[0] * b.x + coef[1] * b.y + coef[2];
     if ((L1 * L2) > 0)
@@ -123,19 +123,19 @@ bool same_side_semiplane(const std::array<double, 3> &coef, const Point &a,
     return false;
 }
 
-Vertex *next_vertex(const Vertex *vertex) {
+auto next_vertex(const Vertex *vertex) -> Vertex * {
     return vertex->incident_edge->next->origin;
 }
 
-bool check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
-                 const Vertex *start, const Vertex *second) {
+auto check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
+                 const Vertex *start, const Vertex *second) -> bool {
     double angle_b = angle(a->point, b->point, c->point);
     double angle_c = angle(b->point, c->point, start->point);
     double angle_start = angle(c->point, start->point, second->point);
     return angle_b <= 180 and angle_c <= 180 and angle_start <= 180;
 }
 
-Face *split_face(Vertex *v1, Vertex *v2, Face *cur) {
+auto split_face(Vertex *v1, Vertex *v2, Face *cur) -> Face * {
 
     Edge *e1, *e2;
     Edge *now = cur->edge;
@@ -170,7 +170,7 @@ Face *split_face(Vertex *v1, Vertex *v2, Face *cur) {
     return new_face;
 }
 
-Face *merge_face(Face *f1, Face *f2) {
+auto merge_face(Face *f1, Face *f2) -> Face * {
     Edge *e3;
     Edge *now = f1->edge;
     do {
@@ -200,9 +200,8 @@ void update_face(Edge *edge, Face *face) {
     next->left_face = face;
 }
 
-std::deque<Vertex *> get_LPVS(std::deque<Vertex *> &notches,
-                              std::deque<Vertex *> &L,
-                              std::deque<Vertex *> &P) {
+auto get_LPVS(std::deque<Vertex *> &notches, std::deque<Vertex *> &L,
+              std::deque<Vertex *> &P) -> std::deque<Vertex *> {
     std::deque<Vertex *> LPVS;
     for (auto notch : notches) {
         bool in_P = false, in_L = false;
@@ -216,7 +215,7 @@ std::deque<Vertex *> get_LPVS(std::deque<Vertex *> &notches,
     return LPVS;
 }
 
-bool is_collinear(const std::deque<Vertex *> &polygon) {
+auto is_collinear(const std::deque<Vertex *> &polygon) -> bool {
     const auto line = get_line(polygon[0]->point, polygon[1]->point);
     // line is ax + by + c = 0
     bool collinear = true;
@@ -229,7 +228,7 @@ bool is_collinear(const std::deque<Vertex *> &polygon) {
     return collinear;
 }
 
-bool is_collinear(Face *f) {
+auto is_collinear(Face *f) -> bool {
     std::deque<Vertex *> p;
     Edge *now = f->edge;
     do {
@@ -239,13 +238,14 @@ bool is_collinear(Face *f) {
     return is_collinear(p);
 }
 
-bool is_convex(Vertex *v) {
+auto is_convex(Vertex *v) -> bool {
     Vertex *nxt = v->incident_edge->next->origin;
     Vertex *pre = v->incident_edge->prev->origin;
     return angle(pre->point, v->point, nxt->point) <= 180;
 }
 
-bool is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch) {
+auto is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch)
+    -> bool {
     // Reference :
     // https://www.eecs.umich.edu/courses/eecs380/HANDOUTS/PROJ2/InsidePoly.html
     usize n = polygon.size();
@@ -265,7 +265,7 @@ bool is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch) {
     return c;
 }
 
-Vertex *next_vertex(Vertex *v, Face *f) {
+auto next_vertex(Vertex *v, Face *f) -> Vertex * {
     Edge *now = f->edge;
     do {
         if (now->origin == v)
@@ -276,7 +276,7 @@ Vertex *next_vertex(Vertex *v, Face *f) {
     return now->origin;
 }
 
-Vertex *prev_vertex(Vertex *v, Face *f) {
+auto prev_vertex(Vertex *v, Face *f) -> Vertex * {
     Edge *now = f->edge;
     do {
         if (now->origin == v)

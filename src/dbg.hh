@@ -3,14 +3,14 @@
 #include "typedefs.hh"
 #include <bits/stdc++.h>
 template <typename A, typename B>
-std::ostream &operator<<(std::ostream &os, const std::pair<A, B> &p) {
+auto operator<<(std::ostream &os, const std::pair<A, B> &p) -> std::ostream & {
     return os << "(" << p.first << ", " << p.second << ")";
 }
 template <typename T_container,
           typename T = typename std::enable_if<
               !std::is_same<T_container, std::string>::value,
               typename T_container::value_type>::type>
-std::ostream &operator<<(std::ostream &os, const T_container &v) {
+auto operator<<(std::ostream &os, const T_container &v) -> std::ostream & {
     os << '{';
     std::string sep;
     for (const T &x : v)

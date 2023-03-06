@@ -3,31 +3,29 @@
 #include "dcel.hh"
 #include <bits/stdc++.h>
 
-// void enumerate_face(const Face &face);
-
-double angle(const Point &a, const Point &b, const Point &c);
-std::deque<Vertex *> get_notches(const std::deque<Vertex *> &polygon);
-std::deque<Vertex *> get_LPVS(std::deque<Vertex *> &notches,
-                              std::deque<Vertex *> &L, std::deque<Vertex *> &P);
-std::array<Point, 2> get_rectangle(const std::deque<Vertex *> &L);
-bool inside_rectangle(const std::array<Point, 2> &rectangle,
-                      const Point &point);
-std::array<double, 3> get_line(const Point &a, const Point &b);
-bool same_side_semiplane(const std::array<double, 3> &coef, const Point &a,
-                         const Point &b);
-// void decompose(const DCEL &dcel);
-Vertex *next_vertex(const Vertex *vertex);
-Vertex *next_vertex(Vertex *v, Face *f);
-Vertex *prev_vertex(Vertex *v, Face *f);
-bool check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
-                 const Vertex *start, const Vertex *second);
+auto angle(const Point &a, const Point &b, const Point &c) -> double;
+auto get_notches(const std::deque<Vertex *> &polygon) -> std::deque<Vertex *>;
+auto get_LPVS(std::deque<Vertex *> &notches, std::deque<Vertex *> &L,
+              std::deque<Vertex *> &P) -> std::deque<Vertex *>;
+auto get_rectangle(const std::deque<Vertex *> &L) -> std::array<Point, 2>;
+auto inside_rectangle(const std::array<Point, 2> &rectangle, const Point &point)
+    -> bool;
+auto get_line(const Point &a, const Point &b) -> std::array<double, 3>;
+auto same_side_semiplane(const std::array<double, 3> &coef, const Point &a,
+                         const Point &b) -> bool;
+auto next_vertex(const Vertex *vertex) -> Vertex *;
+auto next_vertex(Vertex *v, Face *f) -> Vertex *;
+auto prev_vertex(Vertex *v, Face *f) -> Vertex *;
+auto check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
+                 const Vertex *start, const Vertex *second) -> bool;
 void update_face(Edge *edge, Face *face);
 void enumerate_polygons(std::set<Face *> Polygons);
-Face *split_face(Vertex *v1, Vertex *vr, Face *cur);
-bool is_collinear(const std::deque<Vertex *> &polygon);
-bool is_collinear(Face *f);
-bool is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch);
-Face *merge_face(Face *f1, Face *f2);
+auto split_face(Vertex *v1, Vertex *vr, Face *cur) -> Face *;
+auto is_collinear(const std::deque<Vertex *> &polygon) -> bool;
+auto is_collinear(Face *f) -> bool;
+auto is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch)
+    -> bool;
+auto merge_face(Face *f1, Face *f2) -> Face *;
 void enumerate_face(Face *f);
-bool is_convex(Vertex *v);
+auto is_convex(Vertex *v) -> bool;
 #endif // UTILS_H

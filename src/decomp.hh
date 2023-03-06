@@ -21,7 +21,7 @@ struct DecompData {
           LUP(std::move(a_LUP)) {}
 };
 
-DecompData decompose(const Polygon &polygon);
-std::set<Face *> merge(DecompData &polygon);
+auto decompose(const Polygon &polygon) -> DecompData;
+auto merge(DecompData &polygon) -> std::set<Face *>;
 
 #endif // DECOMP_H
