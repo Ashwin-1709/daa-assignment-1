@@ -1,7 +1,8 @@
 #ifndef DCEL_H
 #define DCEL_H
 #include "typedefs.hh"
-#include <bits/stdc++.h>
+#include <array>
+#include <deque>
 
 class Vertex;
 class Edge;

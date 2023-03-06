@@ -1,7 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 #include "dcel.hh"
-#include <bits/stdc++.h>
+#include <set>
 
 auto angle(const Point &a, const Point &b, const Point &c) -> double;
 auto get_notches(const std::deque<Vertex *> &polygon) -> std::deque<Vertex *>;

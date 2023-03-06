@@ -1,7 +1,9 @@
 #include "utils.hh"
 #include <algorithm>
-#include <bits/stdc++.h>
+#include <cassert>
+#include <cmath>
 #include <dbg.hh>
+#include <vector>
 
 // The angle swept by a counterclockwise rotation from bc to ba
 auto angle(const Point &a, const Point &b, const Point &c) -> double {

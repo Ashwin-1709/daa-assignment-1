@@ -1,6 +1,5 @@
 #include "dcel.hh"
 #include "typedefs.hh"
-#include <bits/stdc++.h>
 
 Polygon::Polygon() = default;
 Polygon::Polygon(const std::deque<Point> &point_list) {
