@@ -14,7 +14,7 @@ int main() {
     }
     usize n;
     std::cin >> n;
-    std::string colors[] = {"indigo", "yellow", "blue", "red", "green"};
+    std::string colors[] = {"#a7d52a" , "#dff429" , "#f6c137" , "#f25e40" , "#c32a94" , "#7328b6" , "#3438bd" , "#3f77c4" , "#4daecf" , "#52c67f" , "#79c725"};
     double minx, miny, maxx, maxy;
     std::vector<std::vector<std::pair<double, double>>> polygons(n);
     for (usize i = 0; i < n; i++) {
