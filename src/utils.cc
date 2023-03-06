@@ -1,7 +1,9 @@
 #include "utils.hh"
 #include <algorithm>
-#include <bits/stdc++.h>
+#include <cassert>
+#include <cmath>
 #include <dbg.hh>
+#include <vector>
 
 /// @brief Angle swept by a counterclockwise rotation from line segment ba to line segment bc
 /// @param a 
@@ -158,7 +160,6 @@ auto check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
 /// @param cur 
 /// @return New Face Formed by splitting
 auto split_face(Vertex *v1, Vertex *v2, Face *cur) -> Face * {
-
     Edge *e1;
     Edge *e2;
     Edge *now = cur->edge;
@@ -171,8 +172,8 @@ auto split_face(Vertex *v1, Vertex *v2, Face *cur) -> Face * {
         now = now->next;
     } while (now != cur->edge);
 
-    Edge *e3 = new Edge();
-    Edge *e3_twin = new Edge();
+    auto *e3 = new Edge();
+    auto *e3_twin = new Edge();
     e3->twin = e3_twin;
     e3_twin->twin = e3;
     e3->origin = v1;
@@ -189,7 +190,7 @@ auto split_face(Vertex *v1, Vertex *v2, Face *cur) -> Face * {
     e1->prev = e3_twin;
     e2->next = e3_twin;
     e3_twin->prev = e2;
-    Face *new_face = new Face();
+    auto *new_face = new Face();
     update_face(e3_twin, new_face);
     return new_face;
 }
@@ -208,8 +209,8 @@ auto merge_face(Face *f1, Face *f2) -> Face * {
         now = now->next;
     } while (now != f1->edge);
 
-    Edge *e1 = e3->next;
-    Edge *e2 = e3->twin->next;
+    auto *e1 = e3->next;
+    auto *e2 = e3->twin->next;
     e3->prev->next = e2;
     e2->prev = e3->prev;
     e1->prev = e3->twin->prev;
@@ -225,7 +226,7 @@ auto merge_face(Face *f1, Face *f2) -> Face * {
 void update_face(Edge *edge, Face *face) {
     face->edge = edge;
     edge->left_face = face;
-    Edge *next = edge->next;
+    auto *next = edge->next;
     while (next != edge) {
         next->left_face = face;
         next = next->next;

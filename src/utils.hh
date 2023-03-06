@@ -1,7 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 #include "dcel.hh"
-#include <bits/stdc++.h>
+#include <set>
 
 auto angle(const Point &a, const Point &b, const Point &c) -> double;
 auto get_notches(const std::deque<Vertex *> &polygon) -> std::deque<Vertex *>;
@@ -20,7 +20,7 @@ auto check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
                  const Vertex *start, const Vertex *second) -> bool;
 void update_face(Edge *edge, Face *face);
 void enumerate_polygons(const std::set<Face *> &Polygons);
-auto split_face(Vertex *v1, Vertex *vr, Face *cur) -> Face *;
+auto split_face(Vertex *v1, Vertex *v2, Face *cur) -> Face *;
 auto is_collinear(const std::deque<Vertex *> &polygon) -> bool;
 auto is_collinear(Face *f) -> bool;
 auto is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch)
