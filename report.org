@@ -1,5 +1,6 @@
 #+title: CS F364 Assignment 1
 #+LATEX_HEADER: \usepackage{gensymb}
+#+options: tex:dvisvgm
 * Problem statement
 Given an arbitrary polygon, decompose it into a set of convex polygons. We have been given the following paper to implement:
 Algorithms for the decomposition of a polygon into convex polygons, European Journal of Operational Research, 121(2), 330-342.

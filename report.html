@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-03-22 Wed 19:40 -->
+<!-- 2023-03-22 Wed 23:01 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CS F364 Assignment 1</title>
@@ -193,38 +193,6 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<script>
-  window.MathJax = {
-    tex: {
-      ams: {
-        multlineWidth: '85%'
-      },
-      tags: 'ams',
-      tagSide: 'right',
-      tagIndent: '.8em'
-    },
-    chtml: {
-      scale: 1.0,
-      displayAlign: 'center',
-      displayIndent: '0em'
-    },
-    svg: {
-      scale: 1.0,
-      displayAlign: 'center',
-      displayIndent: '0em'
-    },
-    output: {
-      font: 'mathjax-modern',
-      displayOverflow: 'overflow'
-    }
-  };
-</script>
-
-<script
-  id="MathJax-script"
-  async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -233,80 +201,80 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgbaa95a5">1. Problem statement</a></li>
-<li><a href="#org1161cb4">2. DCEL: Doubly Connected Edge List</a>
+<li><a href="#orgd5d2e31">1. Problem statement</a></li>
+<li><a href="#org756e2c7">2. DCEL: Doubly Connected Edge List</a>
 <ul>
-<li><a href="#org99ec1eb">2.1. Polygon</a></li>
-<li><a href="#orge7beaef">2.2. Vertex</a></li>
-<li><a href="#org76f347f">2.3. Edge</a></li>
-<li><a href="#org7a1dc51">2.4. Face</a></li>
+<li><a href="#org0edc9ca">2.1. Polygon</a></li>
+<li><a href="#orgb06b72d">2.2. Vertex</a></li>
+<li><a href="#org5143a36">2.3. Edge</a></li>
+<li><a href="#org39c582f">2.4. Face</a></li>
 </ul>
 </li>
-<li><a href="#org25f8e7f">3. Decomposition</a>
+<li><a href="#org14acc06">3. Decomposition</a>
 <ul>
-<li><a href="#org55f5e4e">3.1. Terminology</a>
+<li><a href="#org9559a8a">3.1. Terminology</a>
 <ul>
-<li><a href="#orgae01aff">3.1.1. Notch</a></li>
-<li><a href="#orgab3a6f5">3.1.2. LPVS</a></li>
-<li><a href="#org09c03cc">3.1.3. VTR</a></li>
+<li><a href="#orgfb92c65">3.1.1. Notch</a></li>
+<li><a href="#org9b204fa">3.1.2. LPVS</a></li>
+<li><a href="#org4f84098">3.1.3. VTR</a></li>
 </ul>
 </li>
-<li><a href="#org9caf28f">3.2. Algorithm</a></li>
-<li><a href="#orgff5d2a9">3.3. Time complexity analysis of helper functions</a>
+<li><a href="#org781bf4f">3.2. Algorithm</a></li>
+<li><a href="#org5240447">3.3. Time complexity analysis of helper functions</a>
 <ul>
-<li><a href="#org9e5a79b">3.3.1. <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</a></li>
-<li><a href="#org00787bc">3.3.2. <code>get_notches</code>: Given a polygon, return a list of notches</a></li>
-<li><a href="#orgf999702">3.3.3. <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</a></li>
-<li><a href="#orgf6c56cf">3.3.4. <code>merge_face</code>: Given two faces, merge and return their combination</a></li>
-<li><a href="#org217805f">3.3.5. <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in \(P \setminus L_m\)</a></li>
-<li><a href="#orgdc5a76c">3.3.6. <code>inside_polygon</code>: Check whether a point lies inside a polygon</a></li>
+<li><a href="#org33a4af0">3.3.1. <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</a></li>
+<li><a href="#org2d353e7">3.3.2. <code>get_notches</code>: Given a polygon, return a list of notches</a></li>
+<li><a href="#org5d53196">3.3.3. <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</a></li>
+<li><a href="#org640df63">3.3.4. <code>merge_face</code>: Given two faces, merge and return their combination</a></li>
+<li><a href="#orgb05037d">3.3.5. <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in <img src="/home/chinmay/.local/state/emacs/var/org/persist/fc/b586c9-43b8-4880-aa31-bf0ad051e4b7-ff3cba6b55988853c7c4c84fd9b0413e.svg" alt="$P \setminus L_m$" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /></a></li>
+<li><a href="#org4b81b84">3.3.6. <code>inside_polygon</code>: Check whether a point lies inside a polygon</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org8dd2068">4. Merging</a>
+<li><a href="#org13dd06f">4. Merging</a>
 <ul>
-<li><a href="#org128c41d">4.1. Terminology</a>
+<li><a href="#orgea3425c">4.1. Terminology</a>
 <ul>
-<li><a href="#orgbd40c44">4.1.1. LDP</a></li>
-<li><a href="#orgc99cade">4.1.2. LUP</a></li>
-<li><a href="#orgbb0a0be">4.1.3. LLE</a></li>
+<li><a href="#orgff787e6">4.1.1. LDP</a></li>
+<li><a href="#orge43b954">4.1.2. LUP</a></li>
+<li><a href="#orgf139d55">4.1.3. LLE</a></li>
 </ul>
 </li>
-<li><a href="#orgaf7bf8c">4.2. Algorithm</a></li>
+<li><a href="#orgd98775c">4.2. Algorithm</a></li>
 </ul>
 </li>
-<li><a href="#orgd34f914">5. Benchmarks and Results</a></li>
+<li><a href="#org143170b">5. Benchmarks and Results</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgbaa95a5" class="outline-2">
-<h2 id="orgbaa95a5"><span class="section-number-2">1.</span> Problem statement</h2>
+<div id="outline-container-orgd5d2e31" class="outline-2">
+<h2 id="orgd5d2e31"><span class="section-number-2">1.</span> Problem statement</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Given an arbitrary polygon, decompose it into a set of convex polygons. We have been given the following paper to implement:
 Algorithms for the decomposition of a polygon into convex polygons, European Journal of Operational Research, 121(2), 330-342.
-The paper describes three different algorithms for the decomposition of the polygon, we have implement the \(MP1\) algorithm as part of this assignment as well as the merging part that follows.
+The paper describes three different algorithms for the decomposition of the polygon, we have implement the <img src="/home/chinmay/.local/state/emacs/var/org/persist/51/363a16-c2fc-43c0-a1bb-2abecb7b715b-04d6e416256c7a80595394c33995a773.svg" alt="$MP1$" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> algorithm as part of this assignment as well as the merging part that follows.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org1161cb4" class="outline-2">
-<h2 id="org1161cb4"><span class="section-number-2">2.</span> DCEL: Doubly Connected Edge List</h2>
+<div id="outline-container-org756e2c7" class="outline-2">
+<h2 id="org756e2c7"><span class="section-number-2">2.</span> DCEL: Doubly Connected Edge List</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 We have used the DCEL data structure to store our decomposed polygon. DCEL consists of three main sub-data-structures, namely
 Vertex, Edge and Face.
 </p>
 
-<div id="org67d8473" class="figure">
+<div id="org5f22410" class="figure">
 <p><img src="./DCEL:_Doubly_Connected_Edge_List/2023-03-06_23-38-16_screenshot.png" alt="2023-03-06_23-38-16_screenshot.png" />
 </p>
 </div>
 
 
 
-<div id="org734a82b" class="figure">
+<div id="org1c879a7" class="figure">
 <p><img src="./DCEL:_Doubly_Connected_Edge_List/2023-03-06_23-37-13_screenshot.png" alt="2023-03-06_23-37-13_screenshot.png" />
 </p>
 </div>
@@ -315,24 +283,24 @@ Vertex, Edge and Face.
 (Images taken from <a href="https://www2.cs.sfu.ca/~binay/813.2011/DCEL.pdf">https://www2.cs.sfu.ca/~binay/813.2011/DCEL.pdf</a>)
 </p>
 </div>
-<div id="outline-container-org99ec1eb" class="outline-3">
-<h3 id="org99ec1eb"><span class="section-number-3">2.1.</span> Polygon</h3>
+<div id="outline-container-org0edc9ca" class="outline-3">
+<h3 id="org0edc9ca"><span class="section-number-3">2.1.</span> Polygon</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 A decomposed polygon is represented by the Polygon class, which contains a list of vertices of the original polygon in clockwise order, and two Faces which represent the outer and inner faces of the initial, undecomposed polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-orge7beaef" class="outline-3">
-<h3 id="orge7beaef"><span class="section-number-3">2.2.</span> Vertex</h3>
+<div id="outline-container-orgb06b72d" class="outline-3">
+<h3 id="orgb06b72d"><span class="section-number-3">2.2.</span> Vertex</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 A vertex contains the coordinates of the point and an IncidentEdge - an edge which originates at the vertex.
 </p>
 </div>
 </div>
-<div id="outline-container-org76f347f" class="outline-3">
-<h3 id="org76f347f"><span class="section-number-3">2.3.</span> Edge</h3>
+<div id="outline-container-org5143a36" class="outline-3">
+<h3 id="org5143a36"><span class="section-number-3">2.3.</span> Edge</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 An edge contains
@@ -345,8 +313,8 @@ An edge contains
 </ul>
 </div>
 </div>
-<div id="outline-container-org7a1dc51" class="outline-3">
-<h3 id="org7a1dc51"><span class="section-number-3">2.4.</span> Face</h3>
+<div id="outline-container-org39c582f" class="outline-3">
+<h3 id="org39c582f"><span class="section-number-3">2.4.</span> Face</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 A face contains a pointer to any one of the representative edges of the face (if we know one edge we can find all of them by traversing using the <code>next</code> field of the edge)
@@ -354,32 +322,32 @@ A face contains a pointer to any one of the representative edges of the face (if
 </div>
 </div>
 </div>
-<div id="outline-container-org25f8e7f" class="outline-2">
-<h2 id="org25f8e7f"><span class="section-number-2">3.</span> Decomposition</h2>
+<div id="outline-container-org14acc06" class="outline-2">
+<h2 id="org14acc06"><span class="section-number-2">3.</span> Decomposition</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org55f5e4e" class="outline-3">
-<h3 id="org55f5e4e"><span class="section-number-3">3.1.</span> Terminology</h3>
+<div id="outline-container-org9559a8a" class="outline-3">
+<h3 id="org9559a8a"><span class="section-number-3">3.1.</span> Terminology</h3>
 <div class="outline-text-3" id="text-3-1">
 </div>
-<div id="outline-container-orgae01aff" class="outline-4">
-<h4 id="orgae01aff"><span class="section-number-4">3.1.1.</span> Notch</h4>
+<div id="outline-container-orgfb92c65" class="outline-4">
+<h4 id="orgfb92c65"><span class="section-number-4">3.1.1.</span> Notch</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <p>
-Angle between 3 points \(a,b,c\) is said to be a notch if it is greater than \(180 \degree\)
+Angle between 3 points <img src="/home/chinmay/.local/state/emacs/var/org/persist/74/996019-fb25-46dc-8543-5d567b3d9383-c2298487ba91d53d64f863f9d405f61a.svg" alt="$a,b,c$" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /> is said to be a notch if it is greater than <img src="/home/chinmay/.local/state/emacs/var/org/persist/1f/894406-3ed9-4409-8e6e-c1c86128e055-fbb64ed5c10e47fc400a0b7077d5a81e.svg" alt="$180 \degree$" style="height: 0.7732em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" />
 </p>
 </div>
 </div>
-<div id="outline-container-orgab3a6f5" class="outline-4">
-<h4 id="orgab3a6f5"><span class="section-number-4">3.1.2.</span> LPVS</h4>
+<div id="outline-container-org9b204fa" class="outline-4">
+<h4 id="org9b204fa"><span class="section-number-4">3.1.2.</span> LPVS</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <p>
-\(LPVS(P,S)\) is the list of notches enclosed in \(P \setminus L\)
+<img src="/home/chinmay/.local/state/emacs/var/org/persist/34/a2e83c-f87b-4942-8c70-071e3c1f5617-7570a5396115312cfca31c839406e38a.svg" alt="$LPVS(P,S)$" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /> is the list of notches enclosed in <img src="/home/chinmay/.local/state/emacs/var/org/persist/05/1fa63d-54d6-4d75-817d-c834dd75edda-02c3ac7e1cd0a724cee4bd2fd3259dc6.svg" alt="$P \setminus L$" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" />
 </p>
 </div>
 </div>
-<div id="outline-container-org09c03cc" class="outline-4">
-<h4 id="org09c03cc"><span class="section-number-4">3.1.3.</span> VTR</h4>
+<div id="outline-container-org4f84098" class="outline-4">
+<h4 id="org4f84098"><span class="section-number-4">3.1.3.</span> VTR</h4>
 <div class="outline-text-4" id="text-3-1-3">
 <p>
 Intermediate polygon from which we need to remove
@@ -391,95 +359,95 @@ Intermediate polygon from which we need to remove
 </div>
 </div>
 </div>
-<div id="outline-container-org9caf28f" class="outline-3">
-<h3 id="org9caf28f"><span class="section-number-3">3.2.</span> Algorithm</h3>
+<div id="outline-container-org781bf4f" class="outline-3">
+<h3 id="org781bf4f"><span class="section-number-3">3.2.</span> Algorithm</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 The algorithm relies on successive adding of vertices until the polygon formed by the vertices is not convex. When we cannot add any points to the polygon, we check if any notches are enclosed in the rectangle of minimum area formed by the points added so far. If no notches are present, we create a new polygon by splitting the face of the existing polygon and continue to work on the other half of the newly formed polygon until the number of vertices in our list falls below or equal to -  this is the halting condition of the decomposition algorithm. If, in intermediate stages, we notice that notches are present in the rectangle, we remove the notches and the last point of the polygon until we reach a condition where the diagonal formed by the first and the last point does not enclose any other point. We start from the next vertex if we cannot make the polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-orgff5d2a9" class="outline-3">
-<h3 id="orgff5d2a9"><span class="section-number-3">3.3.</span> Time complexity analysis of helper functions</h3>
+<div id="outline-container-org5240447" class="outline-3">
+<h3 id="org5240447"><span class="section-number-3">3.3.</span> Time complexity analysis of helper functions</h3>
 <div class="outline-text-3" id="text-3-3">
 </div>
-<div id="outline-container-org9e5a79b" class="outline-4">
-<h4 id="org9e5a79b"><span class="section-number-4">3.3.1.</span> <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</h4>
+<div id="outline-container-org33a4af0" class="outline-4">
+<h4 id="org33a4af0"><span class="section-number-4">3.3.1.</span> <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <p>
-Returns the angle swept by line segment \(ba\) over \(bc\) counterclockwise. For finding the angle, we calculate the magnitudes of \(\vec{ba}\) and \(\vec{bc}\), and their dot and cross products. We then return different values depending on the sign of the dot and cross products. The time complexity if \(\mathcal{O}(1)\)
+Returns the angle swept by line segment <img src="/home/chinmay/.local/state/emacs/var/org/persist/08/14d14b-4f9a-4562-8608-3d68b16fd0ff-504277695fa7617f8d87e5771d091463.svg" alt="$ba$" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> over <img src="/home/chinmay/.local/state/emacs/var/org/persist/54/73b8eb-61af-4559-8b12-193dfd4c0495-c2ad998ba69391e9c5e3b5fec23d6cea.svg" alt="$bc$" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> counterclockwise. For finding the angle, we calculate the magnitudes of <img src="/home/chinmay/.local/state/emacs/var/org/persist/41/500476-717c-41eb-a7e9-b58003fbdcdd-5ad38cf1a934875fad2101b9adc4706a.svg" alt="$\vec{ba}$" style="height: 1.0571em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> and <img src="/home/chinmay/.local/state/emacs/var/org/persist/59/b663be-ad47-4d03-9252-276cff2c7ff7-ad0f5a84fd6dd1d8eeecbe818c886b2b.svg" alt="$\vec{bc}$" style="height: 1.0571em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" />, and their dot and cross products. We then return different values depending on the sign of the dot and cross products. The time complexity if <img src="/home/chinmay/.local/state/emacs/var/org/persist/a6/5bf466-2ad2-4b52-a1cf-ef2305e8386c-1faed758b8ce428a22d72d1b62e5f6a1.svg" alt="$\mathcal{O}(1)$" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" />
 </p>
 </div>
 </div>
-<div id="outline-container-org00787bc" class="outline-4">
-<h4 id="org00787bc"><span class="section-number-4">3.3.2.</span> <code>get_notches</code>: Given a polygon, return a list of notches</h4>
+<div id="outline-container-org2d353e7" class="outline-4">
+<h4 id="org2d353e7"><span class="section-number-4">3.3.2.</span> <code>get_notches</code>: Given a polygon, return a list of notches</h4>
 <div class="outline-text-4" id="text-3-3-2">
 <p>
-We iterate over the vertices of the polygon in clockwise order, checking if the angle \(v_{i-1},v_i,v_{i+1}\) (where \(v_i\) is the current vertex) is reflex. If the angle is reflex, we add it to the list of notches. Finding the angle takes constant time, hence the time complexity for getting all the notches is \(\mathcal{O}(n)\) where \(n\) is the number of vertices in the polygon.
+We iterate over the vertices of the polygon in clockwise order, checking if the angle <img src="/home/chinmay/.local/state/emacs/var/org/persist/3e/465b79-99fd-4077-94ac-898f6178e4bb-02f4e19b5584ef9f1824d874a7a53114.svg" alt="$v_{i-1},v_i,v_{i+1}$" style="height: 0.7490em; vertical-align: -0.2779em; display: inline-block" class="org-latex org-latex-fragment" /> (where <img src="/home/chinmay/.local/state/emacs/var/org/persist/d6/066f21-a697-4f0b-8abb-b469789a7b6e-8e39ea7e6185aefa280f70b28a95bd60.svg" alt="$v_i$" style="height: 0.6673em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-fragment" /> is the current vertex) is reflex. If the angle is reflex, we add it to the list of notches. Finding the angle takes constant time, hence the time complexity for getting all the notches is <img src="/home/chinmay/.local/state/emacs/var/org/persist/a3/8facf8-57f0-4c72-bbf2-0f36b83ed5ef-358fa90d53ae315e9f55b4f0eede3428.svg" alt="$\mathcal{O}(n)$" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /> where <img src="/home/chinmay/.local/state/emacs/var/org/persist/f4/f10ded-e238-4115-b374-8592823585c9-7287404cbfc613294534a6cbef78b50d.svg" alt="$n$" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> is the number of vertices in the polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf999702" class="outline-4">
-<h4 id="orgf999702"><span class="section-number-4">3.3.3.</span> <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</h4>
+<div id="outline-container-org5d53196" class="outline-4">
+<h4 id="org5d53196"><span class="section-number-4">3.3.3.</span> <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</h4>
 <div class="outline-text-4" id="text-3-3-3">
 <p>
-We iterate over the edges of the face and get the neighbouring edges incident to the diagonal vertices. We do the necessary updates to the <code>next</code> and <code>previous</code> of all the necessary edges. We then create a new face and update its edges so that their left face points to this face. Finally, we return the newly formed face. The time complexity for this process is \(\mathcal{O}(n)\) where \(n\) is the number of vertices in the polygon due to the linear nature of both the processes.
+We iterate over the edges of the face and get the neighbouring edges incident to the diagonal vertices. We do the necessary updates to the <code>next</code> and <code>previous</code> of all the necessary edges. We then create a new face and update its edges so that their left face points to this face. Finally, we return the newly formed face. The time complexity for this process is <img src="/home/chinmay/.local/state/emacs/var/org/persist/a3/8facf8-57f0-4c72-bbf2-0f36b83ed5ef-358fa90d53ae315e9f55b4f0eede3428.svg" alt="$\mathcal{O}(n)$" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /> where <img src="/home/chinmay/.local/state/emacs/var/org/persist/f4/f10ded-e238-4115-b374-8592823585c9-7287404cbfc613294534a6cbef78b50d.svg" alt="$n$" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> is the number of vertices in the polygon due to the linear nature of both the processes.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf6c56cf" class="outline-4">
-<h4 id="orgf6c56cf"><span class="section-number-4">3.3.4.</span> <code>merge_face</code>: Given two faces, merge and return their combination</h4>
+<div id="outline-container-org640df63" class="outline-4">
+<h4 id="org640df63"><span class="section-number-4">3.3.4.</span> <code>merge_face</code>: Given two faces, merge and return their combination</h4>
 <div class="outline-text-4" id="text-3-3-4">
 <p>
-We iterate over edges of the first face to find the diagonal between the two faces and perform the necessary updates in the edges. After updation, the left faces of all the edges are updated to the first face and the first face is returned. The time complexity is \(\mathcal{O}(n)\) where \(n\) is the number of vertices in the polygon.
+We iterate over edges of the first face to find the diagonal between the two faces and perform the necessary updates in the edges. After updation, the left faces of all the edges are updated to the first face and the first face is returned. The time complexity is <img src="/home/chinmay/.local/state/emacs/var/org/persist/a3/8facf8-57f0-4c72-bbf2-0f36b83ed5ef-358fa90d53ae315e9f55b4f0eede3428.svg" alt="$\mathcal{O}(n)$" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /> where <img src="/home/chinmay/.local/state/emacs/var/org/persist/f4/f10ded-e238-4115-b374-8592823585c9-7287404cbfc613294534a6cbef78b50d.svg" alt="$n$" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> is the number of vertices in the polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-org217805f" class="outline-4">
-<h4 id="org217805f"><span class="section-number-4">3.3.5.</span> <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in \(P \setminus L_m\)</h4>
+<div id="outline-container-orgb05037d" class="outline-4">
+<h4 id="orgb05037d"><span class="section-number-4">3.3.5.</span> <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in <img src="/home/chinmay/.local/state/emacs/var/org/persist/fc/b586c9-43b8-4880-aa31-bf0ad051e4b7-ff3cba6b55988853c7c4c84fd9b0413e.svg" alt="$P \setminus L_m$" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /></h4>
 <div class="outline-text-4" id="text-3-3-5">
 <p>
-We iterate over all the notches, and check whether they are present in the list \(L_m\) (the polygon being made in the \(m^{th}\) iteration) and not in \(P\) (the undecomposed polygon we are currently working on). The time complexity is \(\mathcal{O}(n^2)\) as we have to iterate over \(L_m\) and \(P\) for every notch.
+We iterate over all the notches, and check whether they are present in the list <img src="/home/chinmay/.local/state/emacs/var/org/persist/09/d316e0-f653-43d1-8f92-7481cbfec3cf-5db0b8a80302d288f406ccdde8ef67a8.svg" alt="$L_m$" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-fragment" /> (the polygon being made in the <img src="/home/chinmay/.local/state/emacs/var/org/persist/78/e21aa4-c5a3-4c53-9879-285cda9e3f3d-ff2c8c68ccdefcd8c64fdbbbb80ea1a9.svg" alt="$m^{th}$" style="height: 0.9304em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> iteration) and not in <img src="/home/chinmay/.local/state/emacs/var/org/persist/4b/a384fd-7d2e-42db-86d1-c1469607f726-d99929035b65429b9eef9ec8dda5bf97.svg" alt="$P$" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> (the undecomposed polygon we are currently working on). The time complexity is <img src="/home/chinmay/.local/state/emacs/var/org/persist/21/71d687-4715-40ac-b53c-8dfbf2b7af03-94f26d60abdf18c18c3ee32634ea73db.svg" alt="$\mathcal{O}(n^2)$" style="height: 1.1411em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /> as we have to iterate over <img src="/home/chinmay/.local/state/emacs/var/org/persist/09/d316e0-f653-43d1-8f92-7481cbfec3cf-5db0b8a80302d288f406ccdde8ef67a8.svg" alt="$L_m$" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-fragment" /> and <img src="/home/chinmay/.local/state/emacs/var/org/persist/4b/a384fd-7d2e-42db-86d1-c1469607f726-d99929035b65429b9eef9ec8dda5bf97.svg" alt="$P$" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> for every notch.
 </p>
 </div>
 </div>
-<div id="outline-container-orgdc5a76c" class="outline-4">
-<h4 id="orgdc5a76c"><span class="section-number-4">3.3.6.</span> <code>inside_polygon</code>: Check whether a point lies inside a polygon</h4>
+<div id="outline-container-org4b81b84" class="outline-4">
+<h4 id="org4b81b84"><span class="section-number-4">3.3.6.</span> <code>inside_polygon</code>: Check whether a point lies inside a polygon</h4>
 <div class="outline-text-4" id="text-3-3-6">
 <p>
 We iterate over the edges in clockwise order. Every time we find an edge one of whose endpoints is above the given point and the other below, and the point is to the right of the edge, we flip a boolean flag.
-This can be done in \(\mathcal{O}(n)\)
+This can be done in <img src="/home/chinmay/.local/state/emacs/var/org/persist/a3/8facf8-57f0-4c72-bbf2-0f36b83ed5ef-358fa90d53ae315e9f55b4f0eede3428.svg" alt="$\mathcal{O}(n)$" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" />
 </p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org8dd2068" class="outline-2">
-<h2 id="org8dd2068"><span class="section-number-2">4.</span> Merging</h2>
+<div id="outline-container-org13dd06f" class="outline-2">
+<h2 id="org13dd06f"><span class="section-number-2">4.</span> Merging</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org128c41d" class="outline-3">
-<h3 id="org128c41d"><span class="section-number-3">4.1.</span> Terminology</h3>
+<div id="outline-container-orgea3425c" class="outline-3">
+<h3 id="orgea3425c"><span class="section-number-3">4.1.</span> Terminology</h3>
 <div class="outline-text-3" id="text-4-1">
 </div>
-<div id="outline-container-orgbd40c44" class="outline-4">
-<h4 id="orgbd40c44"><span class="section-number-4">4.1.1.</span> LDP</h4>
+<div id="outline-container-orgff787e6" class="outline-4">
+<h4 id="orgff787e6"><span class="section-number-4">4.1.1.</span> LDP</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <p>
-LDP is an ordered list of boolean flags, \(LDP[i]=true\) means that the polygon with index \(i\) is one of the definitive polygons of the partition after the merging process.
+LDP is an ordered list of boolean flags, <img src="/home/chinmay/.local/state/emacs/var/org/persist/95/c260f9-34e1-4925-96b8-872974e0d863-1acf4392b2831c00ee1fffc9d0166cf6.svg" alt="$LDP[i]=true$" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /> means that the polygon with index <img src="/home/chinmay/.local/state/emacs/var/org/persist/80/51dcb6-04d8-4c5b-8669-cf9d4330407f-852cd1cb264f29eaf60479a45b901433.svg" alt="$i$" style="height: 0.7447em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> is one of the definitive polygons of the partition after the merging process.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc99cade" class="outline-4">
-<h4 id="orgc99cade"><span class="section-number-4">4.1.2.</span> LUP</h4>
+<div id="outline-container-orge43b954" class="outline-4">
+<h4 id="orge43b954"><span class="section-number-4">4.1.2.</span> LUP</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <p>
-LUP is an ordered list of integers, \(LUP[i]= j\) means that the polygon with index \(i\) is part of the polygon with index \(j\).
+LUP is an ordered list of integers, <img src="/home/chinmay/.local/state/emacs/var/org/persist/bf/f19fb4-3102-4f60-a527-8bd2b26c873b-d67e4ce100aea92a396bed5e4c473c6d.svg" alt="$LUP[i]= j$" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /> means that the polygon with index <img src="/home/chinmay/.local/state/emacs/var/org/persist/80/51dcb6-04d8-4c5b-8669-cf9d4330407f-852cd1cb264f29eaf60479a45b901433.svg" alt="$i$" style="height: 0.7447em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> is part of the polygon with index <img src="/home/chinmay/.local/state/emacs/var/org/persist/80/06b88e-18f0-4657-85e4-0de6aafa7b50-8e3dffc853fe8c47525284da161b4106.svg" alt="$j$" style="height: 0.9353em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" />.
 </p>
 </div>
 </div>
-<div id="outline-container-orgbb0a0be" class="outline-4">
-<h4 id="orgbb0a0be"><span class="section-number-4">4.1.3.</span> LLE</h4>
+<div id="outline-container-orgf139d55" class="outline-4">
+<h4 id="orgf139d55"><span class="section-number-4">4.1.3.</span> LLE</h4>
 <div class="outline-text-4" id="text-4-1-3">
 <p>
 LLE is a list containing the diagonals of the partition.
@@ -487,8 +455,8 @@ LLE is a list containing the diagonals of the partition.
 </div>
 </div>
 </div>
-<div id="outline-container-orgaf7bf8c" class="outline-3">
-<h3 id="orgaf7bf8c"><span class="section-number-3">4.2.</span> Algorithm</h3>
+<div id="outline-container-orgd98775c" class="outline-3">
+<h3 id="orgd98775c"><span class="section-number-3">4.2.</span> Algorithm</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 We iterate over the list of diagonals (i.e. LLE) and check whether removing the diagonal between two faces does not disturb the convexity of the structure. If it does not, then we merge the two faces and update the LDP and LUP lists.
@@ -496,13 +464,13 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 </div>
 </div>
 </div>
-<div id="outline-container-orgd34f914" class="outline-2">
-<h2 id="orgd34f914"><span class="section-number-2">5.</span> Benchmarks and Results</h2>
+<div id="outline-container-org143170b" class="outline-2">
+<h2 id="org143170b"><span class="section-number-2">5.</span> Benchmarks and Results</h2>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Chinmay Dalal</p>
-<p class="date">Created: 2023-03-22 Wed 19:40</p>
+<p class="date">Created: 2023-03-22 Wed 23:01</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
