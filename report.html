@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-03-06 Mon 23:45 -->
+<!-- 2023-03-22 Wed 19:40 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CS F364 Assignment 1</title>
@@ -233,36 +233,55 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org02fff2c">1. Problem statement</a></li>
-<li><a href="#orgc34761e">2. DCEL: Doubly Connected Edge List</a></li>
-<li><a href="#orgfdd8084">3. <span class="todo TODO">TODO</span> Images reference</a>
+<li><a href="#orgbaa95a5">1. Problem statement</a></li>
+<li><a href="#org1161cb4">2. DCEL: Doubly Connected Edge List</a>
 <ul>
-<li><a href="#org01d17e0">3.1. Polygon</a></li>
-<li><a href="#org67af280">3.2. Vertex</a></li>
-<li><a href="#orga898ee0">3.3. Edge</a></li>
-<li><a href="#org3eef1c9">3.4. Face</a></li>
+<li><a href="#org99ec1eb">2.1. Polygon</a></li>
+<li><a href="#orge7beaef">2.2. Vertex</a></li>
+<li><a href="#org76f347f">2.3. Edge</a></li>
+<li><a href="#org7a1dc51">2.4. Face</a></li>
 </ul>
 </li>
-<li><a href="#orga811c0a">4. <span class="todo TODO">TODO</span> Decomposition algorithm</a>
+<li><a href="#org25f8e7f">3. Decomposition</a>
 <ul>
-<li><a href="#org758283b">4.1. <span class="todo TODO">TODO</span> define terminology</a></li>
-<li><a href="#org2e7bcc7">4.2. Time complexity analysis of helper functions</a>
+<li><a href="#org55f5e4e">3.1. Terminology</a>
 <ul>
-<li><a href="#org827e019">4.2.1. <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</a></li>
-<li><a href="#orge17358e">4.2.2. <code>get_notches</code>: Given a polygon, return a list of notches</a></li>
-<li><a href="#org2119750">4.2.3. <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</a></li>
-<li><a href="#orga08b9fb">4.2.4. <code>merge_face</code>: Given two faces, merge and return their combination</a></li>
-<li><a href="#org5ad9699">4.2.5. <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in \(P \setminus L_m\)</a></li>
+<li><a href="#orgae01aff">3.1.1. Notch</a></li>
+<li><a href="#orgab3a6f5">3.1.2. LPVS</a></li>
+<li><a href="#org09c03cc">3.1.3. VTR</a></li>
+</ul>
+</li>
+<li><a href="#org9caf28f">3.2. Algorithm</a></li>
+<li><a href="#orgff5d2a9">3.3. Time complexity analysis of helper functions</a>
+<ul>
+<li><a href="#org9e5a79b">3.3.1. <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</a></li>
+<li><a href="#org00787bc">3.3.2. <code>get_notches</code>: Given a polygon, return a list of notches</a></li>
+<li><a href="#orgf999702">3.3.3. <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</a></li>
+<li><a href="#orgf6c56cf">3.3.4. <code>merge_face</code>: Given two faces, merge and return their combination</a></li>
+<li><a href="#org217805f">3.3.5. <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in \(P \setminus L_m\)</a></li>
+<li><a href="#orgdc5a76c">3.3.6. <code>inside_polygon</code>: Check whether a point lies inside a polygon</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgf0f2333">5. Merging algorithm</a></li>
+<li><a href="#org8dd2068">4. Merging</a>
+<ul>
+<li><a href="#org128c41d">4.1. Terminology</a>
+<ul>
+<li><a href="#orgbd40c44">4.1.1. LDP</a></li>
+<li><a href="#orgc99cade">4.1.2. LUP</a></li>
+<li><a href="#orgbb0a0be">4.1.3. LLE</a></li>
+</ul>
+</li>
+<li><a href="#orgaf7bf8c">4.2. Algorithm</a></li>
+</ul>
+</li>
+<li><a href="#orgd34f914">5. Benchmarks and Results</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org02fff2c" class="outline-2">
-<h2 id="org02fff2c"><span class="section-number-2">1.</span> Problem statement</h2>
+<div id="outline-container-orgbaa95a5" class="outline-2">
+<h2 id="orgbaa95a5"><span class="section-number-2">1.</span> Problem statement</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Given an arbitrary polygon, decompose it into a set of convex polygons. We have been given the following paper to implement:
@@ -272,51 +291,49 @@ The paper describes three different algorithms for the decomposition of the poly
 </div>
 </div>
 
-<div id="outline-container-orgc34761e" class="outline-2">
-<h2 id="orgc34761e"><span class="section-number-2">2.</span> DCEL: Doubly Connected Edge List</h2>
+<div id="outline-container-org1161cb4" class="outline-2">
+<h2 id="org1161cb4"><span class="section-number-2">2.</span> DCEL: Doubly Connected Edge List</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 We have used the DCEL data structure to store our decomposed polygon. DCEL consists of three main sub-data-structures, namely
 Vertex, Edge and Face.
 </p>
-</div>
-</div>
-<div id="outline-container-orgfdd8084" class="outline-2">
-<h2 id="orgfdd8084"><span class="section-number-2">3.</span> <span class="todo TODO">TODO</span> Images reference</h2>
-<div class="outline-text-2" id="text-3">
 
-<div id="org51e1457" class="figure">
-<p><img src="DCEL:_Doubly_Connected_Edge_List/2023-03-06_23-38-16_screenshot.png" alt="2023-03-06_23-38-16_screenshot.png" />
+<div id="org67d8473" class="figure">
+<p><img src="./DCEL:_Doubly_Connected_Edge_List/2023-03-06_23-38-16_screenshot.png" alt="2023-03-06_23-38-16_screenshot.png" />
 </p>
 </div>
 
 
 
-<div id="org8a50a62" class="figure">
-<p><img src="DCEL:_Doubly_Connected_Edge_List/2023-03-06_23-37-13_screenshot.png" alt="2023-03-06_23-37-13_screenshot.png" />
+<div id="org734a82b" class="figure">
+<p><img src="./DCEL:_Doubly_Connected_Edge_List/2023-03-06_23-37-13_screenshot.png" alt="2023-03-06_23-37-13_screenshot.png" />
 </p>
 </div>
-</div>
 
-<div id="outline-container-org01d17e0" class="outline-3">
-<h3 id="org01d17e0"><span class="section-number-3">3.1.</span> Polygon</h3>
-<div class="outline-text-3" id="text-3-1">
+<p>
+(Images taken from <a href="https://www2.cs.sfu.ca/~binay/813.2011/DCEL.pdf">https://www2.cs.sfu.ca/~binay/813.2011/DCEL.pdf</a>)
+</p>
+</div>
+<div id="outline-container-org99ec1eb" class="outline-3">
+<h3 id="org99ec1eb"><span class="section-number-3">2.1.</span> Polygon</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
 A decomposed polygon is represented by the Polygon class, which contains a list of vertices of the original polygon in clockwise order, and two Faces which represent the outer and inner faces of the initial, undecomposed polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-org67af280" class="outline-3">
-<h3 id="org67af280"><span class="section-number-3">3.2.</span> Vertex</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-orge7beaef" class="outline-3">
+<h3 id="orge7beaef"><span class="section-number-3">2.2.</span> Vertex</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
 A vertex contains the coordinates of the point and an IncidentEdge - an edge which originates at the vertex.
 </p>
 </div>
 </div>
-<div id="outline-container-orga898ee0" class="outline-3">
-<h3 id="orga898ee0"><span class="section-number-3">3.3.</span> Edge</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-org76f347f" class="outline-3">
+<h3 id="org76f347f"><span class="section-number-3">2.3.</span> Edge</h3>
+<div class="outline-text-3" id="text-2-3">
 <p>
 An edge contains
 </p>
@@ -328,78 +345,164 @@ An edge contains
 </ul>
 </div>
 </div>
-<div id="outline-container-org3eef1c9" class="outline-3">
-<h3 id="org3eef1c9"><span class="section-number-3">3.4.</span> Face</h3>
-<div class="outline-text-3" id="text-3-4">
+<div id="outline-container-org7a1dc51" class="outline-3">
+<h3 id="org7a1dc51"><span class="section-number-3">2.4.</span> Face</h3>
+<div class="outline-text-3" id="text-2-4">
 <p>
 A face contains a pointer to any one of the representative edges of the face (if we know one edge we can find all of them by traversing using the <code>next</code> field of the edge)
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orga811c0a" class="outline-2">
-<h2 id="orga811c0a"><span class="section-number-2">4.</span> <span class="todo TODO">TODO</span> Decomposition algorithm</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org25f8e7f" class="outline-2">
+<h2 id="org25f8e7f"><span class="section-number-2">3.</span> Decomposition</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org55f5e4e" class="outline-3">
+<h3 id="org55f5e4e"><span class="section-number-3">3.1.</span> Terminology</h3>
+<div class="outline-text-3" id="text-3-1">
+</div>
+<div id="outline-container-orgae01aff" class="outline-4">
+<h4 id="orgae01aff"><span class="section-number-4">3.1.1.</span> Notch</h4>
+<div class="outline-text-4" id="text-3-1-1">
 <p>
-The algorithm relies on successive adding of vertices until the polygon formed by the vertices is not convex.
+Angle between 3 points \(a,b,c\) is said to be a notch if it is greater than \(180 \degree\)
 </p>
 </div>
-<div id="outline-container-org758283b" class="outline-3">
-<h3 id="org758283b"><span class="section-number-3">4.1.</span> <span class="todo TODO">TODO</span> define terminology</h3>
 </div>
-<div id="outline-container-org2e7bcc7" class="outline-3">
-<h3 id="org2e7bcc7"><span class="section-number-3">4.2.</span> Time complexity analysis of helper functions</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-orgab3a6f5" class="outline-4">
+<h4 id="orgab3a6f5"><span class="section-number-4">3.1.2.</span> LPVS</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<p>
+\(LPVS(P,S)\) is the list of notches enclosed in \(P \setminus L\)
+</p>
 </div>
-<div id="outline-container-org827e019" class="outline-4">
-<h4 id="org827e019"><span class="section-number-4">4.2.1.</span> <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</h4>
-<div class="outline-text-4" id="text-4-2-1">
+</div>
+<div id="outline-container-org09c03cc" class="outline-4">
+<h4 id="org09c03cc"><span class="section-number-4">3.1.3.</span> VTR</h4>
+<div class="outline-text-4" id="text-3-1-3">
+<p>
+Intermediate polygon from which we need to remove
+</p>
+<ul class="org-ul">
+<li>Notches</li>
+<li>Points lying to the right side of the semiplane formed by the notches and the first point of the initial polygon are to be removed.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org9caf28f" class="outline-3">
+<h3 id="org9caf28f"><span class="section-number-3">3.2.</span> Algorithm</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+The algorithm relies on successive adding of vertices until the polygon formed by the vertices is not convex. When we cannot add any points to the polygon, we check if any notches are enclosed in the rectangle of minimum area formed by the points added so far. If no notches are present, we create a new polygon by splitting the face of the existing polygon and continue to work on the other half of the newly formed polygon until the number of vertices in our list falls below or equal to -  this is the halting condition of the decomposition algorithm. If, in intermediate stages, we notice that notches are present in the rectangle, we remove the notches and the last point of the polygon until we reach a condition where the diagonal formed by the first and the last point does not enclose any other point. We start from the next vertex if we cannot make the polygon.
+</p>
+</div>
+</div>
+<div id="outline-container-orgff5d2a9" class="outline-3">
+<h3 id="orgff5d2a9"><span class="section-number-3">3.3.</span> Time complexity analysis of helper functions</h3>
+<div class="outline-text-3" id="text-3-3">
+</div>
+<div id="outline-container-org9e5a79b" class="outline-4">
+<h4 id="org9e5a79b"><span class="section-number-4">3.3.1.</span> <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</h4>
+<div class="outline-text-4" id="text-3-3-1">
 <p>
 Returns the angle swept by line segment \(ba\) over \(bc\) counterclockwise. For finding the angle, we calculate the magnitudes of \(\vec{ba}\) and \(\vec{bc}\), and their dot and cross products. We then return different values depending on the sign of the dot and cross products. The time complexity if \(\mathcal{O}(1)\)
 </p>
 </div>
 </div>
-<div id="outline-container-orge17358e" class="outline-4">
-<h4 id="orge17358e"><span class="section-number-4">4.2.2.</span> <code>get_notches</code>: Given a polygon, return a list of notches</h4>
-<div class="outline-text-4" id="text-4-2-2">
+<div id="outline-container-org00787bc" class="outline-4">
+<h4 id="org00787bc"><span class="section-number-4">3.3.2.</span> <code>get_notches</code>: Given a polygon, return a list of notches</h4>
+<div class="outline-text-4" id="text-3-3-2">
 <p>
 We iterate over the vertices of the polygon in clockwise order, checking if the angle \(v_{i-1},v_i,v_{i+1}\) (where \(v_i\) is the current vertex) is reflex. If the angle is reflex, we add it to the list of notches. Finding the angle takes constant time, hence the time complexity for getting all the notches is \(\mathcal{O}(n)\) where \(n\) is the number of vertices in the polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-org2119750" class="outline-4">
-<h4 id="org2119750"><span class="section-number-4">4.2.3.</span> <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</h4>
-<div class="outline-text-4" id="text-4-2-3">
+<div id="outline-container-orgf999702" class="outline-4">
+<h4 id="orgf999702"><span class="section-number-4">3.3.3.</span> <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</h4>
+<div class="outline-text-4" id="text-3-3-3">
 <p>
 We iterate over the edges of the face and get the neighbouring edges incident to the diagonal vertices. We do the necessary updates to the <code>next</code> and <code>previous</code> of all the necessary edges. We then create a new face and update its edges so that their left face points to this face. Finally, we return the newly formed face. The time complexity for this process is \(\mathcal{O}(n)\) where \(n\) is the number of vertices in the polygon due to the linear nature of both the processes.
 </p>
 </div>
 </div>
-<div id="outline-container-orga08b9fb" class="outline-4">
-<h4 id="orga08b9fb"><span class="section-number-4">4.2.4.</span> <code>merge_face</code>: Given two faces, merge and return their combination</h4>
-<div class="outline-text-4" id="text-4-2-4">
+<div id="outline-container-orgf6c56cf" class="outline-4">
+<h4 id="orgf6c56cf"><span class="section-number-4">3.3.4.</span> <code>merge_face</code>: Given two faces, merge and return their combination</h4>
+<div class="outline-text-4" id="text-3-3-4">
 <p>
 We iterate over edges of the first face to find the diagonal between the two faces and perform the necessary updates in the edges. After updation, the left faces of all the edges are updated to the first face and the first face is returned. The time complexity is \(\mathcal{O}(n)\) where \(n\) is the number of vertices in the polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-org5ad9699" class="outline-4">
-<h4 id="org5ad9699"><span class="section-number-4">4.2.5.</span> <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in \(P \setminus L_m\)</h4>
-<div class="outline-text-4" id="text-4-2-5">
+<div id="outline-container-org217805f" class="outline-4">
+<h4 id="org217805f"><span class="section-number-4">3.3.5.</span> <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in \(P \setminus L_m\)</h4>
+<div class="outline-text-4" id="text-3-3-5">
 <p>
 We iterate over all the notches, and check whether they are present in the list \(L_m\) (the polygon being made in the \(m^{th}\) iteration) and not in \(P\) (the undecomposed polygon we are currently working on). The time complexity is \(\mathcal{O}(n^2)\) as we have to iterate over \(L_m\) and \(P\) for every notch.
 </p>
 </div>
 </div>
+<div id="outline-container-orgdc5a76c" class="outline-4">
+<h4 id="orgdc5a76c"><span class="section-number-4">3.3.6.</span> <code>inside_polygon</code>: Check whether a point lies inside a polygon</h4>
+<div class="outline-text-4" id="text-3-3-6">
+<p>
+We iterate over the edges in clockwise order. Every time we find an edge one of whose endpoints is above the given point and the other below, and the point is to the right of the edge, we flip a boolean flag.
+This can be done in \(\mathcal{O}(n)\)
+</p>
 </div>
 </div>
-<div id="outline-container-orgf0f2333" class="outline-2">
-<h2 id="orgf0f2333"><span class="section-number-2">5.</span> Merging algorithm</h2>
+</div>
+</div>
+<div id="outline-container-org8dd2068" class="outline-2">
+<h2 id="org8dd2068"><span class="section-number-2">4.</span> Merging</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org128c41d" class="outline-3">
+<h3 id="org128c41d"><span class="section-number-3">4.1.</span> Terminology</h3>
+<div class="outline-text-3" id="text-4-1">
+</div>
+<div id="outline-container-orgbd40c44" class="outline-4">
+<h4 id="orgbd40c44"><span class="section-number-4">4.1.1.</span> LDP</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<p>
+LDP is an ordered list of boolean flags, \(LDP[i]=true\) means that the polygon with index \(i\) is one of the definitive polygons of the partition after the merging process.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc99cade" class="outline-4">
+<h4 id="orgc99cade"><span class="section-number-4">4.1.2.</span> LUP</h4>
+<div class="outline-text-4" id="text-4-1-2">
+<p>
+LUP is an ordered list of integers, \(LUP[i]= j\) means that the polygon with index \(i\) is part of the polygon with index \(j\).
+</p>
+</div>
+</div>
+<div id="outline-container-orgbb0a0be" class="outline-4">
+<h4 id="orgbb0a0be"><span class="section-number-4">4.1.3.</span> LLE</h4>
+<div class="outline-text-4" id="text-4-1-3">
+<p>
+LLE is a list containing the diagonals of the partition.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaf7bf8c" class="outline-3">
+<h3 id="orgaf7bf8c"><span class="section-number-3">4.2.</span> Algorithm</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+We iterate over the list of diagonals (i.e. LLE) and check whether removing the diagonal between two faces does not disturb the convexity of the structure. If it does not, then we merge the two faces and update the LDP and LUP lists.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd34f914" class="outline-2">
+<h2 id="orgd34f914"><span class="section-number-2">5.</span> Benchmarks and Results</h2>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Chinmay Dalal</p>
-<p class="date">Created: 2023-03-06 Mon 23:45</p>
+<p class="date">Created: 2023-03-22 Wed 19:40</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

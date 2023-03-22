@@ -299,7 +299,7 @@ auto is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch)
     }
     usize i;
     usize j;
-    usize c = 0;
+    bool c = 0;
     double x = notch->point.x;
     double y = notch->point.y;
     for (i = 0, j = n - 1; i < n; j = i++) {
@@ -309,10 +309,10 @@ auto is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch)
         double xpj = polygon[j]->point.x;
         if ((((ypi <= y) && (y < ypj)) || ((ypj <= y) && (y < ypi))) &&
             (x < (xpj - xpi) * (y - ypi) / (ypj - ypi) + xpi)) {
-            c = static_cast<usize>(static_cast<usize>(c) == 0U);
+            c = !c;
         }
     }
-    return c != 0U;
+    return c;
 }
 
 /// @brief Returns the next Vertex of the edge of a Vertex in a Face
