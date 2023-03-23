@@ -1,15 +1,15 @@
-Name, No. of vertices, Time to decompose, Time to merge, Number of polygons before merging, Number of polygons after merging
-./hand_nodes.txt,59,3371±82,121±82,25,19
-./poly2.txt,12,143±5,32±5,7,4
-./algeria.txt,62,3513±22,159±22,29,22
-./hand.txt,59,3360±25,120±25,25,19
-./star.txt,10,121±4,20±4,6,5
-./comb.txt,10,106±4,15±4,5,5
-./i18.txt,18,518±6,41±6,10,9
-./test2.txt,21,496±6,37±6,11,10
-./star_nodes.txt,10,83±5,21±5,5,3
-./greenland.txt,132,21826±40,556±40,64,45
-./snake.txt,12,142±6,23±6,6,6
-./test_polygon1.txt,17,192±6,31±6,7,4
-./india.txt,136,38222±77,675±77,75,54
-./square_nodes.txt,4,14±1,2±1,1,1
+Name,No. of vertices,Time to decompose,Time to merge,Number of polygons before merging,Number of polygons after merging
+./hand_nodes.txt,59,3391±65,121±65,25,19
+./poly2.txt,12,142±2,32±2,7,4
+./algeria.txt,62,3516±21,160±21,29,22
+./hand.txt,59,3365±10,121±10,25,19
+./star.txt,10,120±2,21±2,6,5
+./comb.txt,10,105±2,15±2,5,5
+./i18.txt,18,522±3,41±3,10,9
+./test2.txt,21,498±3,38±3,11,10
+./star_nodes.txt,10,81±1,21±1,5,3
+./greenland.txt,132,21890±47,560±47,64,45
+./snake.txt,12,141±2,23±2,6,6
+./test_polygon1.txt,17,191±2,32±2,7,4
+./india.txt,136,38235±94,681±94,75,54
+./square_nodes.txt,4,14±0,2±0,1,1

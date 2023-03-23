@@ -40,8 +40,8 @@ auto count_polygons(const std::set<Face *> &Polygons) -> usize {
 
 auto main() -> int {
     std::ofstream os("output.csv");
-    os << "Name, No. of vertices, Time to decompose, Time to merge, Number of "
-          "polygons before merging, Number of polygons after merging"
+    os << "Name,No. of vertices,Time to decompose,Time to merge,Number of "
+          "polygons before merging,Number of polygons after merging"
        << std::endl;
     usize cases;
     std::cin >> cases;
@@ -60,7 +60,6 @@ auto main() -> int {
             Point point;
             point.x = x;
             point.y = y;
-            std::cout << x << " " << y << std::endl;
             points.push_back(point);
         }
         auto decomp_times = std::vector<u128>();

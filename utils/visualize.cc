@@ -1,7 +1,8 @@
 #include <iostream>
 #include <vector>
 typedef uintptr_t usize;
-/// @brief Given data of Initial and Decomposed Polygon , It Generates Drawable HTML Code for Polygon Visualization
+/// @brief Given data of Initial and Decomposed Polygon , It Generates Drawable
+/// HTML Code for Polygon Visualization
 int main() {
     usize num_vertices_initial;
     std::vector<double> initial_x, initial_y;
@@ -14,7 +15,9 @@ int main() {
     }
     usize n;
     std::cin >> n;
-    std::string colors[] = {"#a7d52a" , "#dff429" , "#f6c137" , "#f25e40" , "#c32a94" , "#7328b6" , "#3438bd" , "#3f77c4" , "#4daecf" , "#52c67f" , "#79c725"};
+    std::string colors[] = {"#a7d52a", "#dff429", "#f6c137", "#f25e40",
+                            "#c32a94", "#7328b6", "#3438bd", "#3f77c4",
+                            "#4daecf", "#52c67f", "#79c725"};
     double minx, miny, maxx, maxy;
     std::vector<std::vector<std::pair<double, double>>> polygons(n);
     for (usize i = 0; i < n; i++) {
@@ -68,12 +71,14 @@ int main() {
     out += "' style='fill:teal;stroke:black;stroke-width:1'/>\n</svg>\n<svg "
            "height='540' width='960' viewbox='0 " +
            std::to_string(-rangey * scale) + " 960 540'>\n";
-    usize n_merge; std::cin >> n_merge;
-    for(usize i = 0 ; i < n_merge ; i++) {
+    usize n_merge;
+    std::cin >> n_merge;
+    for (usize i = 0; i < n_merge; i++) {
         out += "<polygon points='";
-        usize cur; std::cin >> cur;
-        while(cur--) {
-            double x , y; 
+        usize cur;
+        std::cin >> cur;
+        while (cur--) {
+            double x, y;
             std::cin >> x >> y;
             x -= minx;
             y -= miny;
