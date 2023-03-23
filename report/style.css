@@ -1,0 +1,12 @@
+.figure {
+    display: inline;
+}
+
+.figure p {
+    display: inline;
+}
+
+.figure img {
+    vertical-align: middle;
+    max-width: 29%;
+}
