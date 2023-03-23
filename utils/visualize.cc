@@ -65,6 +65,25 @@ int main() {
         out += colors[i % (sizeof(colors) / sizeof(colors[0]))];
         out += ";stroke:black;stroke-width:1' />\n";
     }
+    out += "' style='fill:teal;stroke:black;stroke-width:1'/>\n</svg>\n<svg "
+           "height='540' width='960' viewbox='0 " +
+           std::to_string(-rangey * scale) + " 960 540'>\n";
+    usize n_merge; std::cin >> n_merge;
+    for(usize i = 0 ; i < n_merge ; i++) {
+        out += "<polygon points='";
+        usize cur; std::cin >> cur;
+        while(cur--) {
+            double x , y; 
+            std::cin >> x >> y;
+            x -= minx;
+            y -= miny;
+            x *= scale, y *= scale;
+            out += std::to_string(x) + "," + std::to_string(-y) + " ";
+        }
+        out += "' style='fill:";
+        out += colors[i % (sizeof(colors) / sizeof(colors[0]))];
+        out += ";stroke:black;stroke-width:1' />\n";
+    }
     out += "</svg></img></body></html>";
     freopen("image.html", "w", stdout);
     std::cout << out << std::endl;

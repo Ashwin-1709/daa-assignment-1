@@ -1,0 +1,3 @@
+Polygon,Number of vertices,Time_for_decomposition(in microseconds),Time_for_merging(in microseconds),Number of decomposed polygon(before merging),Number of decomposed polygon(after merging)
+india.txt,136,43854,826,75,54
+
