@@ -303,14 +303,14 @@ auto is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch)
     double x = notch->point.x;
     double y = notch->point.y;
     for (i = 0, j = n - 1; i < n; j = i++) {
-        double ypi = polygon[i]->point.y;
-        double xpi = polygon[i]->point.x;
-        double ypj = polygon[j]->point.y;
-        double xpj = polygon[j]->point.x;
-        if ((((ypi <= y) && (y < ypj)) || ((ypj <= y) && (y < ypi))) &&
-            (x < (xpj - xpi) * (y - ypi) / (ypj - ypi) + xpi)) {
-            c = !c;
-        }
+        double y1 = polygon[i]->point.y;
+        double x1 = polygon[i]->point.x;
+        double y2 = polygon[j]->point.y;
+        double x2 = polygon[j]->point.x;
+        bool in_between = (((y1 <= y) and (y < y2)) or ((y2 <= y) and (y < y1)));
+        bool interior = (x < (x2 - x1) * (y - y1) / (y2 - y1) + x1);
+        if(in_between and interior)
+            c = !c; 
     }
     return c;
 }
