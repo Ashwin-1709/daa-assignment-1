@@ -1,12 +1,12 @@
-Polygon,Number of vertices,Time_for_decomposition(in microseconds),Time_for_merging(in microseconds),Number of decomposed polygon(before merging),Number of decomposed polygon(after merging)
-india.txt,136,43854,826,75,54
-singapore.txt,1201,20367747,24691,532,422
-i18.txt,18,909,51,10,9
-hand.txt,59,6996,142,25,19
-pol2.txt,12,930,115,7,4
-test2.txt,21,546,50,11,10
-greenland.txt,132,24486,675,64,45
-algeria.txt,62,5927,207,29,22
-star.txt,10,418,63,6,5
-comb.txt,10,356,47,5,5
-snake.txt,12,413,68,6,6
+Polygon,Number of vertices,Time_for_decomposition(in microseconds),Time_for_merging(in microseconds),Number of decomposed polygon(before merging),Number of decompose
+india.txt,136,43854,826,75,54                                                                                                                                        
+romania.txt,1201,20367747,24691,532,422                                                                                                                              
+i18.txt,18,909,51,10,9                                                                                                                                               
+hand.txt,59,6996,142,25,19                                                                                                                                           
+pol2.txt,12,930,115,7,4                                                                                                                                              
+test2.txt,21,546,50,11,10                                                                                                                                            
+greenland.txt,132,24486,675,64,45                                                                                                                                    
+algeria.txt,62,5927,207,29,22                                                                                                                                        
+star.txt,10,418,63,6,5                                                                                                                                               
+comb.txt,10,356,47,5,5                                                                                                                                               
+snake.txt,12,413,68,6,6                                                                                                                                              
