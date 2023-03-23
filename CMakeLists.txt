@@ -39,8 +39,18 @@ file(GLOB visualize_src
   "${PROJECT_SOURCE_DIR}/utils/visualize.cc"
 )
 
+file(GLOB benchmark_src
+  "${PROJECT_SOURCE_DIR}/src/dbg.cc"
+  "${PROJECT_SOURCE_DIR}/src/dcel.cc"
+  "${PROJECT_SOURCE_DIR}/src/decomp.cc"
+  "${PROJECT_SOURCE_DIR}/src/merge.cc"
+  "${PROJECT_SOURCE_DIR}/src/utils.cc"
+  "${PROJECT_SOURCE_DIR}/utils/benchmark.cc"
+)
+
 add_executable(polygon_decomp ${all_SRCS})
 add_executable(visualize ${visualize_src})
+add_executable(benchmark ${benchmark_src})
 
 add_custom_command(TARGET polygon_decomp POST_BUILD COMMAND cmake -E copy ${CMAKE_BINARY_DIR}/compile_commands.json ${CMAKE_SOURCE_DIR}/compile_commands.json)
 
