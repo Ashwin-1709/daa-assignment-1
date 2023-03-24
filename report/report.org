@@ -2,6 +2,7 @@
 #+title: CS F364 Assignment 1
 #+LATEX_HEADER: \usepackage{gensymb}
 #+options: tex:dvisvgm
+#+AUTHOR: Chinmay Dalal (2020A7PS2060H), Ashwin Pugalia(2020A7PS1080H), Deep Chordia(2020A7PS2073H), Yash Ratnani(2020A7PS0039H)
 * Problem statement
 Given an arbitrary polygon, decompose it into a set of convex polygons. We have been given the following paper to implement:
 Algorithms for the decomposition of a polygon into convex polygons, European Journal of Operational Research, 121(2), 330-342.
@@ -65,87 +66,160 @@ LLE is a list containing the diagonals of the partition.
 ** Algorithm
 We iterate over the list of diagonals (i.e. LLE) and check whether removing the diagonal between two faces disturbs the convexity of the structure. If it does not, then we merge the two faces and update the LDP and LUP lists.
 * Benchmarks and Results
- + Algeria:
+*** Algeria
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/alg_undec.png @ 2023-03-23 23:24:14
 [[file:images/alg_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/alg_unm.png @ 2023-03-23 23:24:36
 [[file:images/alg_unm.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/alg_me.png @ 2023-03-23 23:25:07
 [[file:images/alg_me.png]]
-+ Comb:
+
++ No. of vertices: 62
++ Time to decompose: 3516 \(\pm\) 21 $\mu s$
++ Time to merge: 160 $\pm$ 21 $\mu s$
++ No. of polygons before merging: 29
++ No. of polygons after merging: 22
+ 
+*** Comb:
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/comb_undec.png @ 2023-03-23 23:24:14
 [[file:images/comb_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/comb_unm.png @ 2023-03-23 23:24:36
 [[file:images/comb_unm.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/comb_me.png @ 2023-03-23 23:25:07
 [[file:images/comb_me.png]]
-+ Greenland:
+
++ No. of vertices: 10
++ Time to decompose: 105 \(\pm\) 2 $\mu s$
++ Time to merge: 15 $\pm$ 2 $\mu s$
++ No. of polygons before merging: 5
++ No. of polygons after merging: 5
+*** Greenland:
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/greenland_undec.png @ 2023-03-23 23:24:14
 [[file:images/greenland_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/greenland_unm.png @ 2023-03-23 23:24:36
 [[file:images/greenland_unm.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/greenland_me.png @ 2023-03-23 23:25:07
 [[file:images/greenland_me.png]]
-+ Hand:
+
++ No. of vertices: 132
++ Time to decompose: 21890 \(\pm\) 47 $\mu s$
++ Time to merge: 560 $\pm$ 47 $\mu s$
++ No. of polygons before merging: 64
++ No. of polygons after merging: 45
+*** Hand:
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/hand_undec.png @ 2023-03-23 23:24:14
 [[file:images/hand_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/hand_unm.png @ 2023-03-23 23:24:36
 [[file:images/hand_unm.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/hand_me.png @ 2023-03-23 23:25:07
 [[file:images/hand_me.png]]
-+ i18:
+
++ No. of vertices: 59
++ Time to decompose: 3365 \(\pm\) 10 $\mu s$
++ Time to merge: 121 $\pm$ 10 $\mu s$
++ No. of polygons before merging: 29
++ No. of polygons after merging: 22
+*** i18:
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/i18_undec.png @ 2023-03-23 23:24:14
 [[file:images/i18_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/i18_unm.png @ 2023-03-23 23:24:36
 [[file:images/i18_unm.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/i18_me.png @ 2023-03-23 23:25:07
 [[file:images/i18_me.png]]
-+ India:
+
++ No. of vertices: 62
++ Time to decompose: 3516 \(\pm\) 21 $\mu s$
++ Time to merge: 160 $\pm$ 21 $\mu s$
++ No. of polygons before merging: 29
++ No. of polygons after merging: 22
+*** India:
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/india_undec.png @ 2023-03-23 23:24:14
 [[file:images/india_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/india_unm.png @ 2023-03-23 23:24:36
 [[file:images/india_unm.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/india_me.png @ 2023-03-23 23:25:07
 [[file:images/india_me.png]]
-+ Mongolia:
+
++ No. of vertices: 62
++ Time to decompose: 3516 \(\pm\) 21 $\mu s$
++ Time to merge: 160 $\pm$ 21 $\mu s$
++ No. of polygons before merging: 29
++ No. of polygons after merging: 22
+*** Mongolia:
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/mong_undec.png @ 2023-03-23 23:24:14
 [[file:images/mong_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/mong_unm.png @ 2023-03-23 23:24:36
 [[file:images/mong_unm.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/mong_me.png @ 2023-03-23 23:25:07
 [[file:images/mong_me.png]]
-+ poly2:
+
++ No. of vertices: 62
++ Time to decompose: 3516 \(\pm\) 21 $\mu s$
++ Time to merge: 160 $\pm$ 21 $\mu s$
++ No. of polygons before merging: 29
++ No. of polygons after merging: 22
+*** poly2:
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/poly2_undec.png @ 2023-03-23 23:24:14
 [[file:images/poly2_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/poly2_unm.png @ 2023-03-23 23:24:36
 [[file:images/poly2_unm.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/poly2_me.png @ 2023-03-23 23:25:07
 [[file:images/poly2_me.png]]
-+ Romania:
+
++ No. of vertices: 62
++ Time to decompose: 3516 \(\pm\) 21 $\mu s$
++ Time to merge: 160 $\pm$ 21 $\mu s$
++ No. of polygons before merging: 29
++ No. of polygons after merging: 22
+*** Romania:
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/romania_undec.png @ 2023-03-23 23:24:14
 [[file:images/romania_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/romania_unm.png @ 2023-03-23 23:24:36
 [[file:images/romania_unm.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/romania_me.png @ 2023-03-23 23:25:07
 [[file:images/romania_me.png]]
-+ Snake:
+
++ No. of vertices: 62
++ Time to decompose: 3516 \(\pm\) 21 $\mu s$
++ Time to merge: 160 $\pm$ 21 $\mu s$
++ No. of polygons before merging: 29
++ No. of polygons after merging: 22
+*** Snake:
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/snake_undec.png @ 2023-03-23 23:24:14
 [[file:images/snake_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/snake_unm.png @ 2023-03-23 23:24:36
 [[file:images/snake_unm.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/snake_me.png @ 2023-03-23 23:25:07
 [[file:images/snake_me.png]]
-+ Star:
+
++ No. of vertices: 62
++ Time to decompose: 3516 \(\pm\) 21 $\mu s$
++ Time to merge: 160 $\pm$ 21 $\mu s$
++ No. of polygons before merging: 29
++ No. of polygons after merging: 22
+*** Star:
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/star_undec.png @ 2023-03-23 23:24:14
 [[file:images/star_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/star_unm.png @ 2023-03-23 23:24:36
 [[file:images/star_unm.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/star_me.png @ 2023-03-23 23:25:07
 [[file:images/star_me.png]]
-+ test2:
+
++ No. of vertices: 62
++ Time to decompose: 3516 \(\pm\) 21 $\mu s$
++ Time to merge: 160 $\pm$ 21 $\mu s$
++ No. of polygons before merging: 29
++ No. of polygons after merging: 22
+*** test2:
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/test2_undec.png @ 2023-03-23 23:24:14
 [[file:images/test2_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/test2_unm.png @ 2023-03-23 23:24:36
 [[file:images/test2_unm.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/test2_me.png @ 2023-03-23 23:25:07
 [[file:images/test2_me.png]]
+
++ No. of vertices: 62
++ Time to decompose: 3516 \(\pm\) 21 $\mu s$
++ Time to merge: 160 $\pm$ 21 $\mu s$
++ No. of polygons before merging: 29
++ No. of polygons after merging: 22

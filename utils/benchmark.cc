@@ -92,7 +92,7 @@ auto main() -> int {
         auto merge_mean =
             std::accumulate(merge_times.begin(), merge_times.end(), (u128)0) /
             merge_times.size();
-        auto merge_deviation = std_deviation(decomp_times, decomp_mean);
+        auto merge_deviation = std_deviation(merge_times, merge_mean);
         os << (u64)merge_mean << "±" << (u64)merge_deviation << ",";
         auto after_merge_polygons = count_polygons(merge(decompdata)); //
         os << before_merge_polygons << "," << after_merge_polygons << std::endl;
