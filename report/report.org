@@ -5,7 +5,7 @@
 * Problem statement
 Given an arbitrary polygon, decompose it into a set of convex polygons. We have been given the following paper to implement:
 Algorithms for the decomposition of a polygon into convex polygons, European Journal of Operational Research, 121(2), 330-342.
-The paper describes three different algorithms for the decomposition of the polygon, we have implement the $MP1$ algorithm as part of this assignment as well as the merging part that follows.
+The paper describes three different algorithms for the decomposition of the polygon, we have implement the \(MP1\) algorithm as part of this assignment as well as the merging part that follows.
 
 * DCEL: Doubly Connected Edge List
 We have used the DCEL data structure to store our decomposed polygon. DCEL consists of three main sub-data-structures, namely
@@ -31,9 +31,9 @@ A face contains a pointer to any one of the representative edges of the face (if
 * Decomposition
 ** Terminology
 *** Notch
-Angle between 3 points $a,b,c$ is said to be a notch if it is greater than $180 \degree$
+Angle between 3 points \(a,b,c\) is said to be a notch if it is greater than \(180 \degree\)
 *** LPVS
-$LPVS(P,S)$ is the list of notches enclosed in $P \setminus L$
+\(LPVS(P,S)\) is the list of notches enclosed in \(P \setminus L\)
 *** VTR
 Intermediate polygon from which we need to remove
 + Notches
@@ -42,110 +42,110 @@ Intermediate polygon from which we need to remove
 The algorithm relies on successive adding of vertices until the polygon formed by the vertices is not convex. When we cannot add any points to the polygon, we check if any notches are enclosed in the rectangle of minimum area formed by the points added so far. If no notches are present, we create a new polygon by splitting the face of the existing polygon and continue to work on the other half of the newly formed polygon until the number of vertices in our list falls below or equal to -  this is the halting condition of the decomposition algorithm. If, in intermediate stages, we notice that notches are present in the rectangle, we remove the notches and the last point of the polygon until we reach a condition where the diagonal formed by the first and the last point does not enclose any other point. We start from the next vertex if we cannot make the polygon.
 ** Time complexity analysis of helper functions
 *** ~angle(a,b,c)~: Given three vertices, find the angle between them
-Returns the angle swept by line segment $ba$ over $bc$ counterclockwise. For finding the angle, we calculate the magnitudes of $\vec{ba}$ and $\vec{bc}$, and their dot and cross products. We then return different values depending on the sign of the dot and cross products. The time complexity is $\mathcal{O}(1)$
+Returns the angle swept by line segment \(ba\) over \(bc\) counterclockwise. For finding the angle, we calculate the magnitudes of \(\vec{ba}\) and \(\vec{bc}\), and their dot and cross products. We then return different values depending on the sign of the dot and cross products. The time complexity is \(\mathcal{O}(1)\)
 *** ~get_notches~: Given a polygon, return a list of notches
-We iterate over the vertices of the polygon in clockwise order, checking if the angle $v_{i-1},v_i,v_{i+1}$ (where $v_i$ is the current vertex) is reflex. If the angle is reflex, we add it to the list of notches. Finding the angle takes constant time, hence the time complexity for getting all the notches is $\mathcal{O}(n)$ where $n$ is the number of vertices in the polygon.
+We iterate over the vertices of the polygon in clockwise order, checking if the angle \(v_{i-1},v_i,v_{i+1}\) (where \(v_i\) is the current vertex) is reflex. If the angle is reflex, we add it to the list of notches. Finding the angle takes constant time, hence the time complexity for getting all the notches is \(\mathcal{O}(n)\) where \(n\) is the number of vertices in the polygon.
 *** ~split_face~: Given a diagonal and a face, split the face at the diagonal
-We iterate over the edges of the face and get the neighbouring edges incident to the diagonal vertices. We do the necessary updates to the =next= and =previous= of all the necessary edges. We then create a new face and update its edges so that their left face points to this face. Finally, we return the newly formed face. The time complexity for this process is $\mathcal{O}(n)$ where $n$ is the number of vertices in the polygon due to the linear nature of both the processes.
+We iterate over the edges of the face and get the neighbouring edges incident to the diagonal vertices. We do the necessary updates to the =next= and =previous= of all the necessary edges. We then create a new face and update its edges so that their left face points to this face. Finally, we return the newly formed face. The time complexity for this process is \(\mathcal{O}(n)\) where \(n\) is the number of vertices in the polygon due to the linear nature of both the processes.
 *** ~merge_face~: Given two faces, merge and return their combination
-We iterate over edges of the first face to find the diagonal between the two faces and perform the necessary updates in the edges. After updation, the left faces of all the edges are updated to the first face and the first face is returned. The time complexity is $\mathcal{O}(n)$ where $n$ is the number of vertices in the polygon.
-*** =get_LPVS=: Given a list of notches, find the ones in the polygon made by points in $P \setminus L_m$
-We iterate over all the notches, and check whether they are present in the list $L_m$ (the polygon being made in the $m^{th}$ iteration) and not in $P$ (the undecomposed polygon we are currently working on). The time complexity is $\mathcal{O}(n^2)$ as we have to iterate over $L_m$ and $P$ for every notch.
+We iterate over edges of the first face to find the diagonal between the two faces and perform the necessary updates in the edges. After updation, the left faces of all the edges are updated to the first face and the first face is returned. The time complexity is \(\mathcal{O}(n)\) where \(n\) is the number of vertices in the polygon.
+*** =get_LPVS=: Given a list of notches, find the ones in the polygon made by points in \(P \setminus L_m\)
+We iterate over all the notches, and check whether they are present in the list \(L_m\) (the polygon being made in the \(m^{th}\) iteration) and not in \(P\) (the undecomposed polygon we are currently working on). The time complexity is \( \mathcal{O}(n^2) \) as we have to iterate over \(L_m\) and \(P\) for every notch.
 *** =inside_polygon=: Check whether a point lies inside a polygon
 We iterate over the edges in clockwise order. Every time we find an edge one of whose endpoints is above the given point and the other below, and the point is to the right of the edge, we flip a boolean flag.
-This can be done in $\mathcal{O}(n)$.
+This can be done in \(\mathcal{O}(n)\).
 * Merging
 ** Terminology
 *** LDP
-LDP is an ordered list of boolean flags, $LDP[i]=true$ means that the polygon with index $i$ is one of the definitive polygons of the partition after the merging process.
+LDP is an ordered list of boolean flags, \(LDP[i]=true\) means that the polygon with index \(i\) is one of the definitive polygons of the partition after the merging process.
 *** LUP
-LUP is an ordered list of integers, $LUP[i]= j$ means that the polygon with index $i$ is part of the polygon with index $j$.
+LUP is an ordered list of integers, \(LUP[i]= j\) means that the polygon with index \(i\) is part of the polygon with index \(j\).
 *** LLE
 LLE is a list containing the diagonals of the partition.
 ** Algorithm
 We iterate over the list of diagonals (i.e. LLE) and check whether removing the diagonal between two faces disturbs the convexity of the structure. If it does not, then we merge the two faces and update the LDP and LUP lists.
 * Benchmarks and Results
  + Algeria:
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/alg_undec.png @ 2023-03-23 23:24:14
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/alg_undec.png @ 2023-03-23 23:24:14
 [[file:images/alg_undec.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/alg_unm.png @ 2023-03-23 23:24:36
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/alg_unm.png @ 2023-03-23 23:24:36
 [[file:images/alg_unm.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/alg_me.png @ 2023-03-23 23:25:07
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/alg_me.png @ 2023-03-23 23:25:07
 [[file:images/alg_me.png]]
 + Comb:
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/comb_undec.png @ 2023-03-23 23:24:14
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/comb_undec.png @ 2023-03-23 23:24:14
 [[file:images/comb_undec.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/comb_unm.png @ 2023-03-23 23:24:36
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/comb_unm.png @ 2023-03-23 23:24:36
 [[file:images/comb_unm.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/comb_me.png @ 2023-03-23 23:25:07
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/comb_me.png @ 2023-03-23 23:25:07
 [[file:images/comb_me.png]]
 + Greenland:
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/greenland_undec.png @ 2023-03-23 23:24:14
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/greenland_undec.png @ 2023-03-23 23:24:14
 [[file:images/greenland_undec.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/greenland_unm.png @ 2023-03-23 23:24:36
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/greenland_unm.png @ 2023-03-23 23:24:36
 [[file:images/greenland_unm.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/greenland_me.png @ 2023-03-23 23:25:07
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/greenland_me.png @ 2023-03-23 23:25:07
 [[file:images/greenland_me.png]]
 + Hand:
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/hand_undec.png @ 2023-03-23 23:24:14
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/hand_undec.png @ 2023-03-23 23:24:14
 [[file:images/hand_undec.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/hand_unm.png @ 2023-03-23 23:24:36
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/hand_unm.png @ 2023-03-23 23:24:36
 [[file:images/hand_unm.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/hand_me.png @ 2023-03-23 23:25:07
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/hand_me.png @ 2023-03-23 23:25:07
 [[file:images/hand_me.png]]
 + i18:
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/i18_undec.png @ 2023-03-23 23:24:14
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/i18_undec.png @ 2023-03-23 23:24:14
 [[file:images/i18_undec.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/i18_unm.png @ 2023-03-23 23:24:36
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/i18_unm.png @ 2023-03-23 23:24:36
 [[file:images/i18_unm.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/i18_me.png @ 2023-03-23 23:25:07
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/i18_me.png @ 2023-03-23 23:25:07
 [[file:images/i18_me.png]]
 + India:
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/india_undec.png @ 2023-03-23 23:24:14
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/india_undec.png @ 2023-03-23 23:24:14
 [[file:images/india_undec.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/india_unm.png @ 2023-03-23 23:24:36
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/india_unm.png @ 2023-03-23 23:24:36
 [[file:images/india_unm.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/india_me.png @ 2023-03-23 23:25:07
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/india_me.png @ 2023-03-23 23:25:07
 [[file:images/india_me.png]]
 + Mongolia:
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/mong_undec.png @ 2023-03-23 23:24:14
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/mong_undec.png @ 2023-03-23 23:24:14
 [[file:images/mong_undec.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/mong_unm.png @ 2023-03-23 23:24:36
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/mong_unm.png @ 2023-03-23 23:24:36
 [[file:images/mong_unm.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/mong_me.png @ 2023-03-23 23:25:07
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/mong_me.png @ 2023-03-23 23:25:07
 [[file:images/mong_me.png]]
 + poly2:
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/poly2_undec.png @ 2023-03-23 23:24:14
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/poly2_undec.png @ 2023-03-23 23:24:14
 [[file:images/poly2_undec.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/poly2_unm.png @ 2023-03-23 23:24:36
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/poly2_unm.png @ 2023-03-23 23:24:36
 [[file:images/poly2_unm.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/poly2_me.png @ 2023-03-23 23:25:07
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/poly2_me.png @ 2023-03-23 23:25:07
 [[file:images/poly2_me.png]]
 + Romania:
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/romania_undec.png @ 2023-03-23 23:24:14
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/romania_undec.png @ 2023-03-23 23:24:14
 [[file:images/romania_undec.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/romania_unm.png @ 2023-03-23 23:24:36
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/romania_unm.png @ 2023-03-23 23:24:36
 [[file:images/romania_unm.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/romania_me.png @ 2023-03-23 23:25:07
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/romania_me.png @ 2023-03-23 23:25:07
 [[file:images/romania_me.png]]
 + Snake:
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/snake_undec.png @ 2023-03-23 23:24:14
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/snake_undec.png @ 2023-03-23 23:24:14
 [[file:images/snake_undec.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/snake_unm.png @ 2023-03-23 23:24:36
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/snake_unm.png @ 2023-03-23 23:24:36
 [[file:images/snake_unm.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/snake_me.png @ 2023-03-23 23:25:07
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/snake_me.png @ 2023-03-23 23:25:07
 [[file:images/snake_me.png]]
 + Star:
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/star_undec.png @ 2023-03-23 23:24:14
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/star_undec.png @ 2023-03-23 23:24:14
 [[file:images/star_undec.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/star_unm.png @ 2023-03-23 23:24:36
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/star_unm.png @ 2023-03-23 23:24:36
 [[file:images/star_unm.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/star_me.png @ 2023-03-23 23:25:07
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/star_me.png @ 2023-03-23 23:25:07
 [[file:images/star_me.png]]
 + test2:
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/test2_undec.png @ 2023-03-23 23:24:14
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/test2_undec.png @ 2023-03-23 23:24:14
 [[file:images/test2_undec.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/test2_unm.png @ 2023-03-23 23:24:36
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/test2_unm.png @ 2023-03-23 23:24:36
 [[file:images/test2_unm.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/benchmarks/test2_me.png @ 2023-03-23 23:25:07
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/test2_me.png @ 2023-03-23 23:25:07
 [[file:images/test2_me.png]]
