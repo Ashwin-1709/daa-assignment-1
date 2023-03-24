@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-03-24 Fri 19:14 -->
+<!-- 2023-03-24 Fri 19:57 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CS F364 Assignment 1</title>
@@ -202,65 +202,65 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf30af67">1. Problem statement</a></li>
-<li><a href="#org174e6a9">2. DCEL: Doubly Connected Edge List</a>
+<li><a href="#orga832e27">1. Problem statement</a></li>
+<li><a href="#org2a14c61">2. DCEL: Doubly Connected Edge List</a>
 <ul>
-<li><a href="#orgc4ae0b6">2.1. Polygon</a></li>
-<li><a href="#org6638cc0">2.2. Vertex</a></li>
-<li><a href="#orgccb4a3c">2.3. Edge</a></li>
-<li><a href="#org808c0b4">2.4. Face</a></li>
+<li><a href="#orgaed5ebb">2.1. Polygon</a></li>
+<li><a href="#org35247d7">2.2. Vertex</a></li>
+<li><a href="#orgcfce66e">2.3. Edge</a></li>
+<li><a href="#org29622a8">2.4. Face</a></li>
 </ul>
 </li>
-<li><a href="#org4d71402">3. Decomposition</a>
+<li><a href="#org39e31ff">3. Decomposition</a>
 <ul>
-<li><a href="#orgdbfd95b">3.1. Terminology</a>
+<li><a href="#org280163c">3.1. Terminology</a>
 <ul>
-<li><a href="#org696f1f2">3.1.1. Notch</a></li>
-<li><a href="#orgb034a74">3.1.2. LPVS</a></li>
-<li><a href="#org632f516">3.1.3. VTR</a></li>
+<li><a href="#org418677f">3.1.1. Notch</a></li>
+<li><a href="#org777c27f">3.1.2. LPVS</a></li>
+<li><a href="#org3ba02fa">3.1.3. VTR</a></li>
 </ul>
 </li>
-<li><a href="#org6c408bf">3.2. Algorithm</a></li>
-<li><a href="#org0b9c538">3.3. Time complexity analysis of helper functions</a>
+<li><a href="#org6586783">3.2. Algorithm</a></li>
+<li><a href="#orge7edb7f">3.3. Time complexity analysis of helper functions</a>
 <ul>
-<li><a href="#org102ae18">3.3.1. <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</a></li>
-<li><a href="#org223a04a">3.3.2. <code>get_notches</code>: Given a polygon, return a list of notches</a></li>
-<li><a href="#orgbd9b7c8">3.3.3. <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</a></li>
-<li><a href="#org4af6964">3.3.4. <code>merge_face</code>: Given two faces, merge and return their combination</a></li>
-<li><a href="#org9d5ce81">3.3.5. <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in <img src="ltximg/report_168d405655b0d05881bd0d39d70338533f2f5411.svg" alt="\(P \setminus L_m\)" class="org-svg" /></a></li>
-<li><a href="#org97e3571">3.3.6. <code>inside_polygon</code>: Check whether a point lies inside a polygon</a></li>
+<li><a href="#org723530c">3.3.1. <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</a></li>
+<li><a href="#orga064685">3.3.2. <code>get_notches</code>: Given a polygon, return a list of notches</a></li>
+<li><a href="#org658c2ca">3.3.3. <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</a></li>
+<li><a href="#org2c59503">3.3.4. <code>merge_face</code>: Given two faces, merge and return their combination</a></li>
+<li><a href="#org77d7c2b">3.3.5. <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in <img src="ltximg/report_168d405655b0d05881bd0d39d70338533f2f5411.svg" alt="\(P \setminus L_m\)" class="org-svg" /></a></li>
+<li><a href="#org219e23e">3.3.6. <code>inside_polygon</code>: Check whether a point lies inside a polygon</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org8eb7d06">4. Merging</a>
+<li><a href="#org21aefac">4. Merging</a>
 <ul>
-<li><a href="#org98a64ff">4.1. Terminology</a>
+<li><a href="#orgc278096">4.1. Terminology</a>
 <ul>
-<li><a href="#orgee348cc">4.1.1. LDP</a></li>
-<li><a href="#org6077a06">4.1.2. LUP</a></li>
-<li><a href="#orgdaf9b56">4.1.3. LLE</a></li>
+<li><a href="#orgda5cc06">4.1.1. LDP</a></li>
+<li><a href="#orgab83525">4.1.2. LUP</a></li>
+<li><a href="#orga56a93f">4.1.3. LLE</a></li>
 </ul>
 </li>
-<li><a href="#org77cc3ab">4.2. Algorithm</a></li>
+<li><a href="#org7481230">4.2. Algorithm</a></li>
 </ul>
 </li>
-<li><a href="#org0c392e0">5. Benchmarks and Results</a>
+<li><a href="#orga8e24d2">5. Benchmarks and Results</a>
 <ul>
 <li>
 <ul>
-<li><a href="#orgf5da8ef">5.0.1. Algeria</a></li>
-<li><a href="#org24e1e68">5.0.2. Comb</a></li>
-<li><a href="#org82f859c">5.0.3. Greenland</a></li>
-<li><a href="#orgb347673">5.0.4. Hand</a></li>
-<li><a href="#orga291cc3">5.0.5. i18</a></li>
-<li><a href="#org34894a8">5.0.6. India</a></li>
-<li><a href="#org9af01b9">5.0.7. Mongolia</a></li>
-<li><a href="#org8e1adcf">5.0.8. poly2</a></li>
-<li><a href="#orgd646bff">5.0.9. Snake</a></li>
-<li><a href="#org6301488">5.0.10. Star</a></li>
-<li><a href="#org85be28f">5.0.11. test2</a></li>
-<li><a href="#org7b9ce19">5.0.12. Monteserrat</a></li>
+<li><a href="#org231cfc7">5.0.1. Algeria</a></li>
+<li><a href="#orgb451eac">5.0.2. Comb</a></li>
+<li><a href="#org2c7c09a">5.0.3. Greenland</a></li>
+<li><a href="#orgc984ff7">5.0.4. Hand</a></li>
+<li><a href="#orgb35689a">5.0.5. i18</a></li>
+<li><a href="#orgdd25f09">5.0.6. India</a></li>
+<li><a href="#org69e524c">5.0.7. Mongolia</a></li>
+<li><a href="#orgbfc4b87">5.0.8. poly2</a></li>
+<li><a href="#orgc0c53c2">5.0.9. Snake</a></li>
+<li><a href="#org4fc77a2">5.0.10. Star</a></li>
+<li><a href="#orgd29cc39">5.0.11. test2</a></li>
+<li><a href="#org40c21cd">5.0.12. Monteserrat</a></li>
 </ul>
 </li>
 </ul>
@@ -268,8 +268,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf30af67" class="outline-2">
-<h2 id="orgf30af67"><span class="section-number-2">1.</span> Problem statement</h2>
+<div id="outline-container-orga832e27" class="outline-2">
+<h2 id="orga832e27"><span class="section-number-2">1.</span> Problem statement</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Given an arbitrary polygon, decompose it into a set of convex polygons. We have been given the following paper to implement:
@@ -279,20 +279,20 @@ The paper describes three different algorithms for the decomposition of the poly
 </div>
 </div>
 
-<div id="outline-container-org174e6a9" class="outline-2">
-<h2 id="org174e6a9"><span class="section-number-2">2.</span> DCEL: Doubly Connected Edge List</h2>
+<div id="outline-container-org2a14c61" class="outline-2">
+<h2 id="org2a14c61"><span class="section-number-2">2.</span> DCEL: Doubly Connected Edge List</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 We have used the DCEL data structure to store our decomposed polygon. DCEL consists of three main sub-data-structures, namely
 Vertex, Edge and Face.
 </p>
 
-<div id="org6b7e8a0" class="figure">
+<div id="org8071fca" class="figure">
 <p><img src="images/dcel.png" alt="dcel.png" />
 </p>
 </div>
 
-<div id="org6fe6a0b" class="figure">
+<div id="orgb7401b9" class="figure">
 <p><img src="images/dcel_detailed.png" alt="dcel_detailed.png" />
 </p>
 </div>
@@ -301,24 +301,24 @@ Vertex, Edge and Face.
 (Images taken from <a href="https://www2.cs.sfu.ca/~binay/813.2011/DCEL.pdf">https://www2.cs.sfu.ca/~binay/813.2011/DCEL.pdf</a>)
 </p>
 </div>
-<div id="outline-container-orgc4ae0b6" class="outline-3">
-<h3 id="orgc4ae0b6"><span class="section-number-3">2.1.</span> Polygon</h3>
+<div id="outline-container-orgaed5ebb" class="outline-3">
+<h3 id="orgaed5ebb"><span class="section-number-3">2.1.</span> Polygon</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 A decomposed polygon is represented by the Polygon class, which contains a list of vertices of the original polygon in clockwise order, and two Faces which represent the outer and inner faces of the initial, undecomposed polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-org6638cc0" class="outline-3">
-<h3 id="org6638cc0"><span class="section-number-3">2.2.</span> Vertex</h3>
+<div id="outline-container-org35247d7" class="outline-3">
+<h3 id="org35247d7"><span class="section-number-3">2.2.</span> Vertex</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 A vertex contains the coordinates of the point and an IncidentEdge - an edge which originates at the vertex.
 </p>
 </div>
 </div>
-<div id="outline-container-orgccb4a3c" class="outline-3">
-<h3 id="orgccb4a3c"><span class="section-number-3">2.3.</span> Edge</h3>
+<div id="outline-container-orgcfce66e" class="outline-3">
+<h3 id="orgcfce66e"><span class="section-number-3">2.3.</span> Edge</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 An edge contains
@@ -331,8 +331,8 @@ An edge contains
 </ul>
 </div>
 </div>
-<div id="outline-container-org808c0b4" class="outline-3">
-<h3 id="org808c0b4"><span class="section-number-3">2.4.</span> Face</h3>
+<div id="outline-container-org29622a8" class="outline-3">
+<h3 id="org29622a8"><span class="section-number-3">2.4.</span> Face</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 A face contains a pointer to any one of the representative edges of the face (if we know one edge we can find all of them by traversing using the <code>next</code> field of the edge)
@@ -340,32 +340,32 @@ A face contains a pointer to any one of the representative edges of the face (if
 </div>
 </div>
 </div>
-<div id="outline-container-org4d71402" class="outline-2">
-<h2 id="org4d71402"><span class="section-number-2">3.</span> Decomposition</h2>
+<div id="outline-container-org39e31ff" class="outline-2">
+<h2 id="org39e31ff"><span class="section-number-2">3.</span> Decomposition</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgdbfd95b" class="outline-3">
-<h3 id="orgdbfd95b"><span class="section-number-3">3.1.</span> Terminology</h3>
+<div id="outline-container-org280163c" class="outline-3">
+<h3 id="org280163c"><span class="section-number-3">3.1.</span> Terminology</h3>
 <div class="outline-text-3" id="text-3-1">
 </div>
-<div id="outline-container-org696f1f2" class="outline-4">
-<h4 id="org696f1f2"><span class="section-number-4">3.1.1.</span> Notch</h4>
+<div id="outline-container-org418677f" class="outline-4">
+<h4 id="org418677f"><span class="section-number-4">3.1.1.</span> Notch</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <p>
 Angle between 3 points <img src="ltximg/report_4c3dfedbfc7e18b8b1b20ada6089bedca076c3ec.svg" alt="\(a,b,c\)" class="org-svg" /> is said to be a notch if it is greater than <img src="ltximg/report_c445cef998698f899600154a00ce82e85afbbb44.svg" alt="\(180 \degree\)" class="org-svg" />
 </p>
 </div>
 </div>
-<div id="outline-container-orgb034a74" class="outline-4">
-<h4 id="orgb034a74"><span class="section-number-4">3.1.2.</span> LPVS</h4>
+<div id="outline-container-org777c27f" class="outline-4">
+<h4 id="org777c27f"><span class="section-number-4">3.1.2.</span> LPVS</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <p>
 <img src="ltximg/report_07f3b8a54ff00a8c1d167b4bdfba6c5785b81729.svg" alt="\(LPVS(P,S)\)" class="org-svg" /> is the list of notches enclosed in <img src="ltximg/report_06437bf312f016dfafc344427766ec1cbda83add.svg" alt="\(P \setminus L\)" class="org-svg" />
 </p>
 </div>
 </div>
-<div id="outline-container-org632f516" class="outline-4">
-<h4 id="org632f516"><span class="section-number-4">3.1.3.</span> VTR</h4>
+<div id="outline-container-org3ba02fa" class="outline-4">
+<h4 id="org3ba02fa"><span class="section-number-4">3.1.3.</span> VTR</h4>
 <div class="outline-text-4" id="text-3-1-3">
 <p>
 Intermediate polygon from which we need to remove
@@ -377,60 +377,60 @@ Intermediate polygon from which we need to remove
 </div>
 </div>
 </div>
-<div id="outline-container-org6c408bf" class="outline-3">
-<h3 id="org6c408bf"><span class="section-number-3">3.2.</span> Algorithm</h3>
+<div id="outline-container-org6586783" class="outline-3">
+<h3 id="org6586783"><span class="section-number-3">3.2.</span> Algorithm</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 The algorithm relies on successive adding of vertices until the polygon formed by the vertices is not convex. When we cannot add any points to the polygon, we check if any notches are enclosed in the rectangle of minimum area formed by the points added so far. If no notches are present, we create a new polygon by splitting the face of the existing polygon and continue to work on the other half of the newly formed polygon until the number of vertices in our list falls below or equal to -  this is the halting condition of the decomposition algorithm. If, in intermediate stages, we notice that notches are present in the rectangle, we remove the notches and the last point of the polygon until we reach a condition where the diagonal formed by the first and the last point does not enclose any other point. We start from the next vertex if we cannot make the polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-org0b9c538" class="outline-3">
-<h3 id="org0b9c538"><span class="section-number-3">3.3.</span> Time complexity analysis of helper functions</h3>
+<div id="outline-container-orge7edb7f" class="outline-3">
+<h3 id="orge7edb7f"><span class="section-number-3">3.3.</span> Time complexity analysis of helper functions</h3>
 <div class="outline-text-3" id="text-3-3">
 </div>
-<div id="outline-container-org102ae18" class="outline-4">
-<h4 id="org102ae18"><span class="section-number-4">3.3.1.</span> <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</h4>
+<div id="outline-container-org723530c" class="outline-4">
+<h4 id="org723530c"><span class="section-number-4">3.3.1.</span> <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <p>
 Returns the angle swept by line segment <img src="ltximg/report_491923e73e9082582f4f3ba5a4222ec0fcd7dcba.svg" alt="\(ba\)" class="org-svg" /> over <img src="ltximg/report_1418ac4edf46f00b539cbfa26f687fefdbbe214a.svg" alt="\(bc\)" class="org-svg" /> counterclockwise. For finding the angle, we calculate the magnitudes of <img src="ltximg/report_987d25698c5911222f818b1398d26f1eb75f4022.svg" alt="\(\vec{ba}\)" class="org-svg" /> and <img src="ltximg/report_aa83a9e211260583227d298f03af2acfe108853e.svg" alt="\(\vec{bc}\)" class="org-svg" />, and their dot and cross products. We then return different values depending on the sign of the dot and cross products. The time complexity is <img src="ltximg/report_5086a20bff22f6cef9098d2ad957b7dfebf3a1bc.svg" alt="\(\mathcal{O}(1)\)" class="org-svg" />
 </p>
 </div>
 </div>
-<div id="outline-container-org223a04a" class="outline-4">
-<h4 id="org223a04a"><span class="section-number-4">3.3.2.</span> <code>get_notches</code>: Given a polygon, return a list of notches</h4>
+<div id="outline-container-orga064685" class="outline-4">
+<h4 id="orga064685"><span class="section-number-4">3.3.2.</span> <code>get_notches</code>: Given a polygon, return a list of notches</h4>
 <div class="outline-text-4" id="text-3-3-2">
 <p>
 We iterate over the vertices of the polygon in clockwise order, checking if the angle <img src="ltximg/report_5e2fab8b5344a5998b2e152b7761ff6be924ef99.svg" alt="\(v_{i-1},v_i,v_{i+1}\)" class="org-svg" /> (where <img src="ltximg/report_a2e23f9d5e57ab2b8ac2682dcecc3a5e9fc7fe9a.svg" alt="\(v_i\)" class="org-svg" /> is the current vertex) is reflex. If the angle is reflex, we add it to the list of notches. Finding the angle takes constant time, hence the time complexity for getting all the notches is <img src="ltximg/report_f34fdd723595e1a626e9b3a4c4c63665c5ce89a4.svg" alt="\(\mathcal{O}(n)\)" class="org-svg" /> where <img src="ltximg/report_974d16a2800caed43ba80da4db121cd576ca4322.svg" alt="\(n\)" class="org-svg" /> is the number of vertices in the polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-orgbd9b7c8" class="outline-4">
-<h4 id="orgbd9b7c8"><span class="section-number-4">3.3.3.</span> <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</h4>
+<div id="outline-container-org658c2ca" class="outline-4">
+<h4 id="org658c2ca"><span class="section-number-4">3.3.3.</span> <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</h4>
 <div class="outline-text-4" id="text-3-3-3">
 <p>
 We iterate over the edges of the face and get the neighbouring edges incident to the diagonal vertices. We do the necessary updates to the <code>next</code> and <code>previous</code> of all the necessary edges. We then create a new face and update its edges so that their left face points to this face. Finally, we return the newly formed face. The time complexity for this process is <img src="ltximg/report_f34fdd723595e1a626e9b3a4c4c63665c5ce89a4.svg" alt="\(\mathcal{O}(n)\)" class="org-svg" /> where <img src="ltximg/report_974d16a2800caed43ba80da4db121cd576ca4322.svg" alt="\(n\)" class="org-svg" /> is the number of vertices in the polygon due to the linear nature of both the processes.
 </p>
 </div>
 </div>
-<div id="outline-container-org4af6964" class="outline-4">
-<h4 id="org4af6964"><span class="section-number-4">3.3.4.</span> <code>merge_face</code>: Given two faces, merge and return their combination</h4>
+<div id="outline-container-org2c59503" class="outline-4">
+<h4 id="org2c59503"><span class="section-number-4">3.3.4.</span> <code>merge_face</code>: Given two faces, merge and return their combination</h4>
 <div class="outline-text-4" id="text-3-3-4">
 <p>
 We iterate over edges of the first face to find the diagonal between the two faces and perform the necessary updates in the edges. After updation, the left faces of all the edges are updated to the first face and the first face is returned. The time complexity is <img src="ltximg/report_f34fdd723595e1a626e9b3a4c4c63665c5ce89a4.svg" alt="\(\mathcal{O}(n)\)" class="org-svg" /> where <img src="ltximg/report_974d16a2800caed43ba80da4db121cd576ca4322.svg" alt="\(n\)" class="org-svg" /> is the number of vertices in the polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-org9d5ce81" class="outline-4">
-<h4 id="org9d5ce81"><span class="section-number-4">3.3.5.</span> <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in <img src="ltximg/report_168d405655b0d05881bd0d39d70338533f2f5411.svg" alt="\(P \setminus L_m\)" class="org-svg" /></h4>
+<div id="outline-container-org77d7c2b" class="outline-4">
+<h4 id="org77d7c2b"><span class="section-number-4">3.3.5.</span> <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in <img src="ltximg/report_168d405655b0d05881bd0d39d70338533f2f5411.svg" alt="\(P \setminus L_m\)" class="org-svg" /></h4>
 <div class="outline-text-4" id="text-3-3-5">
 <p>
 We iterate over all the notches, and check whether they are present in the list <img src="ltximg/report_c36a4ff95bab849ba9ef53358755c69d51deade4.svg" alt="\(L_m\)" class="org-svg" /> (the polygon being made in the <img src="ltximg/report_a1611b921ea2dc82ac466871bf72431891d8f031.svg" alt="\(m^{th}\)" class="org-svg" /> iteration) and not in <img src="ltximg/report_cc86f01d14a4a89b5c9cabdf01fd1b71604ee7ef.svg" alt="\(P\)" class="org-svg" /> (the undecomposed polygon we are currently working on). The time complexity is <img src="ltximg/report_741d2de4ac3058065bb4c1c7e1e222bae3423548.svg" alt="\( \mathcal{O}(n^2) \)" class="org-svg" /> as we have to iterate over <img src="ltximg/report_c36a4ff95bab849ba9ef53358755c69d51deade4.svg" alt="\(L_m\)" class="org-svg" /> and <img src="ltximg/report_cc86f01d14a4a89b5c9cabdf01fd1b71604ee7ef.svg" alt="\(P\)" class="org-svg" /> for every notch.
 </p>
 </div>
 </div>
-<div id="outline-container-org97e3571" class="outline-4">
-<h4 id="org97e3571"><span class="section-number-4">3.3.6.</span> <code>inside_polygon</code>: Check whether a point lies inside a polygon</h4>
+<div id="outline-container-org219e23e" class="outline-4">
+<h4 id="org219e23e"><span class="section-number-4">3.3.6.</span> <code>inside_polygon</code>: Check whether a point lies inside a polygon</h4>
 <div class="outline-text-4" id="text-3-3-6">
 <p>
 We iterate over the edges in clockwise order. Every time we find an edge one of whose endpoints is above the given point and the other below, and the point is to the right of the edge, we flip a boolean flag.
@@ -440,32 +440,32 @@ This can be done in <img src="ltximg/report_f34fdd723595e1a626e9b3a4c4c63665c5ce
 </div>
 </div>
 </div>
-<div id="outline-container-org8eb7d06" class="outline-2">
-<h2 id="org8eb7d06"><span class="section-number-2">4.</span> Merging</h2>
+<div id="outline-container-org21aefac" class="outline-2">
+<h2 id="org21aefac"><span class="section-number-2">4.</span> Merging</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org98a64ff" class="outline-3">
-<h3 id="org98a64ff"><span class="section-number-3">4.1.</span> Terminology</h3>
+<div id="outline-container-orgc278096" class="outline-3">
+<h3 id="orgc278096"><span class="section-number-3">4.1.</span> Terminology</h3>
 <div class="outline-text-3" id="text-4-1">
 </div>
-<div id="outline-container-orgee348cc" class="outline-4">
-<h4 id="orgee348cc"><span class="section-number-4">4.1.1.</span> LDP</h4>
+<div id="outline-container-orgda5cc06" class="outline-4">
+<h4 id="orgda5cc06"><span class="section-number-4">4.1.1.</span> LDP</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <p>
 LDP is an ordered list of boolean flags, <img src="ltximg/report_3bb2a05c56ae2f1f56fe13f37ea9ea1a32effe26.svg" alt="\(LDP[i]=true\)" class="org-svg" /> means that the polygon with index <img src="ltximg/report_6cf2f08af66400fd36f0183308ae35968f9ae29f.svg" alt="\(i\)" class="org-svg" /> is one of the definitive polygons of the partition after the merging process.
 </p>
 </div>
 </div>
-<div id="outline-container-org6077a06" class="outline-4">
-<h4 id="org6077a06"><span class="section-number-4">4.1.2.</span> LUP</h4>
+<div id="outline-container-orgab83525" class="outline-4">
+<h4 id="orgab83525"><span class="section-number-4">4.1.2.</span> LUP</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <p>
 LUP is an ordered list of integers, <img src="ltximg/report_bd75a7339ff4787451986c8d2935642f3d3f5e9e.svg" alt="\(LUP[i]= j\)" class="org-svg" /> means that the polygon with index <img src="ltximg/report_6cf2f08af66400fd36f0183308ae35968f9ae29f.svg" alt="\(i\)" class="org-svg" /> is part of the polygon with index <img src="ltximg/report_898523cb79968388d249b09fc91c9cb7961c11bf.svg" alt="\(j\)" class="org-svg" />.
 </p>
 </div>
 </div>
-<div id="outline-container-orgdaf9b56" class="outline-4">
-<h4 id="orgdaf9b56"><span class="section-number-4">4.1.3.</span> LLE</h4>
+<div id="outline-container-orga56a93f" class="outline-4">
+<h4 id="orga56a93f"><span class="section-number-4">4.1.3.</span> LLE</h4>
 <div class="outline-text-4" id="text-4-1-3">
 <p>
 LLE is a list containing the diagonals of the partition.
@@ -473,8 +473,8 @@ LLE is a list containing the diagonals of the partition.
 </div>
 </div>
 </div>
-<div id="outline-container-org77cc3ab" class="outline-3">
-<h3 id="org77cc3ab"><span class="section-number-3">4.2.</span> Algorithm</h3>
+<div id="outline-container-org7481230" class="outline-3">
+<h3 id="org7481230"><span class="section-number-3">4.2.</span> Algorithm</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 We iterate over the list of diagonals (i.e. LLE) and check whether removing the diagonal between two faces disturbs the convexity of the structure. If it does not, then we merge the two faces and update the LDP and LUP lists.
@@ -482,25 +482,25 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 </div>
 </div>
 </div>
-<div id="outline-container-org0c392e0" class="outline-2">
-<h2 id="org0c392e0"><span class="section-number-2">5.</span> Benchmarks and Results</h2>
+<div id="outline-container-orga8e24d2" class="outline-2">
+<h2 id="orga8e24d2"><span class="section-number-2">5.</span> Benchmarks and Results</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orgf5da8ef" class="outline-4">
-<h4 id="orgf5da8ef"><span class="section-number-4">5.0.1.</span> Algeria</h4>
+<div id="outline-container-org231cfc7" class="outline-4">
+<h4 id="org231cfc7"><span class="section-number-4">5.0.1.</span> Algeria</h4>
 <div class="outline-text-4" id="text-5-0-1">
 
-<div id="orgfa4b512" class="figure">
+<div id="orgfa72101" class="figure">
 <p><img src="images/alg_undec.png" alt="alg_undec.png" />
 </p>
 </div>
 
-<div id="org01e7eee" class="figure">
+<div id="org4f39a24" class="figure">
 <p><img src="images/alg_unm.png" alt="alg_unm.png" />
 </p>
 </div>
 
-<div id="org1694052" class="figure">
+<div id="org62070fe" class="figure">
 <p><img src="images/alg_me.png" alt="alg_me.png" />
 </p>
 </div>
@@ -515,21 +515,21 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 </div>
 </div>
 
-<div id="outline-container-org24e1e68" class="outline-4">
-<h4 id="org24e1e68"><span class="section-number-4">5.0.2.</span> Comb</h4>
+<div id="outline-container-orgb451eac" class="outline-4">
+<h4 id="orgb451eac"><span class="section-number-4">5.0.2.</span> Comb</h4>
 <div class="outline-text-4" id="text-5-0-2">
 
-<div id="org7755e6a" class="figure">
+<div id="org145ec14" class="figure">
 <p><img src="images/comb_undec.png" alt="comb_undec.png" />
 </p>
 </div>
 
-<div id="orgcc94958" class="figure">
+<div id="orga40e919" class="figure">
 <p><img src="images/comb_unm.png" alt="comb_unm.png" />
 </p>
 </div>
 
-<div id="org1c62f40" class="figure">
+<div id="org66fd3f0" class="figure">
 <p><img src="images/comb_me.png" alt="comb_me.png" />
 </p>
 </div>
@@ -543,21 +543,21 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 </ul>
 </div>
 </div>
-<div id="outline-container-org82f859c" class="outline-4">
-<h4 id="org82f859c"><span class="section-number-4">5.0.3.</span> Greenland</h4>
+<div id="outline-container-org2c7c09a" class="outline-4">
+<h4 id="org2c7c09a"><span class="section-number-4">5.0.3.</span> Greenland</h4>
 <div class="outline-text-4" id="text-5-0-3">
 
-<div id="org87494ed" class="figure">
+<div id="org3cf8e61" class="figure">
 <p><img src="images/greenland_undec.png" alt="greenland_undec.png" />
 </p>
 </div>
 
-<div id="org432d369" class="figure">
+<div id="orgacc4b12" class="figure">
 <p><img src="images/greenland_unm.png" alt="greenland_unm.png" />
 </p>
 </div>
 
-<div id="org774fd13" class="figure">
+<div id="org06304fb" class="figure">
 <p><img src="images/greenland_me.png" alt="greenland_me.png" />
 </p>
 </div>
@@ -571,21 +571,21 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb347673" class="outline-4">
-<h4 id="orgb347673"><span class="section-number-4">5.0.4.</span> Hand</h4>
+<div id="outline-container-orgc984ff7" class="outline-4">
+<h4 id="orgc984ff7"><span class="section-number-4">5.0.4.</span> Hand</h4>
 <div class="outline-text-4" id="text-5-0-4">
 
-<div id="orgb55ec91" class="figure">
+<div id="org63d14b0" class="figure">
 <p><img src="images/hand_undec.png" alt="hand_undec.png" />
 </p>
 </div>
 
-<div id="orge8c37dc" class="figure">
+<div id="org40e0cb9" class="figure">
 <p><img src="images/hand_unm.png" alt="hand_unm.png" />
 </p>
 </div>
 
-<div id="org1916176" class="figure">
+<div id="org9557a49" class="figure">
 <p><img src="images/hand_me.png" alt="hand_me.png" />
 </p>
 </div>
@@ -599,21 +599,21 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 </ul>
 </div>
 </div>
-<div id="outline-container-orga291cc3" class="outline-4">
-<h4 id="orga291cc3"><span class="section-number-4">5.0.5.</span> i18</h4>
+<div id="outline-container-orgb35689a" class="outline-4">
+<h4 id="orgb35689a"><span class="section-number-4">5.0.5.</span> i18</h4>
 <div class="outline-text-4" id="text-5-0-5">
 
-<div id="org71639b0" class="figure">
+<div id="orgb523cba" class="figure">
 <p><img src="images/i18_undec.png" alt="i18_undec.png" />
 </p>
 </div>
 
-<div id="orgfb479b3" class="figure">
+<div id="org1ccf73b" class="figure">
 <p><img src="images/i18_unm.png" alt="i18_unm.png" />
 </p>
 </div>
 
-<div id="orgfc47cc0" class="figure">
+<div id="org3106bbb" class="figure">
 <p><img src="images/i18_me.png" alt="i18_me.png" />
 </p>
 </div>
@@ -627,21 +627,21 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 </ul>
 </div>
 </div>
-<div id="outline-container-org34894a8" class="outline-4">
-<h4 id="org34894a8"><span class="section-number-4">5.0.6.</span> India</h4>
+<div id="outline-container-orgdd25f09" class="outline-4">
+<h4 id="orgdd25f09"><span class="section-number-4">5.0.6.</span> India</h4>
 <div class="outline-text-4" id="text-5-0-6">
 
-<div id="org9553441" class="figure">
+<div id="orgab8267f" class="figure">
 <p><img src="images/india_undec.png" alt="india_undec.png" />
 </p>
 </div>
 
-<div id="orgc0d7f97" class="figure">
+<div id="org79a5a11" class="figure">
 <p><img src="images/india_unm.png" alt="india_unm.png" />
 </p>
 </div>
 
-<div id="org994e6f8" class="figure">
+<div id="org17ce028" class="figure">
 <p><img src="images/india_me.png" alt="india_me.png" />
 </p>
 </div>
@@ -655,21 +655,21 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 </ul>
 </div>
 </div>
-<div id="outline-container-org9af01b9" class="outline-4">
-<h4 id="org9af01b9"><span class="section-number-4">5.0.7.</span> Mongolia</h4>
+<div id="outline-container-org69e524c" class="outline-4">
+<h4 id="org69e524c"><span class="section-number-4">5.0.7.</span> Mongolia</h4>
 <div class="outline-text-4" id="text-5-0-7">
 
-<div id="org7042cc6" class="figure">
+<div id="org4f03762" class="figure">
 <p><img src="images/mong_undec.png" alt="mong_undec.png" />
 </p>
 </div>
 
-<div id="orgdb162f5" class="figure">
+<div id="org76033ac" class="figure">
 <p><img src="images/mong_unm.png" alt="mong_unm.png" />
 </p>
 </div>
 
-<div id="org66f735d" class="figure">
+<div id="orga83f4e7" class="figure">
 <p><img src="images/mong_me.png" alt="mong_me.png" />
 </p>
 </div>
@@ -683,21 +683,21 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 </ul>
 </div>
 </div>
-<div id="outline-container-org8e1adcf" class="outline-4">
-<h4 id="org8e1adcf"><span class="section-number-4">5.0.8.</span> poly2</h4>
+<div id="outline-container-orgbfc4b87" class="outline-4">
+<h4 id="orgbfc4b87"><span class="section-number-4">5.0.8.</span> poly2</h4>
 <div class="outline-text-4" id="text-5-0-8">
 
-<div id="org7125a1b" class="figure">
+<div id="orgcd6c881" class="figure">
 <p><img src="images/poly2_undec.png" alt="poly2_undec.png" />
 </p>
 </div>
 
-<div id="org6ebc966" class="figure">
+<div id="org82fcef5" class="figure">
 <p><img src="images/poly2_unm.png" alt="poly2_unm.png" />
 </p>
 </div>
 
-<div id="org6116fe3" class="figure">
+<div id="orgbf721a2" class="figure">
 <p><img src="images/poly2_me.png" alt="poly2_me.png" />
 </p>
 </div>
@@ -711,21 +711,21 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd646bff" class="outline-4">
-<h4 id="orgd646bff"><span class="section-number-4">5.0.9.</span> Snake</h4>
+<div id="outline-container-orgc0c53c2" class="outline-4">
+<h4 id="orgc0c53c2"><span class="section-number-4">5.0.9.</span> Snake</h4>
 <div class="outline-text-4" id="text-5-0-9">
 
-<div id="org197cfb8" class="figure">
+<div id="orgc6ad516" class="figure">
 <p><img src="images/snake_undec.png" alt="snake_undec.png" />
 </p>
 </div>
 
-<div id="orgf165bb5" class="figure">
+<div id="org2506474" class="figure">
 <p><img src="images/snake_unm.png" alt="snake_unm.png" />
 </p>
 </div>
 
-<div id="orgfce5ec3" class="figure">
+<div id="org28494b9" class="figure">
 <p><img src="images/snake_me.png" alt="snake_me.png" />
 </p>
 </div>
@@ -739,21 +739,21 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 </ul>
 </div>
 </div>
-<div id="outline-container-org6301488" class="outline-4">
-<h4 id="org6301488"><span class="section-number-4">5.0.10.</span> Star</h4>
+<div id="outline-container-org4fc77a2" class="outline-4">
+<h4 id="org4fc77a2"><span class="section-number-4">5.0.10.</span> Star</h4>
 <div class="outline-text-4" id="text-5-0-10">
 
-<div id="org7edab3b" class="figure">
+<div id="org2b4424d" class="figure">
 <p><img src="images/star_undec.png" alt="star_undec.png" />
 </p>
 </div>
 
-<div id="org359b5d0" class="figure">
+<div id="orgb922398" class="figure">
 <p><img src="images/star_unm.png" alt="star_unm.png" />
 </p>
 </div>
 
-<div id="orga7c30b1" class="figure">
+<div id="org5b48c09" class="figure">
 <p><img src="images/star_me.png" alt="star_me.png" />
 </p>
 </div>
@@ -767,21 +767,21 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 </ul>
 </div>
 </div>
-<div id="outline-container-org85be28f" class="outline-4">
-<h4 id="org85be28f"><span class="section-number-4">5.0.11.</span> test2</h4>
+<div id="outline-container-orgd29cc39" class="outline-4">
+<h4 id="orgd29cc39"><span class="section-number-4">5.0.11.</span> test2</h4>
 <div class="outline-text-4" id="text-5-0-11">
 
-<div id="org3258591" class="figure">
+<div id="org16f9ef5" class="figure">
 <p><img src="images/test2_undec.png" alt="test2_undec.png" />
 </p>
 </div>
 
-<div id="org7504365" class="figure">
+<div id="orgcea2813" class="figure">
 <p><img src="images/test2_unm.png" alt="test2_unm.png" />
 </p>
 </div>
 
-<div id="org95b040e" class="figure">
+<div id="orga2439b6" class="figure">
 <p><img src="images/test2_me.png" alt="test2_me.png" />
 </p>
 </div>
@@ -795,21 +795,21 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 </ul>
 </div>
 </div>
-<div id="outline-container-org7b9ce19" class="outline-4">
-<h4 id="org7b9ce19"><span class="section-number-4">5.0.12.</span> Monteserrat</h4>
+<div id="outline-container-org40c21cd" class="outline-4">
+<h4 id="org40c21cd"><span class="section-number-4">5.0.12.</span> Monteserrat</h4>
 <div class="outline-text-4" id="text-5-0-12">
 
-<div id="org32a2f17" class="figure">
+<div id="org464cf28" class="figure">
 <p><img src="images/mons_undec.png" alt="mons_undec.png" />
 </p>
 </div>
 
-<div id="orgd924014" class="figure">
+<div id="orgb569af8" class="figure">
 <p><img src="images/mons_unm.png" alt="mons_unm.png" />
 </p>
 </div>
 
-<div id="orgc40c6ff" class="figure">
+<div id="org6fe60de" class="figure">
 <p><img src="images/mons_me.png" alt="mons_me.png" />
 </p>
 </div>
@@ -827,7 +827,7 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Chinmay Dalal (2020A7PS2060H), Ashwin Pugalia(2020A7PS1080H), Deep Chordia(2020A7PS2073H), Yash Ratnani(2020A7PS0039H)</p>
-<p class="date">Created: 2023-03-24 Fri 19:14</p>
+<p class="date">Created: 2023-03-24 Fri 19:57</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
