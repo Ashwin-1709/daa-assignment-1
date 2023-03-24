@@ -40,7 +40,7 @@ class Vertex {
     Point point; /*!< The coordinates of the Vertex, represented as a Point */
     usize index; /*!< The index of the Vertex */
     Edge *incident_edge; /*!< Edge originating at this Vertex*/
-    Vertex(Point point, usize index) : point(point), index(index) {}
+    Vertex(Point point_, usize index_) : point(point_), index(index_) {}
     /*!< Constructor taking Point and index */
 };
 
