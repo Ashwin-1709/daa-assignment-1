@@ -14,17 +14,17 @@ auto get_line(const Point &a, const Point &b) -> std::array<double, 3>;
 auto same_side_semiplane(const std::array<double, 3> &coef, const Point &a,
                          const Point &b) -> bool;
 auto next_vertex(const Vertex *vertex) -> Vertex *;
-auto next_vertex(Vertex *v, Face *f) -> Vertex *;
-auto prev_vertex(Vertex *v, Face *f) -> Vertex *;
+auto next_vertex(Vertex *vertex, Face *face) -> Vertex *;
+auto prev_vertex(Vertex *vertex, Face *face) -> Vertex *;
 auto check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
                  const Vertex *start, const Vertex *second) -> bool;
 void update_face(Edge *edge, Face *face);
 void enumerate_polygons(const std::set<Face *> &Polygons);
 auto split_face(Vertex *v1, Vertex *v2, Face *cur) -> Face *;
 auto is_collinear(const std::deque<Vertex *> &polygon) -> bool;
-auto is_collinear(Face *f) -> bool;
+auto is_collinear(Face *face) -> bool;
 auto is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch)
     -> bool;
-auto merge_face(Face *f1, Face *f2) -> Face *;
-auto is_convex(Vertex *v) -> bool;
+auto merge_face(Face *face1, Face *face2) -> Face *;
+auto is_convex(Vertex *vertex) -> bool;
 #endif // UTILS_H

@@ -8,7 +8,7 @@
 /// merging: see DecompData
 auto decompose(const Polygon &polygon) -> DecompData {
     // init
-    usize n = polygon.n_vertices;
+    usize n_vertices = polygon.n_vertices;
     std::deque<std::deque<Vertex *>> L;
 
     // Step 1: Initialising the list P of vertices in clockwise order
@@ -25,16 +25,17 @@ auto decompose(const Polygon &polygon) -> DecompData {
     Face *cur_polygon = polygon.inner_end;
     std::map<Face *, usize> face_id;
     std::map<usize, Face *> inv_face_id;
-    std::map<usize, bool> LDP;
-    std::map<usize, usize> LUP;
+    std::map<usize, bool> const LDP;
+    std::map<usize, usize> const LUP;
     usize cur_id = 0;
     face_id[cur_polygon] = cur_id++;
     inv_face_id[face_id[cur_polygon]] = cur_polygon;
     std::map<Vertex *, std::vector<std::pair<usize, Vertex *>>> LP;
     std::vector<std::array<Vertex *, 2>> LLE;
 
-    // Step 3: The decomposition continues till we are left with less than or equal to 3 vertices
-    while (n > 3) {
+    // Step 3: The decomposition continues till we are left with less than or
+    // equal to 3 vertices
+    while (n_vertices > 3) {
         usize i = 1;
         // 3.1: V1 <- Last(L[m - 1]) and V2 <- next(V1 , P)
         Vertex *v1 = L[m - 1].back();
@@ -46,17 +47,19 @@ auto decompose(const Polygon &polygon) -> DecompData {
         L.push_back(cur);
 
         // 3.3: Keep on adding vertices till we encounter a notch
-        while (L[m].size() < n and
+        while (L[m].size() < n_vertices and
                check_notch(P[i - 1], P[i], P[i + 1], v1, v2)) {
             L[m].push_back(P[i + 1]);
             i++;
         }
-        // 3.4: If there are more points to be explored => There has to be a notch which prevents us from adding more points
+        // 3.4: If there are more points to be explored => There has to be a
+        // notch which prevents us from adding more points
         if (L[m].size() != P.size()) {
             auto notch = get_notches(P);
             // 3.4.1: List of Notches present in P \ L[m]
             std::deque<Vertex *> LPVS = get_LPVS(notch, L[m], P);
-            // 3.4.2: While the notch creates a problem for us, we keep on removing points from our polygon
+            // 3.4.2: While the notch creates a problem for us, we keep on
+            // removing points from our polygon
             while (!LPVS.empty()) {
                 bool backward = false;
                 // Rectangle with minimum area which encloses L[m]
@@ -71,18 +74,20 @@ auto decompose(const Polygon &polygon) -> DecompData {
                         }
                     }
                     if (!LPVS.empty()) {
-                        // If the notch lies inside the polygon, we need to remove vertices lying on the right side of semiplane made by last and first vertex
+                        // If the notch lies inside the polygon, we need to
+                        // remove vertices lying on the right side of semiplane
+                        // made by last and first vertex
                         auto inside = is_inside_polygon(L[m], LPVS.front());
                         if (inside) {
                             std::deque<Vertex *> VTR;
                             auto line =
                                 get_line(v1->point, LPVS.front()->point);
                             auto *bck = L[m].back();
-                            for (auto *u : L[m]) {
-                                if (!same_side_semiplane(line, u->point,
+                            for (auto *vertex : L[m]) {
+                                if (!same_side_semiplane(line, vertex->point,
                                                          bck->point) or
-                                    u == v1) {
-                                    VTR.push_back(u);
+                                    vertex == v1) {
+                                    VTR.push_back(vertex);
                                 }
                             }
                             // Updated polygon after removal of vertices
@@ -100,10 +105,12 @@ auto decompose(const Polygon &polygon) -> DecompData {
             }
         }
 
-        // 3.5: If the last vertex added is not v2 => New Polygon formed with more than 2 vertices
+        // 3.5: If the last vertex added is not v2 => New Polygon formed with
+        // more than 2 vertices
         if (L[m].back() != v2) {
-            // If it does not include all the points => we need to split the polygon by making a diagonal
-            if (L[m].size() != n) {
+            // If it does not include all the points => we need to split the
+            // polygon by making a diagonal
+            if (L[m].size() != n_vertices) {
                 Face *new_polygon =
                     split_face(L[m].front(), L[m].back(), cur_polygon);
                 decomposed_polygons.insert(new_polygon);
@@ -130,9 +137,10 @@ auto decompose(const Polygon &polygon) -> DecompData {
             nxt_iter.push_back(first);
             P.swap(nxt_iter);
             // updating number of leftover vertices in current polygon
-            n = P.size();
+            n_vertices = P.size();
         } else {
-            // If we were unable to make a polygon, we skip over v1 and start from v2
+            // If we were unable to make a polygon, we skip over v1 and start
+            // from v2
             Vertex *first = L[m].front();
             Vertex *last = L[m].back();
             P.pop_front();
@@ -146,7 +154,7 @@ auto decompose(const Polygon &polygon) -> DecompData {
 
     for (const auto &faces : decomposed_polygons) {
         Edge *now = faces->edge;
-        usize id = face_id[faces];
+        usize const id = face_id[faces];
         do {
             if (now->next->origin != next_vertex(now->origin)) {
                 LP[now->origin].push_back({id, now->next->origin});

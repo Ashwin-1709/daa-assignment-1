@@ -43,7 +43,6 @@ file(GLOB visualize_src
 )
 
 file(GLOB benchmark_src
-  "${PROJECT_SOURCE_DIR}/src/dbg.cc"
   "${PROJECT_SOURCE_DIR}/src/dcel.cc"
   "${PROJECT_SOURCE_DIR}/src/decomp.cc"
   "${PROJECT_SOURCE_DIR}/src/merge.cc"
@@ -56,23 +55,6 @@ add_executable(visualize ${visualize_src})
 add_executable(benchmark ${benchmark_src})
 
 add_custom_command(TARGET polygon_decomp POST_BUILD COMMAND cmake -E copy ${CMAKE_BINARY_DIR}/compile_commands.json ${CMAKE_SOURCE_DIR}/compile_commands.json)
-
-enable_testing()
-
-add_executable(
-  test_dcel
-  src/utils.cc
-  src/dcel.cc
-  test/test_dcel.cc
-  test/dcel_fixture.cc
-)
-target_link_libraries(
-  test_dcel
-  GTest::gtest_main
-)
-
-include(GoogleTest)
-gtest_discover_tests(test_dcel)
 
 find_package(Doxygen
              REQUIRED dot

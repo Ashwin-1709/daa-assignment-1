@@ -1,13 +1,15 @@
-Polygon,Number of vertices,Time_for_decomposition(in microseconds),Time_for_merging(in microseconds),Number of decomposed polygon(before merging),Number of decompose
-india.txt,136,43854,826,75,54                                                                                                                                        
-romania.txt,1201,20367747,24691,532,422                                                                                                                              
-i18.txt,18,909,51,10,9                                                                                                                                               
-hand.txt,59,6996,142,25,19                                                                                                                                           
-pol2.txt,12,930,115,7,4                                                                                                                                              
-test2.txt,21,546,50,11,10                                                                                                                                            
-greenland.txt,132,24486,675,64,45                                                                                                                                    
-algeria.txt,62,5927,207,29,22                                                                                                                                        
-star.txt,10,418,63,6,5                                                                                                                                               
-comb.txt,10,356,47,5,5                                                                                                                                               
-snake.txt,12,413,68,6,6
-mongolia.txt,1495,41597653,30799,620,499                                                                                                                                              
+Name,No. of vertices,Time to decompose,Time to merge,Number of polygons before merging,Number of polygons after merging
+./hand_nodes.txt,59,3809±39,118±2,25,19
+./poly2.txt,12,148±2,31±1,7,4
+./algeria.txt,62,4029±28,155±1,29,22
+./hand.txt,59,3802±8,118±1,25,19
+./star.txt,10,125±1,20±0,6,5
+./comb.txt,10,109±1,15±0,5,5
+./i18.txt,18,555±2,41±0,10,9
+./test2.txt,21,535±2,37±0,11,10
+./star_nodes.txt,10,84±1,21±0,5,3
+./greenland.txt,132,26504±59,540±3,64,45
+./snake.txt,12,148±2,22±1,6,6
+./test_polygon1.txt,17,200±1,31±1,7,4
+./india.txt,136,46806±179,654±3,75,54
+./square_nodes.txt,4,14±0,2±0,1,1

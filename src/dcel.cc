@@ -8,7 +8,7 @@ Polygon::Polygon(const std::deque<Point> &point_list) {
     n_vertices = point_list.size();
     open_end = new Face();
     inner_end = new Face();
-    usize cur_id = 0;
+    usize const cur_id = 0;
     auto *start = new Vertex(point_list[0], cur_id);
     auto *forward = new Edge();
     auto *reverse = new Edge();

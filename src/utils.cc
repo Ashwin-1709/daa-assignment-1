@@ -3,8 +3,8 @@
 #include <algorithm>
 #include <cassert>
 #include <cmath>
+#include <iostream>
 #include <vector>
-#include <bits/stdc++.h>
 
 /// @brief Returns the angle swept by a counterclockwise rotation from line
 /// segment ba to line segment bc
@@ -23,8 +23,9 @@ auto angle(const Point &a, const Point &b, const Point &c) -> double {
     if (cross == 0) {
         if (cos_theta > 0) {
             return 0.0;
+        } else {
+            return 180.0;
         }
-        return 180.0;
 
     } else if (cross > 0) {
         return std::acos(cos_theta) * 180 / M_PI;
@@ -35,26 +36,27 @@ auto angle(const Point &a, const Point &b, const Point &c) -> double {
 /// @brief Prints a set of polygons for visualization
 /// @param Polygons The set of polygons
 void enumerate_polygons(const std::set<Face *> &Polygons) {
-    usize cnt = 1;
     std::vector<std::deque<Vertex *>> polygons;
-    for (const auto &f : Polygons) {
-        std::deque<Vertex *> p;
-        Edge *now = f->edge;
+    for (const auto &face : Polygons) {
+        std::deque<Vertex *> polygon;
+        Edge *now = face->edge;
         do {
-            p.push_back(now->origin);
+            polygon.push_back(now->origin);
             now = now->next;
-        } while (now != f->edge);
+        } while (now != face->edge);
 
-        if (is_collinear(p)) {
+        if (is_collinear(polygon)) {
             continue;
         }
-        polygons.push_back(p);
+        polygons.push_back(polygon);
     }
+
     std::cout << polygons.size() << '\n';
-    for (auto &vt : polygons) {
-        std::cout << vt.size() << '\n';
-        for (auto &u : vt) {
-            std::cout << u->point.x << ' ' << u->point.y << ' ';
+
+    for (auto &polygon : polygons) {
+        std::cout << polygon.size() << '\n';
+        for (auto &vertex : polygon) {
+            std::cout << vertex->point.x << ' ' << vertex->point.y << ' ';
         }
         std::cout << '\n';
     }
@@ -65,14 +67,14 @@ void enumerate_polygons(const std::set<Face *> &Polygons) {
 /// @return Deque of notches present in the polygon
 auto get_notches(const std::deque<Vertex *> &polygon) -> std::deque<Vertex *> {
     std::deque<Vertex *> notches;
-    const usize n = polygon.size();
-    if (n < 3) {
+    const usize n_vertices = polygon.size();
+    if (n_vertices < 3) {
         return notches;
     }
-    for (usize i = 0; i < n; i++) {
+    for (usize i = 0; i < n_vertices; i++) {
         Vertex *base = polygon[i];
-        Vertex *left = polygon[(i - 1 + n) % n];
-        Vertex *right = polygon[(i + 1) % n];
+        Vertex *left = polygon[(i - 1 + n_vertices) % n_vertices];
+        Vertex *right = polygon[(i + 1) % n_vertices];
         if (angle(left->point, base->point, right->point) > 180) {
             notches.push_back(base);
         }
@@ -89,11 +91,11 @@ auto get_rectangle(const std::deque<Vertex *> &L) -> std::array<Point, 2> {
     Point maximum;
     minimum.x = 1e9, minimum.y = 1e9;
     maximum.x = -1e9, maximum.y = -1e9;
-    for (const auto &v : L) {
-        minimum.x = std::min(minimum.x, v->point.x);
-        minimum.y = std::min(minimum.y, v->point.y);
-        maximum.x = std::max(maximum.x, v->point.x);
-        maximum.y = std::max(maximum.y, v->point.y);
+    for (const auto &vertex : L) {
+        minimum.x = std::min(minimum.x, vertex->point.x);
+        minimum.y = std::min(minimum.y, vertex->point.y);
+        maximum.x = std::max(maximum.x, vertex->point.x);
+        maximum.y = std::max(maximum.y, vertex->point.y);
     }
     return {minimum, maximum};
 }
@@ -125,9 +127,9 @@ auto get_line(const Point &a, const Point &b) -> std::array<double, 3> {
 /// @param b The Point `b`
 auto same_side_semiplane(const std::array<double, 3> &coef, const Point &a,
                          const Point &b) -> bool {
-    double L1 = coef[0] * a.x + coef[1] * a.y + coef[2];
-    double L2 = coef[0] * b.x + coef[1] * b.y + coef[2];
-    return (L1 * L2) > 0;
+    double const line1 = coef[0] * a.x + coef[1] * a.y + coef[2];
+    double const line2 = coef[0] * b.x + coef[1] * b.y + coef[2];
+    return (line1 * line2) > 0;
 }
 
 /// @brief Returns the next Vertex in the original undecomposed polygon
@@ -146,9 +148,9 @@ auto next_vertex(const Vertex *vertex) -> Vertex * {
 /// @param second The Vertex `second`
 auto check_notch(const Vertex *a, const Vertex *b, const Vertex *c,
                  const Vertex *start, const Vertex *second) -> bool {
-    double angle_b = angle(a->point, b->point, c->point);
-    double angle_c = angle(b->point, c->point, start->point);
-    double angle_start = angle(c->point, start->point, second->point);
+    double const angle_b = angle(a->point, b->point, c->point);
+    double const angle_c = angle(b->point, c->point, start->point);
+    double const angle_start = angle(c->point, start->point, second->point);
     return angle_b <= 180 and angle_c <= 180 and angle_start <= 180;
 }
 
@@ -197,15 +199,15 @@ auto split_face(Vertex *v1, Vertex *v2, Face *cur) -> Face * {
 /// @param f1 The first Face
 /// @param f2 The second Face
 /// @return The new Face formed by merging the two
-auto merge_face(Face *f1, Face *f2) -> Face * {
+auto merge_face(Face *face1, Face *face2) -> Face * {
     Edge *e3;
-    Edge *now = f1->edge;
+    Edge *now = face1->edge;
     do {
-        if (now->left_face == f1 and now->twin->left_face == f2) {
+        if (now->left_face == face1 and now->twin->left_face == face2) {
             e3 = now;
         }
         now = now->next;
-    } while (now != f1->edge);
+    } while (now != face1->edge);
 
     auto *e1 = e3->next;
     auto *e2 = e3->twin->next;
@@ -213,9 +215,9 @@ auto merge_face(Face *f1, Face *f2) -> Face * {
     e2->prev = e3->prev;
     e1->prev = e3->twin->prev;
     e3->twin->prev->next = e1;
-    f1->edge = e1;
-    update_face(e1, f1);
-    return f1;
+    face1->edge = e1;
+    update_face(e1, face1);
+    return face1;
 }
 
 /// @brief Sets the `Edge`s of the polygons' left Face to the given Face
@@ -267,23 +269,23 @@ auto is_collinear(const std::deque<Vertex *> &polygon) -> bool {
 
 /// @brief Checks if all the `Vertice`s of the polygon are collinear
 /// @param f The Face representing the polygon
-auto is_collinear(Face *f) -> bool {
-    std::deque<Vertex *> p;
-    Edge *now = f->edge;
+auto is_collinear(Face *face) -> bool {
+    std::deque<Vertex *> polygon;
+    Edge *now = face->edge;
     do {
-        p.push_back(now->origin);
+        polygon.push_back(now->origin);
         now = now->next;
-    } while (now != f->edge);
-    return is_collinear(p);
+    } while (now != face->edge);
+    return is_collinear(polygon);
 }
 
 /// @brief Checks if the angle made by a Vertex in the original polygon is
 /// convex
 /// @param v the Vertex v
-auto is_convex(Vertex *v) -> bool {
-    Vertex *nxt = v->incident_edge->next->origin;
-    Vertex *pre = v->incident_edge->prev->origin;
-    return angle(pre->point, v->point, nxt->point) <= 180;
+auto is_convex(Vertex *vertex) -> bool {
+    Vertex *nxt = vertex->incident_edge->next->origin;
+    Vertex *pre = vertex->incident_edge->prev->origin;
+    return angle(pre->point, vertex->point, nxt->point) <= 180;
 }
 
 /// @brief Checks whether a given notch lies inside the input polygon
@@ -293,40 +295,42 @@ auto is_inside_polygon(const std::deque<Vertex *> &polygon, Vertex *notch)
     -> bool {
     // Reference :
     // https://www.eecs.umich.edu/courses/eecs380/HANDOUTS/PROJ2/InsidePoly.html
-    usize n = polygon.size();
-    if (n < 3) {
+    usize const n_vertices = polygon.size();
+    if (n_vertices < 3) {
         return false;
     }
     usize i;
     usize j;
-    bool c = 0;
-    double x = notch->point.x;
-    double y = notch->point.y;
-    for (i = 0, j = n - 1; i < n; j = i++) {
-        double y1 = polygon[i]->point.y;
-        double x1 = polygon[i]->point.x;
-        double y2 = polygon[j]->point.y;
-        double x2 = polygon[j]->point.x;
-        bool in_between = (((y1 <= y) and (y < y2)) or ((y2 <= y) and (y < y1)));
-        bool interior = (x < (x2 - x1) * (y - y1) / (y2 - y1) + x1);
-        if(in_between and interior)
-            c = !c; 
+    bool c = false;
+    double const x = notch->point.x;
+    double const y = notch->point.y;
+    for (i = 0, j = n_vertices - 1; i < n_vertices; j = i++) {
+        double const y1 = polygon[i]->point.y;
+        double const x1 = polygon[i]->point.x;
+        double const y2 = polygon[j]->point.y;
+        double const x2 = polygon[j]->point.x;
+        bool const in_between =
+            (((y1 <= y) and (y < y2)) or ((y2 <= y) and (y < y1)));
+        bool const interior = (x < (x2 - x1) * (y - y1) / (y2 - y1) + x1);
+        if (in_between and interior) {
+            c = !c;
+        }
     }
     return c;
 }
 
 /// @brief Returns the next Vertex of the edge of a Vertex in a Face
-/// @param v The Vertex
-/// @param f The Face
+/// @param vertex The Vertex
+/// @param face The Face
 /// @return The next Vertex of v in Face f
-auto next_vertex(Vertex *v, Face *f) -> Vertex * {
-    Edge *now = f->edge;
+auto next_vertex(Vertex *vertex, Face *face) -> Vertex * {
+    Edge *now = face->edge;
     do {
-        if (now->origin == v) {
+        if (now->origin == vertex) {
             return now->next->origin;
         }
         now = now->next;
-    } while (now != f->edge);
+    } while (now != face->edge);
     assert(false);
     return now->origin;
 }

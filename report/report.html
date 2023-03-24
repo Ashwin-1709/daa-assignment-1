@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-03-24 Fri 18:35 -->
+<!-- 2023-03-24 Fri 19:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CS F364 Assignment 1</title>
@@ -202,65 +202,65 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5c7c742">1. Problem statement</a></li>
-<li><a href="#orgb6e0be4">2. DCEL: Doubly Connected Edge List</a>
+<li><a href="#orgf30af67">1. Problem statement</a></li>
+<li><a href="#org174e6a9">2. DCEL: Doubly Connected Edge List</a>
 <ul>
-<li><a href="#org319d80a">2.1. Polygon</a></li>
-<li><a href="#org2b11a1f">2.2. Vertex</a></li>
-<li><a href="#org32ab3d2">2.3. Edge</a></li>
-<li><a href="#org75e3fee">2.4. Face</a></li>
+<li><a href="#orgc4ae0b6">2.1. Polygon</a></li>
+<li><a href="#org6638cc0">2.2. Vertex</a></li>
+<li><a href="#orgccb4a3c">2.3. Edge</a></li>
+<li><a href="#org808c0b4">2.4. Face</a></li>
 </ul>
 </li>
-<li><a href="#org64b2f84">3. Decomposition</a>
+<li><a href="#org4d71402">3. Decomposition</a>
 <ul>
-<li><a href="#orgdef3fc0">3.1. Terminology</a>
+<li><a href="#orgdbfd95b">3.1. Terminology</a>
 <ul>
-<li><a href="#orgbc3a045">3.1.1. Notch</a></li>
-<li><a href="#org8f0448a">3.1.2. LPVS</a></li>
-<li><a href="#orgc1d7149">3.1.3. VTR</a></li>
+<li><a href="#org696f1f2">3.1.1. Notch</a></li>
+<li><a href="#orgb034a74">3.1.2. LPVS</a></li>
+<li><a href="#org632f516">3.1.3. VTR</a></li>
 </ul>
 </li>
-<li><a href="#orge4cef3e">3.2. Algorithm</a></li>
-<li><a href="#org18f696a">3.3. Time complexity analysis of helper functions</a>
+<li><a href="#org6c408bf">3.2. Algorithm</a></li>
+<li><a href="#org0b9c538">3.3. Time complexity analysis of helper functions</a>
 <ul>
-<li><a href="#org80d2365">3.3.1. <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</a></li>
-<li><a href="#orgb53e5de">3.3.2. <code>get_notches</code>: Given a polygon, return a list of notches</a></li>
-<li><a href="#orgbc77c93">3.3.3. <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</a></li>
-<li><a href="#org018f93f">3.3.4. <code>merge_face</code>: Given two faces, merge and return their combination</a></li>
-<li><a href="#org27e38e0">3.3.5. <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in <img src="ltximg/report_168d405655b0d05881bd0d39d70338533f2f5411.svg" alt="\(P \setminus L_m\)" class="org-svg" /></a></li>
-<li><a href="#orge61ff33">3.3.6. <code>inside_polygon</code>: Check whether a point lies inside a polygon</a></li>
+<li><a href="#org102ae18">3.3.1. <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</a></li>
+<li><a href="#org223a04a">3.3.2. <code>get_notches</code>: Given a polygon, return a list of notches</a></li>
+<li><a href="#orgbd9b7c8">3.3.3. <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</a></li>
+<li><a href="#org4af6964">3.3.4. <code>merge_face</code>: Given two faces, merge and return their combination</a></li>
+<li><a href="#org9d5ce81">3.3.5. <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in <img src="ltximg/report_168d405655b0d05881bd0d39d70338533f2f5411.svg" alt="\(P \setminus L_m\)" class="org-svg" /></a></li>
+<li><a href="#org97e3571">3.3.6. <code>inside_polygon</code>: Check whether a point lies inside a polygon</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org3740a1c">4. Merging</a>
+<li><a href="#org8eb7d06">4. Merging</a>
 <ul>
-<li><a href="#org16d100e">4.1. Terminology</a>
+<li><a href="#org98a64ff">4.1. Terminology</a>
 <ul>
-<li><a href="#org05945c2">4.1.1. LDP</a></li>
-<li><a href="#org769a82d">4.1.2. LUP</a></li>
-<li><a href="#orgde946c7">4.1.3. LLE</a></li>
+<li><a href="#orgee348cc">4.1.1. LDP</a></li>
+<li><a href="#org6077a06">4.1.2. LUP</a></li>
+<li><a href="#orgdaf9b56">4.1.3. LLE</a></li>
 </ul>
 </li>
-<li><a href="#org01bc242">4.2. Algorithm</a></li>
+<li><a href="#org77cc3ab">4.2. Algorithm</a></li>
 </ul>
 </li>
-<li><a href="#org8f9dd0c">5. Benchmarks and Results</a>
+<li><a href="#org0c392e0">5. Benchmarks and Results</a>
 <ul>
 <li>
 <ul>
-<li><a href="#orgf0a5db7">5.0.1. Algeria</a></li>
-<li><a href="#orgd4c0ecf">5.0.2. Comb:</a></li>
-<li><a href="#orgdf25eaa">5.0.3. Greenland:</a></li>
-<li><a href="#org9bb4999">5.0.4. Hand:</a></li>
-<li><a href="#org67f97a3">5.0.5. i18:</a></li>
-<li><a href="#org5058ed0">5.0.6. India:</a></li>
-<li><a href="#org525bee6">5.0.7. Mongolia:</a></li>
-<li><a href="#org55fbed1">5.0.8. poly2:</a></li>
-<li><a href="#orgff46e25">5.0.9. Romania:</a></li>
-<li><a href="#orgab63fb9">5.0.10. Snake:</a></li>
-<li><a href="#org5862445">5.0.11. Star:</a></li>
-<li><a href="#org10d3c00">5.0.12. test2:</a></li>
+<li><a href="#orgf5da8ef">5.0.1. Algeria</a></li>
+<li><a href="#org24e1e68">5.0.2. Comb</a></li>
+<li><a href="#org82f859c">5.0.3. Greenland</a></li>
+<li><a href="#orgb347673">5.0.4. Hand</a></li>
+<li><a href="#orga291cc3">5.0.5. i18</a></li>
+<li><a href="#org34894a8">5.0.6. India</a></li>
+<li><a href="#org9af01b9">5.0.7. Mongolia</a></li>
+<li><a href="#org8e1adcf">5.0.8. poly2</a></li>
+<li><a href="#orgd646bff">5.0.9. Snake</a></li>
+<li><a href="#org6301488">5.0.10. Star</a></li>
+<li><a href="#org85be28f">5.0.11. test2</a></li>
+<li><a href="#org7b9ce19">5.0.12. Monteserrat</a></li>
 </ul>
 </li>
 </ul>
@@ -268,8 +268,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org5c7c742" class="outline-2">
-<h2 id="org5c7c742"><span class="section-number-2">1.</span> Problem statement</h2>
+<div id="outline-container-orgf30af67" class="outline-2">
+<h2 id="orgf30af67"><span class="section-number-2">1.</span> Problem statement</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Given an arbitrary polygon, decompose it into a set of convex polygons. We have been given the following paper to implement:
@@ -279,20 +279,20 @@ The paper describes three different algorithms for the decomposition of the poly
 </div>
 </div>
 
-<div id="outline-container-orgb6e0be4" class="outline-2">
-<h2 id="orgb6e0be4"><span class="section-number-2">2.</span> DCEL: Doubly Connected Edge List</h2>
+<div id="outline-container-org174e6a9" class="outline-2">
+<h2 id="org174e6a9"><span class="section-number-2">2.</span> DCEL: Doubly Connected Edge List</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 We have used the DCEL data structure to store our decomposed polygon. DCEL consists of three main sub-data-structures, namely
 Vertex, Edge and Face.
 </p>
 
-<div id="orgb8bb875" class="figure">
+<div id="org6b7e8a0" class="figure">
 <p><img src="images/dcel.png" alt="dcel.png" />
 </p>
 </div>
 
-<div id="orge2c15cd" class="figure">
+<div id="org6fe6a0b" class="figure">
 <p><img src="images/dcel_detailed.png" alt="dcel_detailed.png" />
 </p>
 </div>
@@ -301,24 +301,24 @@ Vertex, Edge and Face.
 (Images taken from <a href="https://www2.cs.sfu.ca/~binay/813.2011/DCEL.pdf">https://www2.cs.sfu.ca/~binay/813.2011/DCEL.pdf</a>)
 </p>
 </div>
-<div id="outline-container-org319d80a" class="outline-3">
-<h3 id="org319d80a"><span class="section-number-3">2.1.</span> Polygon</h3>
+<div id="outline-container-orgc4ae0b6" class="outline-3">
+<h3 id="orgc4ae0b6"><span class="section-number-3">2.1.</span> Polygon</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 A decomposed polygon is represented by the Polygon class, which contains a list of vertices of the original polygon in clockwise order, and two Faces which represent the outer and inner faces of the initial, undecomposed polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-org2b11a1f" class="outline-3">
-<h3 id="org2b11a1f"><span class="section-number-3">2.2.</span> Vertex</h3>
+<div id="outline-container-org6638cc0" class="outline-3">
+<h3 id="org6638cc0"><span class="section-number-3">2.2.</span> Vertex</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 A vertex contains the coordinates of the point and an IncidentEdge - an edge which originates at the vertex.
 </p>
 </div>
 </div>
-<div id="outline-container-org32ab3d2" class="outline-3">
-<h3 id="org32ab3d2"><span class="section-number-3">2.3.</span> Edge</h3>
+<div id="outline-container-orgccb4a3c" class="outline-3">
+<h3 id="orgccb4a3c"><span class="section-number-3">2.3.</span> Edge</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 An edge contains
@@ -331,8 +331,8 @@ An edge contains
 </ul>
 </div>
 </div>
-<div id="outline-container-org75e3fee" class="outline-3">
-<h3 id="org75e3fee"><span class="section-number-3">2.4.</span> Face</h3>
+<div id="outline-container-org808c0b4" class="outline-3">
+<h3 id="org808c0b4"><span class="section-number-3">2.4.</span> Face</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 A face contains a pointer to any one of the representative edges of the face (if we know one edge we can find all of them by traversing using the <code>next</code> field of the edge)
@@ -340,32 +340,32 @@ A face contains a pointer to any one of the representative edges of the face (if
 </div>
 </div>
 </div>
-<div id="outline-container-org64b2f84" class="outline-2">
-<h2 id="org64b2f84"><span class="section-number-2">3.</span> Decomposition</h2>
+<div id="outline-container-org4d71402" class="outline-2">
+<h2 id="org4d71402"><span class="section-number-2">3.</span> Decomposition</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgdef3fc0" class="outline-3">
-<h3 id="orgdef3fc0"><span class="section-number-3">3.1.</span> Terminology</h3>
+<div id="outline-container-orgdbfd95b" class="outline-3">
+<h3 id="orgdbfd95b"><span class="section-number-3">3.1.</span> Terminology</h3>
 <div class="outline-text-3" id="text-3-1">
 </div>
-<div id="outline-container-orgbc3a045" class="outline-4">
-<h4 id="orgbc3a045"><span class="section-number-4">3.1.1.</span> Notch</h4>
+<div id="outline-container-org696f1f2" class="outline-4">
+<h4 id="org696f1f2"><span class="section-number-4">3.1.1.</span> Notch</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <p>
 Angle between 3 points <img src="ltximg/report_4c3dfedbfc7e18b8b1b20ada6089bedca076c3ec.svg" alt="\(a,b,c\)" class="org-svg" /> is said to be a notch if it is greater than <img src="ltximg/report_c445cef998698f899600154a00ce82e85afbbb44.svg" alt="\(180 \degree\)" class="org-svg" />
 </p>
 </div>
 </div>
-<div id="outline-container-org8f0448a" class="outline-4">
-<h4 id="org8f0448a"><span class="section-number-4">3.1.2.</span> LPVS</h4>
+<div id="outline-container-orgb034a74" class="outline-4">
+<h4 id="orgb034a74"><span class="section-number-4">3.1.2.</span> LPVS</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <p>
 <img src="ltximg/report_07f3b8a54ff00a8c1d167b4bdfba6c5785b81729.svg" alt="\(LPVS(P,S)\)" class="org-svg" /> is the list of notches enclosed in <img src="ltximg/report_06437bf312f016dfafc344427766ec1cbda83add.svg" alt="\(P \setminus L\)" class="org-svg" />
 </p>
 </div>
 </div>
-<div id="outline-container-orgc1d7149" class="outline-4">
-<h4 id="orgc1d7149"><span class="section-number-4">3.1.3.</span> VTR</h4>
+<div id="outline-container-org632f516" class="outline-4">
+<h4 id="org632f516"><span class="section-number-4">3.1.3.</span> VTR</h4>
 <div class="outline-text-4" id="text-3-1-3">
 <p>
 Intermediate polygon from which we need to remove
@@ -377,60 +377,60 @@ Intermediate polygon from which we need to remove
 </div>
 </div>
 </div>
-<div id="outline-container-orge4cef3e" class="outline-3">
-<h3 id="orge4cef3e"><span class="section-number-3">3.2.</span> Algorithm</h3>
+<div id="outline-container-org6c408bf" class="outline-3">
+<h3 id="org6c408bf"><span class="section-number-3">3.2.</span> Algorithm</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 The algorithm relies on successive adding of vertices until the polygon formed by the vertices is not convex. When we cannot add any points to the polygon, we check if any notches are enclosed in the rectangle of minimum area formed by the points added so far. If no notches are present, we create a new polygon by splitting the face of the existing polygon and continue to work on the other half of the newly formed polygon until the number of vertices in our list falls below or equal to -  this is the halting condition of the decomposition algorithm. If, in intermediate stages, we notice that notches are present in the rectangle, we remove the notches and the last point of the polygon until we reach a condition where the diagonal formed by the first and the last point does not enclose any other point. We start from the next vertex if we cannot make the polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-org18f696a" class="outline-3">
-<h3 id="org18f696a"><span class="section-number-3">3.3.</span> Time complexity analysis of helper functions</h3>
+<div id="outline-container-org0b9c538" class="outline-3">
+<h3 id="org0b9c538"><span class="section-number-3">3.3.</span> Time complexity analysis of helper functions</h3>
 <div class="outline-text-3" id="text-3-3">
 </div>
-<div id="outline-container-org80d2365" class="outline-4">
-<h4 id="org80d2365"><span class="section-number-4">3.3.1.</span> <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</h4>
+<div id="outline-container-org102ae18" class="outline-4">
+<h4 id="org102ae18"><span class="section-number-4">3.3.1.</span> <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <p>
 Returns the angle swept by line segment <img src="ltximg/report_491923e73e9082582f4f3ba5a4222ec0fcd7dcba.svg" alt="\(ba\)" class="org-svg" /> over <img src="ltximg/report_1418ac4edf46f00b539cbfa26f687fefdbbe214a.svg" alt="\(bc\)" class="org-svg" /> counterclockwise. For finding the angle, we calculate the magnitudes of <img src="ltximg/report_987d25698c5911222f818b1398d26f1eb75f4022.svg" alt="\(\vec{ba}\)" class="org-svg" /> and <img src="ltximg/report_aa83a9e211260583227d298f03af2acfe108853e.svg" alt="\(\vec{bc}\)" class="org-svg" />, and their dot and cross products. We then return different values depending on the sign of the dot and cross products. The time complexity is <img src="ltximg/report_5086a20bff22f6cef9098d2ad957b7dfebf3a1bc.svg" alt="\(\mathcal{O}(1)\)" class="org-svg" />
 </p>
 </div>
 </div>
-<div id="outline-container-orgb53e5de" class="outline-4">
-<h4 id="orgb53e5de"><span class="section-number-4">3.3.2.</span> <code>get_notches</code>: Given a polygon, return a list of notches</h4>
+<div id="outline-container-org223a04a" class="outline-4">
+<h4 id="org223a04a"><span class="section-number-4">3.3.2.</span> <code>get_notches</code>: Given a polygon, return a list of notches</h4>
 <div class="outline-text-4" id="text-3-3-2">
 <p>
 We iterate over the vertices of the polygon in clockwise order, checking if the angle <img src="ltximg/report_5e2fab8b5344a5998b2e152b7761ff6be924ef99.svg" alt="\(v_{i-1},v_i,v_{i+1}\)" class="org-svg" /> (where <img src="ltximg/report_a2e23f9d5e57ab2b8ac2682dcecc3a5e9fc7fe9a.svg" alt="\(v_i\)" class="org-svg" /> is the current vertex) is reflex. If the angle is reflex, we add it to the list of notches. Finding the angle takes constant time, hence the time complexity for getting all the notches is <img src="ltximg/report_f34fdd723595e1a626e9b3a4c4c63665c5ce89a4.svg" alt="\(\mathcal{O}(n)\)" class="org-svg" /> where <img src="ltximg/report_974d16a2800caed43ba80da4db121cd576ca4322.svg" alt="\(n\)" class="org-svg" /> is the number of vertices in the polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-orgbc77c93" class="outline-4">
-<h4 id="orgbc77c93"><span class="section-number-4">3.3.3.</span> <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</h4>
+<div id="outline-container-orgbd9b7c8" class="outline-4">
+<h4 id="orgbd9b7c8"><span class="section-number-4">3.3.3.</span> <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</h4>
 <div class="outline-text-4" id="text-3-3-3">
 <p>
 We iterate over the edges of the face and get the neighbouring edges incident to the diagonal vertices. We do the necessary updates to the <code>next</code> and <code>previous</code> of all the necessary edges. We then create a new face and update its edges so that their left face points to this face. Finally, we return the newly formed face. The time complexity for this process is <img src="ltximg/report_f34fdd723595e1a626e9b3a4c4c63665c5ce89a4.svg" alt="\(\mathcal{O}(n)\)" class="org-svg" /> where <img src="ltximg/report_974d16a2800caed43ba80da4db121cd576ca4322.svg" alt="\(n\)" class="org-svg" /> is the number of vertices in the polygon due to the linear nature of both the processes.
 </p>
 </div>
 </div>
-<div id="outline-container-org018f93f" class="outline-4">
-<h4 id="org018f93f"><span class="section-number-4">3.3.4.</span> <code>merge_face</code>: Given two faces, merge and return their combination</h4>
+<div id="outline-container-org4af6964" class="outline-4">
+<h4 id="org4af6964"><span class="section-number-4">3.3.4.</span> <code>merge_face</code>: Given two faces, merge and return their combination</h4>
 <div class="outline-text-4" id="text-3-3-4">
 <p>
 We iterate over edges of the first face to find the diagonal between the two faces and perform the necessary updates in the edges. After updation, the left faces of all the edges are updated to the first face and the first face is returned. The time complexity is <img src="ltximg/report_f34fdd723595e1a626e9b3a4c4c63665c5ce89a4.svg" alt="\(\mathcal{O}(n)\)" class="org-svg" /> where <img src="ltximg/report_974d16a2800caed43ba80da4db121cd576ca4322.svg" alt="\(n\)" class="org-svg" /> is the number of vertices in the polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-org27e38e0" class="outline-4">
-<h4 id="org27e38e0"><span class="section-number-4">3.3.5.</span> <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in <img src="ltximg/report_168d405655b0d05881bd0d39d70338533f2f5411.svg" alt="\(P \setminus L_m\)" class="org-svg" /></h4>
+<div id="outline-container-org9d5ce81" class="outline-4">
+<h4 id="org9d5ce81"><span class="section-number-4">3.3.5.</span> <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in <img src="ltximg/report_168d405655b0d05881bd0d39d70338533f2f5411.svg" alt="\(P \setminus L_m\)" class="org-svg" /></h4>
 <div class="outline-text-4" id="text-3-3-5">
 <p>
 We iterate over all the notches, and check whether they are present in the list <img src="ltximg/report_c36a4ff95bab849ba9ef53358755c69d51deade4.svg" alt="\(L_m\)" class="org-svg" /> (the polygon being made in the <img src="ltximg/report_a1611b921ea2dc82ac466871bf72431891d8f031.svg" alt="\(m^{th}\)" class="org-svg" /> iteration) and not in <img src="ltximg/report_cc86f01d14a4a89b5c9cabdf01fd1b71604ee7ef.svg" alt="\(P\)" class="org-svg" /> (the undecomposed polygon we are currently working on). The time complexity is <img src="ltximg/report_741d2de4ac3058065bb4c1c7e1e222bae3423548.svg" alt="\( \mathcal{O}(n^2) \)" class="org-svg" /> as we have to iterate over <img src="ltximg/report_c36a4ff95bab849ba9ef53358755c69d51deade4.svg" alt="\(L_m\)" class="org-svg" /> and <img src="ltximg/report_cc86f01d14a4a89b5c9cabdf01fd1b71604ee7ef.svg" alt="\(P\)" class="org-svg" /> for every notch.
 </p>
 </div>
 </div>
-<div id="outline-container-orge61ff33" class="outline-4">
-<h4 id="orge61ff33"><span class="section-number-4">3.3.6.</span> <code>inside_polygon</code>: Check whether a point lies inside a polygon</h4>
+<div id="outline-container-org97e3571" class="outline-4">
+<h4 id="org97e3571"><span class="section-number-4">3.3.6.</span> <code>inside_polygon</code>: Check whether a point lies inside a polygon</h4>
 <div class="outline-text-4" id="text-3-3-6">
 <p>
 We iterate over the edges in clockwise order. Every time we find an edge one of whose endpoints is above the given point and the other below, and the point is to the right of the edge, we flip a boolean flag.
@@ -440,32 +440,32 @@ This can be done in <img src="ltximg/report_f34fdd723595e1a626e9b3a4c4c63665c5ce
 </div>
 </div>
 </div>
-<div id="outline-container-org3740a1c" class="outline-2">
-<h2 id="org3740a1c"><span class="section-number-2">4.</span> Merging</h2>
+<div id="outline-container-org8eb7d06" class="outline-2">
+<h2 id="org8eb7d06"><span class="section-number-2">4.</span> Merging</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org16d100e" class="outline-3">
-<h3 id="org16d100e"><span class="section-number-3">4.1.</span> Terminology</h3>
+<div id="outline-container-org98a64ff" class="outline-3">
+<h3 id="org98a64ff"><span class="section-number-3">4.1.</span> Terminology</h3>
 <div class="outline-text-3" id="text-4-1">
 </div>
-<div id="outline-container-org05945c2" class="outline-4">
-<h4 id="org05945c2"><span class="section-number-4">4.1.1.</span> LDP</h4>
+<div id="outline-container-orgee348cc" class="outline-4">
+<h4 id="orgee348cc"><span class="section-number-4">4.1.1.</span> LDP</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <p>
 LDP is an ordered list of boolean flags, <img src="ltximg/report_3bb2a05c56ae2f1f56fe13f37ea9ea1a32effe26.svg" alt="\(LDP[i]=true\)" class="org-svg" /> means that the polygon with index <img src="ltximg/report_6cf2f08af66400fd36f0183308ae35968f9ae29f.svg" alt="\(i\)" class="org-svg" /> is one of the definitive polygons of the partition after the merging process.
 </p>
 </div>
 </div>
-<div id="outline-container-org769a82d" class="outline-4">
-<h4 id="org769a82d"><span class="section-number-4">4.1.2.</span> LUP</h4>
+<div id="outline-container-org6077a06" class="outline-4">
+<h4 id="org6077a06"><span class="section-number-4">4.1.2.</span> LUP</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <p>
 LUP is an ordered list of integers, <img src="ltximg/report_bd75a7339ff4787451986c8d2935642f3d3f5e9e.svg" alt="\(LUP[i]= j\)" class="org-svg" /> means that the polygon with index <img src="ltximg/report_6cf2f08af66400fd36f0183308ae35968f9ae29f.svg" alt="\(i\)" class="org-svg" /> is part of the polygon with index <img src="ltximg/report_898523cb79968388d249b09fc91c9cb7961c11bf.svg" alt="\(j\)" class="org-svg" />.
 </p>
 </div>
 </div>
-<div id="outline-container-orgde946c7" class="outline-4">
-<h4 id="orgde946c7"><span class="section-number-4">4.1.3.</span> LLE</h4>
+<div id="outline-container-orgdaf9b56" class="outline-4">
+<h4 id="orgdaf9b56"><span class="section-number-4">4.1.3.</span> LLE</h4>
 <div class="outline-text-4" id="text-4-1-3">
 <p>
 LLE is a list containing the diagonals of the partition.
@@ -473,8 +473,8 @@ LLE is a list containing the diagonals of the partition.
 </div>
 </div>
 </div>
-<div id="outline-container-org01bc242" class="outline-3">
-<h3 id="org01bc242"><span class="section-number-3">4.2.</span> Algorithm</h3>
+<div id="outline-container-org77cc3ab" class="outline-3">
+<h3 id="org77cc3ab"><span class="section-number-3">4.2.</span> Algorithm</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 We iterate over the list of diagonals (i.e. LLE) and check whether removing the diagonal between two faces disturbs the convexity of the structure. If it does not, then we merge the two faces and update the LDP and LUP lists.
@@ -482,344 +482,344 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 </div>
 </div>
 </div>
-<div id="outline-container-org8f9dd0c" class="outline-2">
-<h2 id="org8f9dd0c"><span class="section-number-2">5.</span> Benchmarks and Results</h2>
+<div id="outline-container-org0c392e0" class="outline-2">
+<h2 id="org0c392e0"><span class="section-number-2">5.</span> Benchmarks and Results</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orgf0a5db7" class="outline-4">
-<h4 id="orgf0a5db7"><span class="section-number-4">5.0.1.</span> Algeria</h4>
+<div id="outline-container-orgf5da8ef" class="outline-4">
+<h4 id="orgf5da8ef"><span class="section-number-4">5.0.1.</span> Algeria</h4>
 <div class="outline-text-4" id="text-5-0-1">
 
-<div id="orgacc473d" class="figure">
+<div id="orgfa4b512" class="figure">
 <p><img src="images/alg_undec.png" alt="alg_undec.png" />
 </p>
 </div>
 
-<div id="org23b5c4f" class="figure">
+<div id="org01e7eee" class="figure">
 <p><img src="images/alg_unm.png" alt="alg_unm.png" />
 </p>
 </div>
 
-<div id="orge4f7d87" class="figure">
+<div id="org1694052" class="figure">
 <p><img src="images/alg_me.png" alt="alg_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
 <li>No. of vertices: 62</li>
-<li>Time to decompose: 3516 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 160 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to decompose: 4019 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 28 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to merge: 155 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 1 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
 <li>No. of polygons before merging: 29</li>
 <li>No. of polygons after merging: 22</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgd4c0ecf" class="outline-4">
-<h4 id="orgd4c0ecf"><span class="section-number-4">5.0.2.</span> Comb:</h4>
+<div id="outline-container-org24e1e68" class="outline-4">
+<h4 id="org24e1e68"><span class="section-number-4">5.0.2.</span> Comb</h4>
 <div class="outline-text-4" id="text-5-0-2">
 
-<div id="orge24d85b" class="figure">
+<div id="org7755e6a" class="figure">
 <p><img src="images/comb_undec.png" alt="comb_undec.png" />
 </p>
 </div>
 
-<div id="org37d9626" class="figure">
+<div id="orgcc94958" class="figure">
 <p><img src="images/comb_unm.png" alt="comb_unm.png" />
 </p>
 </div>
 
-<div id="org45d6c17" class="figure">
+<div id="org1c62f40" class="figure">
 <p><img src="images/comb_me.png" alt="comb_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
-<li>No. of vertices: 62</li>
-<li>Time to decompose: 3516 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 160 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>No. of polygons before merging: 29</li>
-<li>No. of polygons after merging: 22</li>
+<li>No. of vertices: 10</li>
+<li>Time to decompose: 109 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 1 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to merge: 15 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 0 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>No. of polygons before merging: 5</li>
+<li>No. of polygons after merging: 5</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgdf25eaa" class="outline-4">
-<h4 id="orgdf25eaa"><span class="section-number-4">5.0.3.</span> Greenland:</h4>
+<div id="outline-container-org82f859c" class="outline-4">
+<h4 id="org82f859c"><span class="section-number-4">5.0.3.</span> Greenland</h4>
 <div class="outline-text-4" id="text-5-0-3">
 
-<div id="orgd2929d3" class="figure">
+<div id="org87494ed" class="figure">
 <p><img src="images/greenland_undec.png" alt="greenland_undec.png" />
 </p>
 </div>
 
-<div id="org1ce0e4a" class="figure">
+<div id="org432d369" class="figure">
 <p><img src="images/greenland_unm.png" alt="greenland_unm.png" />
 </p>
 </div>
 
-<div id="org3adbd84" class="figure">
+<div id="org774fd13" class="figure">
 <p><img src="images/greenland_me.png" alt="greenland_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
-<li>No. of vertices: 62</li>
-<li>Time to decompose: 3516 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 160 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>No. of polygons before merging: 29</li>
-<li>No. of polygons after merging: 22</li>
+<li>No. of vertices: 132</li>
+<li>Time to decompose: 26504 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 59 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to merge: 540 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 3 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>No. of polygons before merging: 64</li>
+<li>No. of polygons after merging: 45</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org9bb4999" class="outline-4">
-<h4 id="org9bb4999"><span class="section-number-4">5.0.4.</span> Hand:</h4>
+<div id="outline-container-orgb347673" class="outline-4">
+<h4 id="orgb347673"><span class="section-number-4">5.0.4.</span> Hand</h4>
 <div class="outline-text-4" id="text-5-0-4">
 
-<div id="org5ad9a04" class="figure">
+<div id="orgb55ec91" class="figure">
 <p><img src="images/hand_undec.png" alt="hand_undec.png" />
 </p>
 </div>
 
-<div id="orgf7d3233" class="figure">
+<div id="orge8c37dc" class="figure">
 <p><img src="images/hand_unm.png" alt="hand_unm.png" />
 </p>
 </div>
 
-<div id="orge7581c0" class="figure">
+<div id="org1916176" class="figure">
 <p><img src="images/hand_me.png" alt="hand_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
-<li>No. of vertices: 62</li>
-<li>Time to decompose: 3516 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 160 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>No. of polygons before merging: 29</li>
-<li>No. of polygons after merging: 22</li>
+<li>No. of vertices: 59</li>
+<li>Time to decompose: 3802 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 8 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to merge: 118 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 1 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>No. of polygons before merging: 25</li>
+<li>No. of polygons after merging: 19</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org67f97a3" class="outline-4">
-<h4 id="org67f97a3"><span class="section-number-4">5.0.5.</span> i18:</h4>
+<div id="outline-container-orga291cc3" class="outline-4">
+<h4 id="orga291cc3"><span class="section-number-4">5.0.5.</span> i18</h4>
 <div class="outline-text-4" id="text-5-0-5">
 
-<div id="orgdc59af0" class="figure">
+<div id="org71639b0" class="figure">
 <p><img src="images/i18_undec.png" alt="i18_undec.png" />
 </p>
 </div>
 
-<div id="orgd05648f" class="figure">
+<div id="orgfb479b3" class="figure">
 <p><img src="images/i18_unm.png" alt="i18_unm.png" />
 </p>
 </div>
 
-<div id="orgc2316c8" class="figure">
+<div id="orgfc47cc0" class="figure">
 <p><img src="images/i18_me.png" alt="i18_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
-<li>No. of vertices: 62</li>
-<li>Time to decompose: 3516 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 160 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>No. of polygons before merging: 29</li>
-<li>No. of polygons after merging: 22</li>
+<li>No. of vertices: 18</li>
+<li>Time to decompose: 555 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 2 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to merge: 41 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 0 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>No. of polygons before merging: 10</li>
+<li>No. of polygons after merging: 9</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org5058ed0" class="outline-4">
-<h4 id="org5058ed0"><span class="section-number-4">5.0.6.</span> India:</h4>
+<div id="outline-container-org34894a8" class="outline-4">
+<h4 id="org34894a8"><span class="section-number-4">5.0.6.</span> India</h4>
 <div class="outline-text-4" id="text-5-0-6">
 
-<div id="org3345a8f" class="figure">
+<div id="org9553441" class="figure">
 <p><img src="images/india_undec.png" alt="india_undec.png" />
 </p>
 </div>
 
-<div id="orgd344763" class="figure">
+<div id="orgc0d7f97" class="figure">
 <p><img src="images/india_unm.png" alt="india_unm.png" />
 </p>
 </div>
 
-<div id="org4a91967" class="figure">
+<div id="org994e6f8" class="figure">
 <p><img src="images/india_me.png" alt="india_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
-<li>No. of vertices: 62</li>
-<li>Time to decompose: 3516 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 160 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>No. of polygons before merging: 29</li>
-<li>No. of polygons after merging: 22</li>
+<li>No. of vertices: 136</li>
+<li>Time to decompose: 46806 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 179 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to merge: 654 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 3 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>No. of polygons before merging: 75</li>
+<li>No. of polygons after merging: 54</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org525bee6" class="outline-4">
-<h4 id="org525bee6"><span class="section-number-4">5.0.7.</span> Mongolia:</h4>
+<div id="outline-container-org9af01b9" class="outline-4">
+<h4 id="org9af01b9"><span class="section-number-4">5.0.7.</span> Mongolia</h4>
 <div class="outline-text-4" id="text-5-0-7">
 
-<div id="org4e23580" class="figure">
+<div id="org7042cc6" class="figure">
 <p><img src="images/mong_undec.png" alt="mong_undec.png" />
 </p>
 </div>
 
-<div id="org09ab20f" class="figure">
+<div id="orgdb162f5" class="figure">
 <p><img src="images/mong_unm.png" alt="mong_unm.png" />
 </p>
 </div>
 
-<div id="orgad76d80" class="figure">
+<div id="org66f735d" class="figure">
 <p><img src="images/mong_me.png" alt="mong_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
-<li>No. of vertices: 62</li>
-<li>Time to decompose: 3516 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 160 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>No. of polygons before merging: 29</li>
-<li>No. of polygons after merging: 22</li>
+<li>No. of vertices: 1495</li>
+<li>Time to decompose: 35185674  <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to merge: 25721 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>No. of polygons before merging: 620</li>
+<li>No. of polygons after merging: 429</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org55fbed1" class="outline-4">
-<h4 id="org55fbed1"><span class="section-number-4">5.0.8.</span> poly2:</h4>
+<div id="outline-container-org8e1adcf" class="outline-4">
+<h4 id="org8e1adcf"><span class="section-number-4">5.0.8.</span> poly2</h4>
 <div class="outline-text-4" id="text-5-0-8">
 
-<div id="org16e81ae" class="figure">
+<div id="org7125a1b" class="figure">
 <p><img src="images/poly2_undec.png" alt="poly2_undec.png" />
 </p>
 </div>
 
-<div id="orgd5447b5" class="figure">
+<div id="org6ebc966" class="figure">
 <p><img src="images/poly2_unm.png" alt="poly2_unm.png" />
 </p>
 </div>
 
-<div id="orgba6140b" class="figure">
+<div id="org6116fe3" class="figure">
 <p><img src="images/poly2_me.png" alt="poly2_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
-<li>No. of vertices: 62</li>
-<li>Time to decompose: 3516 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 160 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>No. of polygons before merging: 29</li>
-<li>No. of polygons after merging: 22</li>
+<li>No. of vertices: 12</li>
+<li>Time to decompose: 148 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 2 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to merge: 31 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 1 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>No. of polygons before merging: 7</li>
+<li>No. of polygons after merging: 4</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgff46e25" class="outline-4">
-<h4 id="orgff46e25"><span class="section-number-4">5.0.9.</span> Romania:</h4>
+<div id="outline-container-orgd646bff" class="outline-4">
+<h4 id="orgd646bff"><span class="section-number-4">5.0.9.</span> Snake</h4>
 <div class="outline-text-4" id="text-5-0-9">
 
-<div id="orgfc1a2b9" class="figure">
-<p><img src="images/romania_undec.png" alt="romania_undec.png" />
-</p>
-</div>
-
-<div id="org9596312" class="figure">
-<p><img src="images/romania_unm.png" alt="romania_unm.png" />
-</p>
-</div>
-
-<div id="orge4eac94" class="figure">
-<p><img src="images/romania_me.png" alt="romania_me.png" />
-</p>
-</div>
-
-<ul class="org-ul">
-<li>No. of vertices: 62</li>
-<li>Time to decompose: 3516 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 160 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>No. of polygons before merging: 29</li>
-<li>No. of polygons after merging: 22</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgab63fb9" class="outline-4">
-<h4 id="orgab63fb9"><span class="section-number-4">5.0.10.</span> Snake:</h4>
-<div class="outline-text-4" id="text-5-0-10">
-
-<div id="orgefd858e" class="figure">
+<div id="org197cfb8" class="figure">
 <p><img src="images/snake_undec.png" alt="snake_undec.png" />
 </p>
 </div>
 
-<div id="org3cfa399" class="figure">
+<div id="orgf165bb5" class="figure">
 <p><img src="images/snake_unm.png" alt="snake_unm.png" />
 </p>
 </div>
 
-<div id="org1e1ffb3" class="figure">
+<div id="orgfce5ec3" class="figure">
 <p><img src="images/snake_me.png" alt="snake_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
-<li>No. of vertices: 62</li>
-<li>Time to decompose: 3516 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 160 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>No. of polygons before merging: 29</li>
-<li>No. of polygons after merging: 22</li>
+<li>No. of vertices: 12</li>
+<li>Time to decompose: 148 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 2 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to merge: 22 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 1 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>No. of polygons before merging: 6</li>
+<li>No. of polygons after merging: 6</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org5862445" class="outline-4">
-<h4 id="org5862445"><span class="section-number-4">5.0.11.</span> Star:</h4>
-<div class="outline-text-4" id="text-5-0-11">
+<div id="outline-container-org6301488" class="outline-4">
+<h4 id="org6301488"><span class="section-number-4">5.0.10.</span> Star</h4>
+<div class="outline-text-4" id="text-5-0-10">
 
-<div id="org225b295" class="figure">
+<div id="org7edab3b" class="figure">
 <p><img src="images/star_undec.png" alt="star_undec.png" />
 </p>
 </div>
 
-<div id="org8352bd2" class="figure">
+<div id="org359b5d0" class="figure">
 <p><img src="images/star_unm.png" alt="star_unm.png" />
 </p>
 </div>
 
-<div id="org11a41ca" class="figure">
+<div id="orga7c30b1" class="figure">
 <p><img src="images/star_me.png" alt="star_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
-<li>No. of vertices: 62</li>
-<li>Time to decompose: 3516 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 160 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>No. of polygons before merging: 29</li>
-<li>No. of polygons after merging: 22</li>
+<li>No. of vertices: 10</li>
+<li>Time to decompose: 125 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 1 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to merge: 20 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 0 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>No. of polygons before merging: 6</li>
+<li>No. of polygons after merging: 5</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org10d3c00" class="outline-4">
-<h4 id="org10d3c00"><span class="section-number-4">5.0.12.</span> test2:</h4>
-<div class="outline-text-4" id="text-5-0-12">
+<div id="outline-container-org85be28f" class="outline-4">
+<h4 id="org85be28f"><span class="section-number-4">5.0.11.</span> test2</h4>
+<div class="outline-text-4" id="text-5-0-11">
 
-<div id="orga8a7cb0" class="figure">
+<div id="org3258591" class="figure">
 <p><img src="images/test2_undec.png" alt="test2_undec.png" />
 </p>
 </div>
 
-<div id="org1c3f3ed" class="figure">
+<div id="org7504365" class="figure">
 <p><img src="images/test2_unm.png" alt="test2_unm.png" />
 </p>
 </div>
 
-<div id="org3d3a8bf" class="figure">
+<div id="org95b040e" class="figure">
 <p><img src="images/test2_me.png" alt="test2_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
-<li>No. of vertices: 62</li>
-<li>Time to decompose: 3516 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 160 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 21 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>No. of polygons before merging: 29</li>
-<li>No. of polygons after merging: 22</li>
+<li>No. of vertices: 21</li>
+<li>Time to decompose: 535 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 2 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to merge: 37 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 0 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>No. of polygons before merging: 11</li>
+<li>No. of polygons after merging: 10</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7b9ce19" class="outline-4">
+<h4 id="org7b9ce19"><span class="section-number-4">5.0.12.</span> Monteserrat</h4>
+<div class="outline-text-4" id="text-5-0-12">
+
+<div id="org32a2f17" class="figure">
+<p><img src="images/mons_undec.png" alt="mons_undec.png" />
+</p>
+</div>
+
+<div id="orgd924014" class="figure">
+<p><img src="images/mons_unm.png" alt="mons_unm.png" />
+</p>
+</div>
+
+<div id="orgc40c6ff" class="figure">
+<p><img src="images/mons_me.png" alt="mons_me.png" />
+</p>
+</div>
+
+<ul class="org-ul">
+<li>No. of vertices: 23</li>
+<li>Time to decompose: 300 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 15 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to merge: 34 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 1 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>No. of polygons before merging: 9</li>
+<li>No. of polygons after merging: 7</li>
 </ul>
 </div>
 </div>
@@ -827,7 +827,7 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Chinmay Dalal (2020A7PS2060H), Ashwin Pugalia(2020A7PS1080H), Deep Chordia(2020A7PS2073H), Yash Ratnani(2020A7PS0039H)</p>
-<p class="date">Created: 2023-03-24 Fri 18:35</p>
+<p class="date">Created: 2023-03-24 Fri 19:14</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

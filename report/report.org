@@ -75,12 +75,12 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 [[file:images/alg_me.png]]
 
 + No. of vertices: 62
-+ Time to decompose: 3516 \(\pm\) 21 $\mu s$
-+ Time to merge: 160 $\pm$ 21 $\mu s$
++ Time to decompose: 4019 $\pm$ 28 $\mu s$
++ Time to merge: 155 $\pm$ 1 $\mu s$
 + No. of polygons before merging: 29
 + No. of polygons after merging: 22
  
-*** Comb:
+*** Comb
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/comb_undec.png @ 2023-03-23 23:24:14
 [[file:images/comb_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/comb_unm.png @ 2023-03-23 23:24:36
@@ -89,11 +89,11 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 [[file:images/comb_me.png]]
 
 + No. of vertices: 10
-+ Time to decompose: 105 \(\pm\) 2 $\mu s$
-+ Time to merge: 15 $\pm$ 2 $\mu s$
++ Time to decompose: 109 \(\pm\) 1 $\mu s$
++ Time to merge: 15 $\pm$ 0 $\mu s$
 + No. of polygons before merging: 5
 + No. of polygons after merging: 5
-*** Greenland:
+*** Greenland
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/greenland_undec.png @ 2023-03-23 23:24:14
 [[file:images/greenland_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/greenland_unm.png @ 2023-03-23 23:24:36
@@ -102,11 +102,11 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 [[file:images/greenland_me.png]]
 
 + No. of vertices: 132
-+ Time to decompose: 21890 \(\pm\) 47 $\mu s$
-+ Time to merge: 560 $\pm$ 47 $\mu s$
++ Time to decompose: 26504 \(\pm\) 59 $\mu s$
++ Time to merge: 540 $\pm$ 3 $\mu s$
 + No. of polygons before merging: 64
 + No. of polygons after merging: 45
-*** Hand:
+*** Hand
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/hand_undec.png @ 2023-03-23 23:24:14
 [[file:images/hand_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/hand_unm.png @ 2023-03-23 23:24:36
@@ -115,11 +115,11 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 [[file:images/hand_me.png]]
 
 + No. of vertices: 59
-+ Time to decompose: 3365 \(\pm\) 10 $\mu s$
-+ Time to merge: 121 $\pm$ 10 $\mu s$
-+ No. of polygons before merging: 29
-+ No. of polygons after merging: 22
-*** i18:
++ Time to decompose: 3802 \(\pm\) 8 $\mu s$
++ Time to merge: 118 $\pm$ 1 $\mu s$
++ No. of polygons before merging: 25
++ No. of polygons after merging: 19
+*** i18
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/i18_undec.png @ 2023-03-23 23:24:14
 [[file:images/i18_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/i18_unm.png @ 2023-03-23 23:24:36
@@ -127,12 +127,12 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/i18_me.png @ 2023-03-23 23:25:07
 [[file:images/i18_me.png]]
 
-+ No. of vertices: 62
-+ Time to decompose: 3516 \(\pm\) 21 $\mu s$
-+ Time to merge: 160 $\pm$ 21 $\mu s$
-+ No. of polygons before merging: 29
-+ No. of polygons after merging: 22
-*** India:
++ No. of vertices: 18
++ Time to decompose: 555 \(\pm\) 2 $\mu s$
++ Time to merge: 41 $\pm$ 0 $\mu s$
++ No. of polygons before merging: 10
++ No. of polygons after merging: 9
+*** India
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/india_undec.png @ 2023-03-23 23:24:14
 [[file:images/india_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/india_unm.png @ 2023-03-23 23:24:36
@@ -140,12 +140,12 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/india_me.png @ 2023-03-23 23:25:07
 [[file:images/india_me.png]]
 
-+ No. of vertices: 62
-+ Time to decompose: 3516 \(\pm\) 21 $\mu s$
-+ Time to merge: 160 $\pm$ 21 $\mu s$
-+ No. of polygons before merging: 29
-+ No. of polygons after merging: 22
-*** Mongolia:
++ No. of vertices: 136
++ Time to decompose: 46806 \(\pm\) 179 $\mu s$
++ Time to merge: 654 $\pm$ 3 $\mu s$
++ No. of polygons before merging: 75
++ No. of polygons after merging: 54
+*** Mongolia
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/mong_undec.png @ 2023-03-23 23:24:14
 [[file:images/mong_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/mong_unm.png @ 2023-03-23 23:24:36
@@ -153,12 +153,12 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/mong_me.png @ 2023-03-23 23:25:07
 [[file:images/mong_me.png]]
 
-+ No. of vertices: 62
-+ Time to decompose: 3516 \(\pm\) 21 $\mu s$
-+ Time to merge: 160 $\pm$ 21 $\mu s$
-+ No. of polygons before merging: 29
-+ No. of polygons after merging: 22
-*** poly2:
++ No. of vertices: 1495
++ Time to decompose: 35185674  $\mu s$
++ Time to merge: 25721 $\mu s$
++ No. of polygons before merging: 620
++ No. of polygons after merging: 429
+*** poly2
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/poly2_undec.png @ 2023-03-23 23:24:14
 [[file:images/poly2_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/poly2_unm.png @ 2023-03-23 23:24:36
@@ -166,25 +166,12 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/poly2_me.png @ 2023-03-23 23:25:07
 [[file:images/poly2_me.png]]
 
-+ No. of vertices: 62
-+ Time to decompose: 3516 \(\pm\) 21 $\mu s$
-+ Time to merge: 160 $\pm$ 21 $\mu s$
-+ No. of polygons before merging: 29
-+ No. of polygons after merging: 22
-*** Romania:
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/romania_undec.png @ 2023-03-23 23:24:14
-[[file:images/romania_undec.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/romania_unm.png @ 2023-03-23 23:24:36
-[[file:images/romania_unm.png]]
-#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/romania_me.png @ 2023-03-23 23:25:07
-[[file:images/romania_me.png]]
-
-+ No. of vertices: 62
-+ Time to decompose: 3516 \(\pm\) 21 $\mu s$
-+ Time to merge: 160 $\pm$ 21 $\mu s$
-+ No. of polygons before merging: 29
-+ No. of polygons after merging: 22
-*** Snake:
++ No. of vertices: 12
++ Time to decompose: 148 \(\pm\) 2 $\mu s$
++ Time to merge: 31 $\pm$ 1 $\mu s$
++ No. of polygons before merging: 7
++ No. of polygons after merging: 4
+*** Snake
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/snake_undec.png @ 2023-03-23 23:24:14
 [[file:images/snake_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/snake_unm.png @ 2023-03-23 23:24:36
@@ -192,12 +179,12 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/snake_me.png @ 2023-03-23 23:25:07
 [[file:images/snake_me.png]]
 
-+ No. of vertices: 62
-+ Time to decompose: 3516 \(\pm\) 21 $\mu s$
-+ Time to merge: 160 $\pm$ 21 $\mu s$
-+ No. of polygons before merging: 29
-+ No. of polygons after merging: 22
-*** Star:
++ No. of vertices: 12
++ Time to decompose: 148 \(\pm\) 2 $\mu s$
++ Time to merge: 22 $\pm$ 1 $\mu s$
++ No. of polygons before merging: 6
++ No. of polygons after merging: 6
+*** Star
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/star_undec.png @ 2023-03-23 23:24:14
 [[file:images/star_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/star_unm.png @ 2023-03-23 23:24:36
@@ -205,12 +192,12 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/star_me.png @ 2023-03-23 23:25:07
 [[file:images/star_me.png]]
 
-+ No. of vertices: 62
-+ Time to decompose: 3516 \(\pm\) 21 $\mu s$
-+ Time to merge: 160 $\pm$ 21 $\mu s$
-+ No. of polygons before merging: 29
-+ No. of polygons after merging: 22
-*** test2:
++ No. of vertices: 10
++ Time to decompose: 125 \(\pm\) 1 $\mu s$
++ Time to merge: 20 $\pm$ 0 $\mu s$
++ No. of polygons before merging: 6
++ No. of polygons after merging: 5
+*** test2
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/test2_undec.png @ 2023-03-23 23:24:14
 [[file:images/test2_undec.png]]
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/test2_unm.png @ 2023-03-23 23:24:36
@@ -218,8 +205,21 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 #+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/test2_me.png @ 2023-03-23 23:25:07
 [[file:images/test2_me.png]]
 
-+ No. of vertices: 62
-+ Time to decompose: 3516 \(\pm\) 21 $\mu s$
-+ Time to merge: 160 $\pm$ 21 $\mu s$
-+ No. of polygons before merging: 29
-+ No. of polygons after merging: 22
++ No. of vertices: 21
++ Time to decompose: 535 \(\pm\) 2 $\mu s$
++ Time to merge: 37 $\pm$ 0 $\mu s$
++ No. of polygons before merging: 11
++ No. of polygons after merging: 10
+*** Monteserrat
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/mons_undec.png @ 2023-03-23 23:24:14
+[[file:images/mons_undec.png]]
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/mons_unm.png @ 2023-03-23 23:24:36
+[[file:images/mons_unm.png]]
+#+DOWNLOADED: file:///home/chinmay/acads/assignments/DAA-Assignment-1/report/images/mons_me.png @ 2023-03-23 23:25:07
+[[file:images/mons_me.png]]
+
++ No. of vertices: 23
++ Time to decompose: 300 \(\pm\) 15 $\mu s$
++ Time to merge: 34 $\pm$ 1 $\mu s$
++ No. of polygons before merging: 9
++ No. of polygons after merging: 7

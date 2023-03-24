@@ -1,0 +1,6 @@
+<map id="Face" name="Face">
+<area shape="rect" id="node1" title=" " alt="" coords="29,5,80,31"/>
+<area shape="rect" id="node2" href="$classEdge.html" title=" " alt="" coords="28,103,80,128"/>
+<area shape="rect" id="node3" href="$classVertex.html" title=" " alt="" coords="114,200,173,225"/>
+<area shape="rect" id="node4" href="$classPoint.html" title=" " alt="" coords="184,103,236,128"/>
+</map>

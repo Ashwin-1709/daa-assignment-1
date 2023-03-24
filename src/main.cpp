@@ -4,16 +4,16 @@
 #include "utils.hh"
 #include <chrono>
 #include <cstdio>
-#include <bits/stdc++.h>
+#include <iostream>
 
 /// @brief Given list of points of input polygon in clockwise order, decomposes
 /// it to convex polygons
 auto main() -> int {
-    usize n;
-    std::cin >> n;
-    std::cout << n << std::endl;
+    usize n_vertices;
+    std::cin >> n_vertices;
+    std::cout << n_vertices << std::endl;
     std::deque<Point> points;
-    for (usize i = 0; i < n; i++) {
+    for (usize i = 0; i < n_vertices; i++) {
         double x;
         double y;
         std::cin >> x >> y;

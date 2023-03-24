@@ -14,17 +14,17 @@ auto merge(DecompData &decompdata) -> std::set<Face *> {
     auto &inv_face_id = decompdata.inv_face_id;
     const auto &LLE = decompdata.LLE;
     const auto &LP = decompdata.LP;
-    for (const auto &f : faces) {
-        if (is_collinear(f)) {
-            remove.push_back(f);
+    for (const auto &face : faces) {
+        if (is_collinear(face)) {
+            remove.push_back(face);
         }
     }
 
-    for (auto &f : remove) {
-        faces.erase(f);
+    for (auto &face : remove) {
+        faces.erase(face);
     }
 
-    usize m = decompdata.LLE.size();
+    usize const m = decompdata.LLE.size();
     // Step 1: Initialising NP
     usize NP = m + 1;
 

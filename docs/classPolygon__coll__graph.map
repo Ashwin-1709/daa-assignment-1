@@ -1,0 +1,7 @@
+<map id="Polygon" name="Polygon">
+<area shape="rect" id="node1" title=" " alt="" coords="5,117,75,143"/>
+<area shape="rect" id="node2" href="$classFace.html" title=" " alt="" coords="107,5,157,31"/>
+<area shape="rect" id="node3" href="$classEdge.html" title=" " alt="" coords="149,117,201,143"/>
+<area shape="rect" id="node4" href="$classVertex.html" title=" " alt="" coords="235,215,293,240"/>
+<area shape="rect" id="node5" href="$classPoint.html" title=" " alt="" coords="305,117,357,143"/>
+</map>
