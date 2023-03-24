@@ -1,6 +1,5 @@
 /** \file */
 #include "decomp.hh"
-#include "dbg.hh"
 #include <deque>
 
 /// @brief Decomposes a Polygon using the MP1 Algorithm

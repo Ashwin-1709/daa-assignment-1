@@ -3,8 +3,8 @@
 #include <algorithm>
 #include <cassert>
 #include <cmath>
-#include <dbg.hh>
 #include <vector>
+#include <bits/stdc++.h>
 
 /// @brief Returns the angle swept by a counterclockwise rotation from line
 /// segment ba to line segment bc

@@ -9,7 +9,7 @@ class Edge;
 class Face {
   public:
     Edge *edge;
-    /*!< TODO */
+    /*!< Representative edge of the face */
 };
 
 class Edge {
@@ -47,9 +47,9 @@ class Vertex {
 class Polygon {
   public:
     Face *open_end;
-    /*!< TODO */
+    /*!< Face corresponding to the open end of polygon*/
     Face *inner_end;
-    /*!< TODO */
+    /*!< Face corresponding to the inner end of polygon */
     std::deque<Vertex *> vertices; /*!< Deque of `Vertex`es of the Polygon */
     usize n_vertices;              /*!< Number of vertices in the Polygon */
     Polygon(const std::deque<Point> &point_list);

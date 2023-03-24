@@ -1,10 +1,10 @@
-#include "dbg.hh"
 #include "dcel.hh"
 #include "decomp.hh"
 #include "merge.hh"
 #include "utils.hh"
 #include <chrono>
 #include <cstdio>
+#include <bits/stdc++.h>
 
 /// @brief Given list of points of input polygon in clockwise order, decomposes
 /// it to convex polygons

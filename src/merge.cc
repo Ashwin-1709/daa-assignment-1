@@ -25,16 +25,16 @@ auto merge(DecompData &decompdata) -> std::set<Face *> {
     }
 
     usize m = decompdata.LLE.size();
-    // Step 1
+    // Step 1: Initialising NP
     usize NP = m + 1;
 
-    // Step 2
+    // Step 2: LDP[i] = true and LUP[i] = i
     for (usize i = 0; i < NP; i++) {
         LDP[i] = true;
         LUP[i] = i;
     }
 
-    // Step 3
+    // Step 3: Iterating over diagonals and checking if the faces can be merged
     for (usize j = 0; j < m; j++) {
         // 3.1
         auto [Vs, Vt] = LLE[j];
