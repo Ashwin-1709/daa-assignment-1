@@ -52,7 +52,6 @@ auto decompose(const Polygon &polygon) -> DecompData {
             L[m].push_back(P[i + 1]);
             i++;
         }
-        dbg(n);
         // 3.4: If there are more points to be explored => There has to be a notch which prevents us from adding more points
         if (L[m].size() != P.size()) {
             auto notch = get_notches(P);
