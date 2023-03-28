@@ -223,3 +223,9 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 + Time to merge: 34 $\pm$ 1 $\mu s$
 + No. of polygons before merging: 9
 + No. of polygons after merging: 7
+
+* Plots 
+** Decomposition
+[[file:images/decomp_analysis.png]]
+** Merging
+[[file:images/merge_analysis.png]]

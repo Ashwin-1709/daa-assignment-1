@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-03-24 Fri 19:57 -->
+<!-- 2023-03-28 Tue 14:18 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CS F364 Assignment 1</title>
@@ -202,97 +202,103 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga832e27">1. Problem statement</a></li>
-<li><a href="#org2a14c61">2. DCEL: Doubly Connected Edge List</a>
+<li><a href="#org2fa935d">1. Problem statement</a></li>
+<li><a href="#orga9b4792">2. DCEL: Doubly Connected Edge List</a>
 <ul>
-<li><a href="#orgaed5ebb">2.1. Polygon</a></li>
-<li><a href="#org35247d7">2.2. Vertex</a></li>
-<li><a href="#orgcfce66e">2.3. Edge</a></li>
-<li><a href="#org29622a8">2.4. Face</a></li>
+<li><a href="#orgd0bc5b1">2.1. Polygon</a></li>
+<li><a href="#orgef49230">2.2. Vertex</a></li>
+<li><a href="#org46bea76">2.3. Edge</a></li>
+<li><a href="#org96923fb">2.4. Face</a></li>
 </ul>
 </li>
-<li><a href="#org39e31ff">3. Decomposition</a>
+<li><a href="#orgffc3d36">3. Decomposition</a>
 <ul>
-<li><a href="#org280163c">3.1. Terminology</a>
+<li><a href="#orgde9dabc">3.1. Terminology</a>
 <ul>
-<li><a href="#org418677f">3.1.1. Notch</a></li>
-<li><a href="#org777c27f">3.1.2. LPVS</a></li>
-<li><a href="#org3ba02fa">3.1.3. VTR</a></li>
+<li><a href="#orge1a9853">3.1.1. Notch</a></li>
+<li><a href="#org782c6c3">3.1.2. LPVS</a></li>
+<li><a href="#org618f8be">3.1.3. VTR</a></li>
 </ul>
 </li>
-<li><a href="#org6586783">3.2. Algorithm</a></li>
-<li><a href="#orge7edb7f">3.3. Time complexity analysis of helper functions</a>
+<li><a href="#orgc479cf3">3.2. Algorithm</a></li>
+<li><a href="#org877b5ec">3.3. Time complexity analysis of helper functions</a>
 <ul>
-<li><a href="#org723530c">3.3.1. <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</a></li>
-<li><a href="#orga064685">3.3.2. <code>get_notches</code>: Given a polygon, return a list of notches</a></li>
-<li><a href="#org658c2ca">3.3.3. <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</a></li>
-<li><a href="#org2c59503">3.3.4. <code>merge_face</code>: Given two faces, merge and return their combination</a></li>
-<li><a href="#org77d7c2b">3.3.5. <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in <img src="ltximg/report_168d405655b0d05881bd0d39d70338533f2f5411.svg" alt="\(P \setminus L_m\)" class="org-svg" /></a></li>
-<li><a href="#org219e23e">3.3.6. <code>inside_polygon</code>: Check whether a point lies inside a polygon</a></li>
+<li><a href="#org0386fa8">3.3.1. <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</a></li>
+<li><a href="#org69f6cd5">3.3.2. <code>get_notches</code>: Given a polygon, return a list of notches</a></li>
+<li><a href="#org7784c7c">3.3.3. <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</a></li>
+<li><a href="#org39a5b01">3.3.4. <code>merge_face</code>: Given two faces, merge and return their combination</a></li>
+<li><a href="#org3c99e07">3.3.5. <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in <img src="/home/chinmay/.local/state/emacs/var/org/persist/d5/6f9480-a6fa-4e64-b1b8-23a539a7395b-9be907eaf865d4be9bbb285321ef4262.svg" alt="\(P \setminus L_m\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /></a></li>
+<li><a href="#org3da2838">3.3.6. <code>inside_polygon</code>: Check whether a point lies inside a polygon</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org21aefac">4. Merging</a>
+<li><a href="#org694065f">4. Merging</a>
 <ul>
-<li><a href="#orgc278096">4.1. Terminology</a>
+<li><a href="#org65a32ce">4.1. Terminology</a>
 <ul>
-<li><a href="#orgda5cc06">4.1.1. LDP</a></li>
-<li><a href="#orgab83525">4.1.2. LUP</a></li>
-<li><a href="#orga56a93f">4.1.3. LLE</a></li>
+<li><a href="#org4d1b2f7">4.1.1. LDP</a></li>
+<li><a href="#org7a3c26a">4.1.2. LUP</a></li>
+<li><a href="#org5046ed0">4.1.3. LLE</a></li>
 </ul>
 </li>
-<li><a href="#org7481230">4.2. Algorithm</a></li>
+<li><a href="#orga786465">4.2. Algorithm</a></li>
 </ul>
 </li>
-<li><a href="#orga8e24d2">5. Benchmarks and Results</a>
+<li><a href="#org133aeba">5. Benchmarks and Results</a>
 <ul>
 <li>
 <ul>
-<li><a href="#org231cfc7">5.0.1. Algeria</a></li>
-<li><a href="#orgb451eac">5.0.2. Comb</a></li>
-<li><a href="#org2c7c09a">5.0.3. Greenland</a></li>
-<li><a href="#orgc984ff7">5.0.4. Hand</a></li>
-<li><a href="#orgb35689a">5.0.5. i18</a></li>
-<li><a href="#orgdd25f09">5.0.6. India</a></li>
-<li><a href="#org69e524c">5.0.7. Mongolia</a></li>
-<li><a href="#orgbfc4b87">5.0.8. poly2</a></li>
-<li><a href="#orgc0c53c2">5.0.9. Snake</a></li>
-<li><a href="#org4fc77a2">5.0.10. Star</a></li>
-<li><a href="#orgd29cc39">5.0.11. test2</a></li>
-<li><a href="#org40c21cd">5.0.12. Monteserrat</a></li>
+<li><a href="#org38301e8">5.0.1. Algeria</a></li>
+<li><a href="#org3387dbd">5.0.2. Comb</a></li>
+<li><a href="#org79db695">5.0.3. Greenland</a></li>
+<li><a href="#orgc00ad90">5.0.4. Hand</a></li>
+<li><a href="#org8dfdded">5.0.5. i18</a></li>
+<li><a href="#org08758c5">5.0.6. India</a></li>
+<li><a href="#org59fff5b">5.0.7. Mongolia</a></li>
+<li><a href="#org1097f01">5.0.8. poly2</a></li>
+<li><a href="#org9882dc8">5.0.9. Snake</a></li>
+<li><a href="#orgd03040d">5.0.10. Star</a></li>
+<li><a href="#org548dd18">5.0.11. test2</a></li>
+<li><a href="#orgec62dd2">5.0.12. Monteserrat</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#org33c4329">6. Plots</a>
+<ul>
+<li><a href="#org42d0af1">6.1. Decomposition</a></li>
+<li><a href="#orga21e044">6.2. Merging</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orga832e27" class="outline-2">
-<h2 id="orga832e27"><span class="section-number-2">1.</span> Problem statement</h2>
+<div id="outline-container-org2fa935d" class="outline-2">
+<h2 id="org2fa935d"><span class="section-number-2">1.</span> Problem statement</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Given an arbitrary polygon, decompose it into a set of convex polygons. We have been given the following paper to implement:
 Algorithms for the decomposition of a polygon into convex polygons, European Journal of Operational Research, 121(2), 330-342.
-The paper describes three different algorithms for the decomposition of the polygon, we have implement the <img src="ltximg/report_2216eb3b3ac43b6fd7793594648fb5d45e59f332.svg" alt="\(MP1\)" class="org-svg" /> algorithm as part of this assignment as well as the merging part that follows.
+The paper describes three different algorithms for the decomposition of the polygon, we have implement the <img src="/home/chinmay/.local/state/emacs/var/org/persist/b6/666e0c-cac2-4bd6-9cd9-c656160200f3-f43224d19edbd3a03c9486d89300aba9.svg" alt="\(MP1\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> algorithm as part of this assignment as well as the merging part that follows.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org2a14c61" class="outline-2">
-<h2 id="org2a14c61"><span class="section-number-2">2.</span> DCEL: Doubly Connected Edge List</h2>
+<div id="outline-container-orga9b4792" class="outline-2">
+<h2 id="orga9b4792"><span class="section-number-2">2.</span> DCEL: Doubly Connected Edge List</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 We have used the DCEL data structure to store our decomposed polygon. DCEL consists of three main sub-data-structures, namely
 Vertex, Edge and Face.
 </p>
 
-<div id="org8071fca" class="figure">
+<div id="org8c70d2d" class="figure">
 <p><img src="images/dcel.png" alt="dcel.png" />
 </p>
 </div>
 
-<div id="orgb7401b9" class="figure">
+<div id="org285f7ea" class="figure">
 <p><img src="images/dcel_detailed.png" alt="dcel_detailed.png" />
 </p>
 </div>
@@ -301,24 +307,24 @@ Vertex, Edge and Face.
 (Images taken from <a href="https://www2.cs.sfu.ca/~binay/813.2011/DCEL.pdf">https://www2.cs.sfu.ca/~binay/813.2011/DCEL.pdf</a>)
 </p>
 </div>
-<div id="outline-container-orgaed5ebb" class="outline-3">
-<h3 id="orgaed5ebb"><span class="section-number-3">2.1.</span> Polygon</h3>
+<div id="outline-container-orgd0bc5b1" class="outline-3">
+<h3 id="orgd0bc5b1"><span class="section-number-3">2.1.</span> Polygon</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 A decomposed polygon is represented by the Polygon class, which contains a list of vertices of the original polygon in clockwise order, and two Faces which represent the outer and inner faces of the initial, undecomposed polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-org35247d7" class="outline-3">
-<h3 id="org35247d7"><span class="section-number-3">2.2.</span> Vertex</h3>
+<div id="outline-container-orgef49230" class="outline-3">
+<h3 id="orgef49230"><span class="section-number-3">2.2.</span> Vertex</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 A vertex contains the coordinates of the point and an IncidentEdge - an edge which originates at the vertex.
 </p>
 </div>
 </div>
-<div id="outline-container-orgcfce66e" class="outline-3">
-<h3 id="orgcfce66e"><span class="section-number-3">2.3.</span> Edge</h3>
+<div id="outline-container-org46bea76" class="outline-3">
+<h3 id="org46bea76"><span class="section-number-3">2.3.</span> Edge</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 An edge contains
@@ -331,8 +337,8 @@ An edge contains
 </ul>
 </div>
 </div>
-<div id="outline-container-org29622a8" class="outline-3">
-<h3 id="org29622a8"><span class="section-number-3">2.4.</span> Face</h3>
+<div id="outline-container-org96923fb" class="outline-3">
+<h3 id="org96923fb"><span class="section-number-3">2.4.</span> Face</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 A face contains a pointer to any one of the representative edges of the face (if we know one edge we can find all of them by traversing using the <code>next</code> field of the edge)
@@ -340,32 +346,32 @@ A face contains a pointer to any one of the representative edges of the face (if
 </div>
 </div>
 </div>
-<div id="outline-container-org39e31ff" class="outline-2">
-<h2 id="org39e31ff"><span class="section-number-2">3.</span> Decomposition</h2>
+<div id="outline-container-orgffc3d36" class="outline-2">
+<h2 id="orgffc3d36"><span class="section-number-2">3.</span> Decomposition</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org280163c" class="outline-3">
-<h3 id="org280163c"><span class="section-number-3">3.1.</span> Terminology</h3>
+<div id="outline-container-orgde9dabc" class="outline-3">
+<h3 id="orgde9dabc"><span class="section-number-3">3.1.</span> Terminology</h3>
 <div class="outline-text-3" id="text-3-1">
 </div>
-<div id="outline-container-org418677f" class="outline-4">
-<h4 id="org418677f"><span class="section-number-4">3.1.1.</span> Notch</h4>
+<div id="outline-container-orge1a9853" class="outline-4">
+<h4 id="orge1a9853"><span class="section-number-4">3.1.1.</span> Notch</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <p>
-Angle between 3 points <img src="ltximg/report_4c3dfedbfc7e18b8b1b20ada6089bedca076c3ec.svg" alt="\(a,b,c\)" class="org-svg" /> is said to be a notch if it is greater than <img src="ltximg/report_c445cef998698f899600154a00ce82e85afbbb44.svg" alt="\(180 \degree\)" class="org-svg" />
+Angle between 3 points <img src="/home/chinmay/.local/state/emacs/var/org/persist/9c/0408c8-f629-40a4-a46a-870579176b63-f941296542a7c59d44a49cb51c6e7fd1.svg" alt="\(a,b,c\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /> is said to be a notch if it is greater than <img src="/home/chinmay/.local/state/emacs/var/org/persist/92/18fc2f-7508-4e02-8c5a-b4c8ec4c2d89-c3cc114f96714fbd65cec2a9cb51499c.svg" alt="\(180 \degree\)" style="height: 0.7732em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" />
 </p>
 </div>
 </div>
-<div id="outline-container-org777c27f" class="outline-4">
-<h4 id="org777c27f"><span class="section-number-4">3.1.2.</span> LPVS</h4>
+<div id="outline-container-org782c6c3" class="outline-4">
+<h4 id="org782c6c3"><span class="section-number-4">3.1.2.</span> LPVS</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <p>
-<img src="ltximg/report_07f3b8a54ff00a8c1d167b4bdfba6c5785b81729.svg" alt="\(LPVS(P,S)\)" class="org-svg" /> is the list of notches enclosed in <img src="ltximg/report_06437bf312f016dfafc344427766ec1cbda83add.svg" alt="\(P \setminus L\)" class="org-svg" />
+<img src="/home/chinmay/.local/state/emacs/var/org/persist/5e/dbf9e8-51d3-4955-b4f1-4b65860654db-8a6c6f9a7d7bb773ca895ff6e3654f43.svg" alt="\(LPVS(P,S)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /> is the list of notches enclosed in <img src="/home/chinmay/.local/state/emacs/var/org/persist/8a/377824-d171-48d9-8d96-d4d46a27cea5-d037b76f7f9e1f8d39308d98c92bca4d.svg" alt="\(P \setminus L\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" />
 </p>
 </div>
 </div>
-<div id="outline-container-org3ba02fa" class="outline-4">
-<h4 id="org3ba02fa"><span class="section-number-4">3.1.3.</span> VTR</h4>
+<div id="outline-container-org618f8be" class="outline-4">
+<h4 id="org618f8be"><span class="section-number-4">3.1.3.</span> VTR</h4>
 <div class="outline-text-4" id="text-3-1-3">
 <p>
 Intermediate polygon from which we need to remove
@@ -377,95 +383,95 @@ Intermediate polygon from which we need to remove
 </div>
 </div>
 </div>
-<div id="outline-container-org6586783" class="outline-3">
-<h3 id="org6586783"><span class="section-number-3">3.2.</span> Algorithm</h3>
+<div id="outline-container-orgc479cf3" class="outline-3">
+<h3 id="orgc479cf3"><span class="section-number-3">3.2.</span> Algorithm</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 The algorithm relies on successive adding of vertices until the polygon formed by the vertices is not convex. When we cannot add any points to the polygon, we check if any notches are enclosed in the rectangle of minimum area formed by the points added so far. If no notches are present, we create a new polygon by splitting the face of the existing polygon and continue to work on the other half of the newly formed polygon until the number of vertices in our list falls below or equal to -  this is the halting condition of the decomposition algorithm. If, in intermediate stages, we notice that notches are present in the rectangle, we remove the notches and the last point of the polygon until we reach a condition where the diagonal formed by the first and the last point does not enclose any other point. We start from the next vertex if we cannot make the polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-orge7edb7f" class="outline-3">
-<h3 id="orge7edb7f"><span class="section-number-3">3.3.</span> Time complexity analysis of helper functions</h3>
+<div id="outline-container-org877b5ec" class="outline-3">
+<h3 id="org877b5ec"><span class="section-number-3">3.3.</span> Time complexity analysis of helper functions</h3>
 <div class="outline-text-3" id="text-3-3">
 </div>
-<div id="outline-container-org723530c" class="outline-4">
-<h4 id="org723530c"><span class="section-number-4">3.3.1.</span> <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</h4>
+<div id="outline-container-org0386fa8" class="outline-4">
+<h4 id="org0386fa8"><span class="section-number-4">3.3.1.</span> <code>angle(a,b,c)</code>: Given three vertices, find the angle between them</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <p>
-Returns the angle swept by line segment <img src="ltximg/report_491923e73e9082582f4f3ba5a4222ec0fcd7dcba.svg" alt="\(ba\)" class="org-svg" /> over <img src="ltximg/report_1418ac4edf46f00b539cbfa26f687fefdbbe214a.svg" alt="\(bc\)" class="org-svg" /> counterclockwise. For finding the angle, we calculate the magnitudes of <img src="ltximg/report_987d25698c5911222f818b1398d26f1eb75f4022.svg" alt="\(\vec{ba}\)" class="org-svg" /> and <img src="ltximg/report_aa83a9e211260583227d298f03af2acfe108853e.svg" alt="\(\vec{bc}\)" class="org-svg" />, and their dot and cross products. We then return different values depending on the sign of the dot and cross products. The time complexity is <img src="ltximg/report_5086a20bff22f6cef9098d2ad957b7dfebf3a1bc.svg" alt="\(\mathcal{O}(1)\)" class="org-svg" />
+Returns the angle swept by line segment <img src="/home/chinmay/.local/state/emacs/var/org/persist/fe/b9d0de-6d0d-49db-8f09-d88abaf5b290-a7cd09716b8d588c5022390f8cc91df7.svg" alt="\(ba\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> over <img src="/home/chinmay/.local/state/emacs/var/org/persist/84/21734e-9022-4b7c-bb4b-09226089ddff-b6d81d175123ce920c3226be5b7712f3.svg" alt="\(bc\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> counterclockwise. For finding the angle, we calculate the magnitudes of <img src="/home/chinmay/.local/state/emacs/var/org/persist/5e/4f1cd4-c9fe-412f-9253-8bc73cef4039-8da69f400a36e7b624646f25ac790d7f.svg" alt="\(\vec{ba}\)" style="height: 1.0571em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> and <img src="/home/chinmay/.local/state/emacs/var/org/persist/3e/c7868e-4eac-42c5-9188-af91b1e46d65-8e0aee3d5446b8fe406a3a4456a9a3e2.svg" alt="\(\vec{bc}\)" style="height: 1.0571em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" />, and their dot and cross products. We then return different values depending on the sign of the dot and cross products. The time complexity is <img src="/home/chinmay/.local/state/emacs/var/org/persist/a8/9cdf2d-ef93-481c-b93f-fad39f8caa93-b30104913d5bf860e96a3e09927d66d3.svg" alt="\(\mathcal{O}(1)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" />
 </p>
 </div>
 </div>
-<div id="outline-container-orga064685" class="outline-4">
-<h4 id="orga064685"><span class="section-number-4">3.3.2.</span> <code>get_notches</code>: Given a polygon, return a list of notches</h4>
+<div id="outline-container-org69f6cd5" class="outline-4">
+<h4 id="org69f6cd5"><span class="section-number-4">3.3.2.</span> <code>get_notches</code>: Given a polygon, return a list of notches</h4>
 <div class="outline-text-4" id="text-3-3-2">
 <p>
-We iterate over the vertices of the polygon in clockwise order, checking if the angle <img src="ltximg/report_5e2fab8b5344a5998b2e152b7761ff6be924ef99.svg" alt="\(v_{i-1},v_i,v_{i+1}\)" class="org-svg" /> (where <img src="ltximg/report_a2e23f9d5e57ab2b8ac2682dcecc3a5e9fc7fe9a.svg" alt="\(v_i\)" class="org-svg" /> is the current vertex) is reflex. If the angle is reflex, we add it to the list of notches. Finding the angle takes constant time, hence the time complexity for getting all the notches is <img src="ltximg/report_f34fdd723595e1a626e9b3a4c4c63665c5ce89a4.svg" alt="\(\mathcal{O}(n)\)" class="org-svg" /> where <img src="ltximg/report_974d16a2800caed43ba80da4db121cd576ca4322.svg" alt="\(n\)" class="org-svg" /> is the number of vertices in the polygon.
+We iterate over the vertices of the polygon in clockwise order, checking if the angle <img src="/home/chinmay/.local/state/emacs/var/org/persist/9f/cf0525-2700-4ca1-aad5-29248e5ac8ef-455e17c8d62fd79b6cae7f6320c34f74.svg" alt="\(v_{i-1},v_i,v_{i+1}\)" style="height: 0.7490em; vertical-align: -0.2779em; display: inline-block" class="org-latex org-latex-fragment" /> (where <img src="/home/chinmay/.local/state/emacs/var/org/persist/81/5f4415-2290-4dc8-b65f-bcd7302e10db-95ef963b23643ec99744646f7b780f6c.svg" alt="\(v_i\)" style="height: 0.6673em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-fragment" /> is the current vertex) is reflex. If the angle is reflex, we add it to the list of notches. Finding the angle takes constant time, hence the time complexity for getting all the notches is <img src="/home/chinmay/.local/state/emacs/var/org/persist/fc/b1392e-14da-426f-8fe0-f6f4a5fb1503-e18e437794019b8bd4bfc7af079ebe61.svg" alt="\(\mathcal{O}(n)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /> where <img src="/home/chinmay/.local/state/emacs/var/org/persist/ef/d9841c-b7c4-42fd-be89-55038d478583-0a06a8ae503ec4a5f5b50273d033522f.svg" alt="\(n\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> is the number of vertices in the polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-org658c2ca" class="outline-4">
-<h4 id="org658c2ca"><span class="section-number-4">3.3.3.</span> <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</h4>
+<div id="outline-container-org7784c7c" class="outline-4">
+<h4 id="org7784c7c"><span class="section-number-4">3.3.3.</span> <code>split_face</code>: Given a diagonal and a face, split the face at the diagonal</h4>
 <div class="outline-text-4" id="text-3-3-3">
 <p>
-We iterate over the edges of the face and get the neighbouring edges incident to the diagonal vertices. We do the necessary updates to the <code>next</code> and <code>previous</code> of all the necessary edges. We then create a new face and update its edges so that their left face points to this face. Finally, we return the newly formed face. The time complexity for this process is <img src="ltximg/report_f34fdd723595e1a626e9b3a4c4c63665c5ce89a4.svg" alt="\(\mathcal{O}(n)\)" class="org-svg" /> where <img src="ltximg/report_974d16a2800caed43ba80da4db121cd576ca4322.svg" alt="\(n\)" class="org-svg" /> is the number of vertices in the polygon due to the linear nature of both the processes.
+We iterate over the edges of the face and get the neighbouring edges incident to the diagonal vertices. We do the necessary updates to the <code>next</code> and <code>previous</code> of all the necessary edges. We then create a new face and update its edges so that their left face points to this face. Finally, we return the newly formed face. The time complexity for this process is <img src="/home/chinmay/.local/state/emacs/var/org/persist/fc/b1392e-14da-426f-8fe0-f6f4a5fb1503-e18e437794019b8bd4bfc7af079ebe61.svg" alt="\(\mathcal{O}(n)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /> where <img src="/home/chinmay/.local/state/emacs/var/org/persist/ef/d9841c-b7c4-42fd-be89-55038d478583-0a06a8ae503ec4a5f5b50273d033522f.svg" alt="\(n\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> is the number of vertices in the polygon due to the linear nature of both the processes.
 </p>
 </div>
 </div>
-<div id="outline-container-org2c59503" class="outline-4">
-<h4 id="org2c59503"><span class="section-number-4">3.3.4.</span> <code>merge_face</code>: Given two faces, merge and return their combination</h4>
+<div id="outline-container-org39a5b01" class="outline-4">
+<h4 id="org39a5b01"><span class="section-number-4">3.3.4.</span> <code>merge_face</code>: Given two faces, merge and return their combination</h4>
 <div class="outline-text-4" id="text-3-3-4">
 <p>
-We iterate over edges of the first face to find the diagonal between the two faces and perform the necessary updates in the edges. After updation, the left faces of all the edges are updated to the first face and the first face is returned. The time complexity is <img src="ltximg/report_f34fdd723595e1a626e9b3a4c4c63665c5ce89a4.svg" alt="\(\mathcal{O}(n)\)" class="org-svg" /> where <img src="ltximg/report_974d16a2800caed43ba80da4db121cd576ca4322.svg" alt="\(n\)" class="org-svg" /> is the number of vertices in the polygon.
+We iterate over edges of the first face to find the diagonal between the two faces and perform the necessary updates in the edges. After updation, the left faces of all the edges are updated to the first face and the first face is returned. The time complexity is <img src="/home/chinmay/.local/state/emacs/var/org/persist/fc/b1392e-14da-426f-8fe0-f6f4a5fb1503-e18e437794019b8bd4bfc7af079ebe61.svg" alt="\(\mathcal{O}(n)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /> where <img src="/home/chinmay/.local/state/emacs/var/org/persist/ef/d9841c-b7c4-42fd-be89-55038d478583-0a06a8ae503ec4a5f5b50273d033522f.svg" alt="\(n\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> is the number of vertices in the polygon.
 </p>
 </div>
 </div>
-<div id="outline-container-org77d7c2b" class="outline-4">
-<h4 id="org77d7c2b"><span class="section-number-4">3.3.5.</span> <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in <img src="ltximg/report_168d405655b0d05881bd0d39d70338533f2f5411.svg" alt="\(P \setminus L_m\)" class="org-svg" /></h4>
+<div id="outline-container-org3c99e07" class="outline-4">
+<h4 id="org3c99e07"><span class="section-number-4">3.3.5.</span> <code>get_LPVS</code>: Given a list of notches, find the ones in the polygon made by points in <img src="/home/chinmay/.local/state/emacs/var/org/persist/d5/6f9480-a6fa-4e64-b1b8-23a539a7395b-9be907eaf865d4be9bbb285321ef4262.svg" alt="\(P \setminus L_m\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /></h4>
 <div class="outline-text-4" id="text-3-3-5">
 <p>
-We iterate over all the notches, and check whether they are present in the list <img src="ltximg/report_c36a4ff95bab849ba9ef53358755c69d51deade4.svg" alt="\(L_m\)" class="org-svg" /> (the polygon being made in the <img src="ltximg/report_a1611b921ea2dc82ac466871bf72431891d8f031.svg" alt="\(m^{th}\)" class="org-svg" /> iteration) and not in <img src="ltximg/report_cc86f01d14a4a89b5c9cabdf01fd1b71604ee7ef.svg" alt="\(P\)" class="org-svg" /> (the undecomposed polygon we are currently working on). The time complexity is <img src="ltximg/report_741d2de4ac3058065bb4c1c7e1e222bae3423548.svg" alt="\( \mathcal{O}(n^2) \)" class="org-svg" /> as we have to iterate over <img src="ltximg/report_c36a4ff95bab849ba9ef53358755c69d51deade4.svg" alt="\(L_m\)" class="org-svg" /> and <img src="ltximg/report_cc86f01d14a4a89b5c9cabdf01fd1b71604ee7ef.svg" alt="\(P\)" class="org-svg" /> for every notch.
+We iterate over all the notches, and check whether they are present in the list <img src="/home/chinmay/.local/state/emacs/var/org/persist/90/40d67c-bbb1-451c-91d8-fb3938227387-782859cec7296e7d356bf63d4e84903b.svg" alt="\(L_m\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-fragment" /> (the polygon being made in the <img src="/home/chinmay/.local/state/emacs/var/org/persist/c2/0e6c32-d235-4902-b053-5c4fd9a22419-1d5ee81821f3fa59839494ccb035c491.svg" alt="\(m^{th}\)" style="height: 0.9304em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> iteration) and not in <img src="/home/chinmay/.local/state/emacs/var/org/persist/1c/df7ce5-68c7-497d-9174-de9df921eea1-74bf29327ba0fe0330feb23a439cb71e.svg" alt="\(P\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> (the undecomposed polygon we are currently working on). The time complexity is <img src="/home/chinmay/.local/state/emacs/var/org/persist/50/02140e-8133-44b8-b4be-6d6faa5a53b8-84e78f9b27932eb22748c092d9029868.svg" alt="\( \mathcal{O}(n^2) \)" style="height: 1.1411em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /> as we have to iterate over <img src="/home/chinmay/.local/state/emacs/var/org/persist/90/40d67c-bbb1-451c-91d8-fb3938227387-782859cec7296e7d356bf63d4e84903b.svg" alt="\(L_m\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-fragment" /> and <img src="/home/chinmay/.local/state/emacs/var/org/persist/1c/df7ce5-68c7-497d-9174-de9df921eea1-74bf29327ba0fe0330feb23a439cb71e.svg" alt="\(P\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> for every notch.
 </p>
 </div>
 </div>
-<div id="outline-container-org219e23e" class="outline-4">
-<h4 id="org219e23e"><span class="section-number-4">3.3.6.</span> <code>inside_polygon</code>: Check whether a point lies inside a polygon</h4>
+<div id="outline-container-org3da2838" class="outline-4">
+<h4 id="org3da2838"><span class="section-number-4">3.3.6.</span> <code>inside_polygon</code>: Check whether a point lies inside a polygon</h4>
 <div class="outline-text-4" id="text-3-3-6">
 <p>
 We iterate over the edges in clockwise order. Every time we find an edge one of whose endpoints is above the given point and the other below, and the point is to the right of the edge, we flip a boolean flag.
-This can be done in <img src="ltximg/report_f34fdd723595e1a626e9b3a4c4c63665c5ce89a4.svg" alt="\(\mathcal{O}(n)\)" class="org-svg" />.
+This can be done in <img src="/home/chinmay/.local/state/emacs/var/org/persist/fc/b1392e-14da-426f-8fe0-f6f4a5fb1503-e18e437794019b8bd4bfc7af079ebe61.svg" alt="\(\mathcal{O}(n)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" />.
 </p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org21aefac" class="outline-2">
-<h2 id="org21aefac"><span class="section-number-2">4.</span> Merging</h2>
+<div id="outline-container-org694065f" class="outline-2">
+<h2 id="org694065f"><span class="section-number-2">4.</span> Merging</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-orgc278096" class="outline-3">
-<h3 id="orgc278096"><span class="section-number-3">4.1.</span> Terminology</h3>
+<div id="outline-container-org65a32ce" class="outline-3">
+<h3 id="org65a32ce"><span class="section-number-3">4.1.</span> Terminology</h3>
 <div class="outline-text-3" id="text-4-1">
 </div>
-<div id="outline-container-orgda5cc06" class="outline-4">
-<h4 id="orgda5cc06"><span class="section-number-4">4.1.1.</span> LDP</h4>
+<div id="outline-container-org4d1b2f7" class="outline-4">
+<h4 id="org4d1b2f7"><span class="section-number-4">4.1.1.</span> LDP</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <p>
-LDP is an ordered list of boolean flags, <img src="ltximg/report_3bb2a05c56ae2f1f56fe13f37ea9ea1a32effe26.svg" alt="\(LDP[i]=true\)" class="org-svg" /> means that the polygon with index <img src="ltximg/report_6cf2f08af66400fd36f0183308ae35968f9ae29f.svg" alt="\(i\)" class="org-svg" /> is one of the definitive polygons of the partition after the merging process.
+LDP is an ordered list of boolean flags, <img src="/home/chinmay/.local/state/emacs/var/org/persist/1c/2b2b7f-d68b-4297-867b-94d629bcf3f0-0fbe8f5562faa67bb547c7711bbfd4ac.svg" alt="\(LDP[i]=true\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /> means that the polygon with index <img src="/home/chinmay/.local/state/emacs/var/org/persist/40/9c3edd-ae01-4e84-be29-5f94dd016001-e4166a514bed1d5be235b42b980b9e31.svg" alt="\(i\)" style="height: 0.7447em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> is one of the definitive polygons of the partition after the merging process.
 </p>
 </div>
 </div>
-<div id="outline-container-orgab83525" class="outline-4">
-<h4 id="orgab83525"><span class="section-number-4">4.1.2.</span> LUP</h4>
+<div id="outline-container-org7a3c26a" class="outline-4">
+<h4 id="org7a3c26a"><span class="section-number-4">4.1.2.</span> LUP</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <p>
-LUP is an ordered list of integers, <img src="ltximg/report_bd75a7339ff4787451986c8d2935642f3d3f5e9e.svg" alt="\(LUP[i]= j\)" class="org-svg" /> means that the polygon with index <img src="ltximg/report_6cf2f08af66400fd36f0183308ae35968f9ae29f.svg" alt="\(i\)" class="org-svg" /> is part of the polygon with index <img src="ltximg/report_898523cb79968388d249b09fc91c9cb7961c11bf.svg" alt="\(j\)" class="org-svg" />.
+LUP is an ordered list of integers, <img src="/home/chinmay/.local/state/emacs/var/org/persist/10/59eda3-4c98-43b4-81c6-64bb67ca8110-a9640c89b560d791ae72e9b789b36ee6.svg" alt="\(LUP[i]= j\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-fragment" /> means that the polygon with index <img src="/home/chinmay/.local/state/emacs/var/org/persist/40/9c3edd-ae01-4e84-be29-5f94dd016001-e4166a514bed1d5be235b42b980b9e31.svg" alt="\(i\)" style="height: 0.7447em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-fragment" /> is part of the polygon with index <img src="/home/chinmay/.local/state/emacs/var/org/persist/58/c65f74-c187-4990-974b-052a15e54bb0-c730902b818643ffe99332ac69222e83.svg" alt="\(j\)" style="height: 0.9353em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" />.
 </p>
 </div>
 </div>
-<div id="outline-container-orga56a93f" class="outline-4">
-<h4 id="orga56a93f"><span class="section-number-4">4.1.3.</span> LLE</h4>
+<div id="outline-container-org5046ed0" class="outline-4">
+<h4 id="org5046ed0"><span class="section-number-4">4.1.3.</span> LLE</h4>
 <div class="outline-text-4" id="text-4-1-3">
 <p>
 LLE is a list containing the diagonals of the partition.
@@ -473,8 +479,8 @@ LLE is a list containing the diagonals of the partition.
 </div>
 </div>
 </div>
-<div id="outline-container-org7481230" class="outline-3">
-<h3 id="org7481230"><span class="section-number-3">4.2.</span> Algorithm</h3>
+<div id="outline-container-orga786465" class="outline-3">
+<h3 id="orga786465"><span class="section-number-3">4.2.</span> Algorithm</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 We iterate over the list of diagonals (i.e. LLE) and check whether removing the diagonal between two faces disturbs the convexity of the structure. If it does not, then we merge the two faces and update the LDP and LUP lists.
@@ -482,352 +488,378 @@ We iterate over the list of diagonals (i.e. LLE) and check whether removing the 
 </div>
 </div>
 </div>
-<div id="outline-container-orga8e24d2" class="outline-2">
-<h2 id="orga8e24d2"><span class="section-number-2">5.</span> Benchmarks and Results</h2>
+<div id="outline-container-org133aeba" class="outline-2">
+<h2 id="org133aeba"><span class="section-number-2">5.</span> Benchmarks and Results</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-org231cfc7" class="outline-4">
-<h4 id="org231cfc7"><span class="section-number-4">5.0.1.</span> Algeria</h4>
+<div id="outline-container-org38301e8" class="outline-4">
+<h4 id="org38301e8"><span class="section-number-4">5.0.1.</span> Algeria</h4>
 <div class="outline-text-4" id="text-5-0-1">
 
-<div id="orgfa72101" class="figure">
+<div id="org92ca8c2" class="figure">
 <p><img src="images/alg_undec.png" alt="alg_undec.png" />
 </p>
 </div>
 
-<div id="org4f39a24" class="figure">
+<div id="orga47bafb" class="figure">
 <p><img src="images/alg_unm.png" alt="alg_unm.png" />
 </p>
 </div>
 
-<div id="org62070fe" class="figure">
+<div id="org21ffce8" class="figure">
 <p><img src="images/alg_me.png" alt="alg_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
 <li>No. of vertices: 62</li>
-<li>Time to decompose: 4019 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 28 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 155 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 1 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to decompose: 4019 <img src="/home/chinmay/.local/state/emacs/var/org/persist/47/6c6aa3-231d-4e1a-893b-dc9f752be614-f990314ebb949c4d30409393c5e0ddfe.svg" alt="$\pm$" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 28 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
+<li>Time to merge: 155 <img src="/home/chinmay/.local/state/emacs/var/org/persist/47/6c6aa3-231d-4e1a-893b-dc9f752be614-f990314ebb949c4d30409393c5e0ddfe.svg" alt="$\pm$" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 1 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
 <li>No. of polygons before merging: 29</li>
 <li>No. of polygons after merging: 22</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgb451eac" class="outline-4">
-<h4 id="orgb451eac"><span class="section-number-4">5.0.2.</span> Comb</h4>
+<div id="outline-container-org3387dbd" class="outline-4">
+<h4 id="org3387dbd"><span class="section-number-4">5.0.2.</span> Comb</h4>
 <div class="outline-text-4" id="text-5-0-2">
 
-<div id="org145ec14" class="figure">
+<div id="org5816406" class="figure">
 <p><img src="images/comb_undec.png" alt="comb_undec.png" />
 </p>
 </div>
 
-<div id="orga40e919" class="figure">
+<div id="org9e5d1e5" class="figure">
 <p><img src="images/comb_unm.png" alt="comb_unm.png" />
 </p>
 </div>
 
-<div id="org66fd3f0" class="figure">
+<div id="org052478c" class="figure">
 <p><img src="images/comb_me.png" alt="comb_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
 <li>No. of vertices: 10</li>
-<li>Time to decompose: 109 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 1 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 15 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 0 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to decompose: 109 <img src="/home/chinmay/.local/state/emacs/var/org/persist/8b/fa1ef9-09b8-49ad-a567-dcf3c11933be-c78b20ac3270146fb50d9eaa38bc0825.svg" alt="\(\pm\)" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 1 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
+<li>Time to merge: 15 <img src="/home/chinmay/.local/state/emacs/var/org/persist/47/6c6aa3-231d-4e1a-893b-dc9f752be614-f990314ebb949c4d30409393c5e0ddfe.svg" alt="$\pm$" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 0 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
 <li>No. of polygons before merging: 5</li>
 <li>No. of polygons after merging: 5</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org2c7c09a" class="outline-4">
-<h4 id="org2c7c09a"><span class="section-number-4">5.0.3.</span> Greenland</h4>
+<div id="outline-container-org79db695" class="outline-4">
+<h4 id="org79db695"><span class="section-number-4">5.0.3.</span> Greenland</h4>
 <div class="outline-text-4" id="text-5-0-3">
 
-<div id="org3cf8e61" class="figure">
+<div id="org4a570a5" class="figure">
 <p><img src="images/greenland_undec.png" alt="greenland_undec.png" />
 </p>
 </div>
 
-<div id="orgacc4b12" class="figure">
+<div id="org43694da" class="figure">
 <p><img src="images/greenland_unm.png" alt="greenland_unm.png" />
 </p>
 </div>
 
-<div id="org06304fb" class="figure">
+<div id="org0388300" class="figure">
 <p><img src="images/greenland_me.png" alt="greenland_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
 <li>No. of vertices: 132</li>
-<li>Time to decompose: 26504 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 59 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 540 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 3 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to decompose: 26504 <img src="/home/chinmay/.local/state/emacs/var/org/persist/8b/fa1ef9-09b8-49ad-a567-dcf3c11933be-c78b20ac3270146fb50d9eaa38bc0825.svg" alt="\(\pm\)" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 59 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
+<li>Time to merge: 540 <img src="/home/chinmay/.local/state/emacs/var/org/persist/47/6c6aa3-231d-4e1a-893b-dc9f752be614-f990314ebb949c4d30409393c5e0ddfe.svg" alt="$\pm$" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 3 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
 <li>No. of polygons before merging: 64</li>
 <li>No. of polygons after merging: 45</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc984ff7" class="outline-4">
-<h4 id="orgc984ff7"><span class="section-number-4">5.0.4.</span> Hand</h4>
+<div id="outline-container-orgc00ad90" class="outline-4">
+<h4 id="orgc00ad90"><span class="section-number-4">5.0.4.</span> Hand</h4>
 <div class="outline-text-4" id="text-5-0-4">
 
-<div id="org63d14b0" class="figure">
+<div id="orgd0b8856" class="figure">
 <p><img src="images/hand_undec.png" alt="hand_undec.png" />
 </p>
 </div>
 
-<div id="org40e0cb9" class="figure">
+<div id="orgcf18122" class="figure">
 <p><img src="images/hand_unm.png" alt="hand_unm.png" />
 </p>
 </div>
 
-<div id="org9557a49" class="figure">
+<div id="orgb0025ae" class="figure">
 <p><img src="images/hand_me.png" alt="hand_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
 <li>No. of vertices: 59</li>
-<li>Time to decompose: 3802 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 8 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 118 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 1 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to decompose: 3802 <img src="/home/chinmay/.local/state/emacs/var/org/persist/8b/fa1ef9-09b8-49ad-a567-dcf3c11933be-c78b20ac3270146fb50d9eaa38bc0825.svg" alt="\(\pm\)" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 8 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
+<li>Time to merge: 118 <img src="/home/chinmay/.local/state/emacs/var/org/persist/47/6c6aa3-231d-4e1a-893b-dc9f752be614-f990314ebb949c4d30409393c5e0ddfe.svg" alt="$\pm$" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 1 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
 <li>No. of polygons before merging: 25</li>
 <li>No. of polygons after merging: 19</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb35689a" class="outline-4">
-<h4 id="orgb35689a"><span class="section-number-4">5.0.5.</span> i18</h4>
+<div id="outline-container-org8dfdded" class="outline-4">
+<h4 id="org8dfdded"><span class="section-number-4">5.0.5.</span> i18</h4>
 <div class="outline-text-4" id="text-5-0-5">
 
-<div id="orgb523cba" class="figure">
+<div id="orgd461116" class="figure">
 <p><img src="images/i18_undec.png" alt="i18_undec.png" />
 </p>
 </div>
 
-<div id="org1ccf73b" class="figure">
+<div id="org5a156d9" class="figure">
 <p><img src="images/i18_unm.png" alt="i18_unm.png" />
 </p>
 </div>
 
-<div id="org3106bbb" class="figure">
+<div id="orgd0f362d" class="figure">
 <p><img src="images/i18_me.png" alt="i18_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
 <li>No. of vertices: 18</li>
-<li>Time to decompose: 555 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 2 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 41 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 0 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to decompose: 555 <img src="/home/chinmay/.local/state/emacs/var/org/persist/8b/fa1ef9-09b8-49ad-a567-dcf3c11933be-c78b20ac3270146fb50d9eaa38bc0825.svg" alt="\(\pm\)" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 2 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
+<li>Time to merge: 41 <img src="/home/chinmay/.local/state/emacs/var/org/persist/47/6c6aa3-231d-4e1a-893b-dc9f752be614-f990314ebb949c4d30409393c5e0ddfe.svg" alt="$\pm$" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 0 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
 <li>No. of polygons before merging: 10</li>
 <li>No. of polygons after merging: 9</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgdd25f09" class="outline-4">
-<h4 id="orgdd25f09"><span class="section-number-4">5.0.6.</span> India</h4>
+<div id="outline-container-org08758c5" class="outline-4">
+<h4 id="org08758c5"><span class="section-number-4">5.0.6.</span> India</h4>
 <div class="outline-text-4" id="text-5-0-6">
 
-<div id="orgab8267f" class="figure">
+<div id="org8551fa8" class="figure">
 <p><img src="images/india_undec.png" alt="india_undec.png" />
 </p>
 </div>
 
-<div id="org79a5a11" class="figure">
+<div id="orgb579c30" class="figure">
 <p><img src="images/india_unm.png" alt="india_unm.png" />
 </p>
 </div>
 
-<div id="org17ce028" class="figure">
+<div id="orgee84dc5" class="figure">
 <p><img src="images/india_me.png" alt="india_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
 <li>No. of vertices: 136</li>
-<li>Time to decompose: 46806 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 179 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 654 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 3 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to decompose: 46806 <img src="/home/chinmay/.local/state/emacs/var/org/persist/8b/fa1ef9-09b8-49ad-a567-dcf3c11933be-c78b20ac3270146fb50d9eaa38bc0825.svg" alt="\(\pm\)" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 179 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
+<li>Time to merge: 654 <img src="/home/chinmay/.local/state/emacs/var/org/persist/47/6c6aa3-231d-4e1a-893b-dc9f752be614-f990314ebb949c4d30409393c5e0ddfe.svg" alt="$\pm$" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 3 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
 <li>No. of polygons before merging: 75</li>
 <li>No. of polygons after merging: 54</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org69e524c" class="outline-4">
-<h4 id="org69e524c"><span class="section-number-4">5.0.7.</span> Mongolia</h4>
+<div id="outline-container-org59fff5b" class="outline-4">
+<h4 id="org59fff5b"><span class="section-number-4">5.0.7.</span> Mongolia</h4>
 <div class="outline-text-4" id="text-5-0-7">
 
-<div id="org4f03762" class="figure">
+<div id="orgbd8166d" class="figure">
 <p><img src="images/mong_undec.png" alt="mong_undec.png" />
 </p>
 </div>
 
-<div id="org76033ac" class="figure">
+<div id="org946837a" class="figure">
 <p><img src="images/mong_unm.png" alt="mong_unm.png" />
 </p>
 </div>
 
-<div id="orga83f4e7" class="figure">
+<div id="orga56f3ef" class="figure">
 <p><img src="images/mong_me.png" alt="mong_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
 <li>No. of vertices: 1495</li>
-<li>Time to decompose: 35185674  <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 25721 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to decompose: 35185674  <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
+<li>Time to merge: 25721 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
 <li>No. of polygons before merging: 620</li>
 <li>No. of polygons after merging: 429</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgbfc4b87" class="outline-4">
-<h4 id="orgbfc4b87"><span class="section-number-4">5.0.8.</span> poly2</h4>
+<div id="outline-container-org1097f01" class="outline-4">
+<h4 id="org1097f01"><span class="section-number-4">5.0.8.</span> poly2</h4>
 <div class="outline-text-4" id="text-5-0-8">
 
-<div id="orgcd6c881" class="figure">
+<div id="org076b49d" class="figure">
 <p><img src="images/poly2_undec.png" alt="poly2_undec.png" />
 </p>
 </div>
 
-<div id="org82fcef5" class="figure">
+<div id="org2cd63f9" class="figure">
 <p><img src="images/poly2_unm.png" alt="poly2_unm.png" />
 </p>
 </div>
 
-<div id="orgbf721a2" class="figure">
+<div id="org4045b7d" class="figure">
 <p><img src="images/poly2_me.png" alt="poly2_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
 <li>No. of vertices: 12</li>
-<li>Time to decompose: 148 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 2 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 31 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 1 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to decompose: 148 <img src="/home/chinmay/.local/state/emacs/var/org/persist/8b/fa1ef9-09b8-49ad-a567-dcf3c11933be-c78b20ac3270146fb50d9eaa38bc0825.svg" alt="\(\pm\)" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 2 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
+<li>Time to merge: 31 <img src="/home/chinmay/.local/state/emacs/var/org/persist/47/6c6aa3-231d-4e1a-893b-dc9f752be614-f990314ebb949c4d30409393c5e0ddfe.svg" alt="$\pm$" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 1 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
 <li>No. of polygons before merging: 7</li>
 <li>No. of polygons after merging: 4</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc0c53c2" class="outline-4">
-<h4 id="orgc0c53c2"><span class="section-number-4">5.0.9.</span> Snake</h4>
+<div id="outline-container-org9882dc8" class="outline-4">
+<h4 id="org9882dc8"><span class="section-number-4">5.0.9.</span> Snake</h4>
 <div class="outline-text-4" id="text-5-0-9">
 
-<div id="orgc6ad516" class="figure">
+<div id="org4012426" class="figure">
 <p><img src="images/snake_undec.png" alt="snake_undec.png" />
 </p>
 </div>
 
-<div id="org2506474" class="figure">
+<div id="org1b57d1f" class="figure">
 <p><img src="images/snake_unm.png" alt="snake_unm.png" />
 </p>
 </div>
 
-<div id="org28494b9" class="figure">
+<div id="orgeda7d56" class="figure">
 <p><img src="images/snake_me.png" alt="snake_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
 <li>No. of vertices: 12</li>
-<li>Time to decompose: 148 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 2 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 22 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 1 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to decompose: 148 <img src="/home/chinmay/.local/state/emacs/var/org/persist/8b/fa1ef9-09b8-49ad-a567-dcf3c11933be-c78b20ac3270146fb50d9eaa38bc0825.svg" alt="\(\pm\)" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 2 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
+<li>Time to merge: 22 <img src="/home/chinmay/.local/state/emacs/var/org/persist/47/6c6aa3-231d-4e1a-893b-dc9f752be614-f990314ebb949c4d30409393c5e0ddfe.svg" alt="$\pm$" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 1 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
 <li>No. of polygons before merging: 6</li>
 <li>No. of polygons after merging: 6</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org4fc77a2" class="outline-4">
-<h4 id="org4fc77a2"><span class="section-number-4">5.0.10.</span> Star</h4>
+<div id="outline-container-orgd03040d" class="outline-4">
+<h4 id="orgd03040d"><span class="section-number-4">5.0.10.</span> Star</h4>
 <div class="outline-text-4" id="text-5-0-10">
 
-<div id="org2b4424d" class="figure">
+<div id="org673c65f" class="figure">
 <p><img src="images/star_undec.png" alt="star_undec.png" />
 </p>
 </div>
 
-<div id="orgb922398" class="figure">
+<div id="orgfcd992e" class="figure">
 <p><img src="images/star_unm.png" alt="star_unm.png" />
 </p>
 </div>
 
-<div id="org5b48c09" class="figure">
+<div id="org33908e3" class="figure">
 <p><img src="images/star_me.png" alt="star_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
 <li>No. of vertices: 10</li>
-<li>Time to decompose: 125 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 1 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 20 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 0 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to decompose: 125 <img src="/home/chinmay/.local/state/emacs/var/org/persist/8b/fa1ef9-09b8-49ad-a567-dcf3c11933be-c78b20ac3270146fb50d9eaa38bc0825.svg" alt="\(\pm\)" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 1 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
+<li>Time to merge: 20 <img src="/home/chinmay/.local/state/emacs/var/org/persist/47/6c6aa3-231d-4e1a-893b-dc9f752be614-f990314ebb949c4d30409393c5e0ddfe.svg" alt="$\pm$" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 0 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
 <li>No. of polygons before merging: 6</li>
 <li>No. of polygons after merging: 5</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd29cc39" class="outline-4">
-<h4 id="orgd29cc39"><span class="section-number-4">5.0.11.</span> test2</h4>
+<div id="outline-container-org548dd18" class="outline-4">
+<h4 id="org548dd18"><span class="section-number-4">5.0.11.</span> test2</h4>
 <div class="outline-text-4" id="text-5-0-11">
 
-<div id="org16f9ef5" class="figure">
+<div id="org4f75368" class="figure">
 <p><img src="images/test2_undec.png" alt="test2_undec.png" />
 </p>
 </div>
 
-<div id="orgcea2813" class="figure">
+<div id="org8b76768" class="figure">
 <p><img src="images/test2_unm.png" alt="test2_unm.png" />
 </p>
 </div>
 
-<div id="orga2439b6" class="figure">
+<div id="org72fb70c" class="figure">
 <p><img src="images/test2_me.png" alt="test2_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
 <li>No. of vertices: 21</li>
-<li>Time to decompose: 535 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 2 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 37 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 0 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to decompose: 535 <img src="/home/chinmay/.local/state/emacs/var/org/persist/8b/fa1ef9-09b8-49ad-a567-dcf3c11933be-c78b20ac3270146fb50d9eaa38bc0825.svg" alt="\(\pm\)" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 2 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
+<li>Time to merge: 37 <img src="/home/chinmay/.local/state/emacs/var/org/persist/47/6c6aa3-231d-4e1a-893b-dc9f752be614-f990314ebb949c4d30409393c5e0ddfe.svg" alt="$\pm$" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 0 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
 <li>No. of polygons before merging: 11</li>
 <li>No. of polygons after merging: 10</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org40c21cd" class="outline-4">
-<h4 id="org40c21cd"><span class="section-number-4">5.0.12.</span> Monteserrat</h4>
+<div id="outline-container-orgec62dd2" class="outline-4">
+<h4 id="orgec62dd2"><span class="section-number-4">5.0.12.</span> Monteserrat</h4>
 <div class="outline-text-4" id="text-5-0-12">
 
-<div id="org464cf28" class="figure">
+<div id="orgf059433" class="figure">
 <p><img src="images/mons_undec.png" alt="mons_undec.png" />
 </p>
 </div>
 
-<div id="orgb569af8" class="figure">
+<div id="orgfc29ba4" class="figure">
 <p><img src="images/mons_unm.png" alt="mons_unm.png" />
 </p>
 </div>
 
-<div id="org6fe60de" class="figure">
+<div id="org34723fa" class="figure">
 <p><img src="images/mons_me.png" alt="mons_me.png" />
 </p>
 </div>
 
 <ul class="org-ul">
 <li>No. of vertices: 23</li>
-<li>Time to decompose: 300 <img src="ltximg/report_a4d3b8e92b106fc6aba57b7a2b2ed61b0ff8a7a0.svg" alt="\(\pm\)" class="org-svg" /> 15 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
-<li>Time to merge: 34 <img src="ltximg/report_a9d4a17faba3613a69612b9fa732c0542f59c247.svg" alt="$\pm$" class="org-svg" /> 1 <img src="ltximg/report_482916eee2d5b5f1ecb2cdabaa31453dbb47d38a.svg" alt="$\mu s$" class="org-svg" /></li>
+<li>Time to decompose: 300 <img src="/home/chinmay/.local/state/emacs/var/org/persist/8b/fa1ef9-09b8-49ad-a567-dcf3c11933be-c78b20ac3270146fb50d9eaa38bc0825.svg" alt="\(\pm\)" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 15 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
+<li>Time to merge: 34 <img src="/home/chinmay/.local/state/emacs/var/org/persist/47/6c6aa3-231d-4e1a-893b-dc9f752be614-f990314ebb949c4d30409393c5e0ddfe.svg" alt="$\pm$" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-fragment" /> 1 <img src="/home/chinmay/.local/state/emacs/var/org/persist/5c/a97845-494c-4897-acfe-78b2cc2662e4-7630776431f3faf136adca1792b4e861.svg" alt="$\mu s$" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-fragment" /></li>
 <li>No. of polygons before merging: 9</li>
 <li>No. of polygons after merging: 7</li>
 </ul>
 </div>
 </div>
 </div>
+
+<div id="outline-container-org33c4329" class="outline-2">
+<h2 id="org33c4329"><span class="section-number-2">6.</span> Plots</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org42d0af1" class="outline-3">
+<h3 id="org42d0af1"><span class="section-number-3">6.1.</span> Decomposition</h3>
+<div class="outline-text-3" id="text-6-1">
+
+<div id="orgbc5dd24" class="figure">
+<p><img src="images/decomp_analysis.png" alt="decomp_analysis.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orga21e044" class="outline-3">
+<h3 id="orga21e044"><span class="section-number-3">6.2.</span> Merging</h3>
+<div class="outline-text-3" id="text-6-2">
+
+<div id="orgd9255b2" class="figure">
+<p><img src="images/merge_analysis.png" alt="merge_analysis.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Chinmay Dalal (2020A7PS2060H), Ashwin Pugalia(2020A7PS1080H), Deep Chordia(2020A7PS2073H), Yash Ratnani(2020A7PS0039H)</p>
-<p class="date">Created: 2023-03-24 Fri 19:57</p>
+<p class="date">Created: 2023-03-28 Tue 14:18</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
