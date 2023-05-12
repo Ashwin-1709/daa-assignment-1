@@ -1,11 +1,9 @@
 # CS F364 -  Design and Analysis of Algorithms
 
 ### Objective: Decomposing any arbitrary polygon into convex polygons
-In this assignment we have implemented the algorithm[1] described in the following paper (decomposition + merging): </br>
-[1] Fernández, J., Cánovas, L., & Pelegrın, B. (2000). Algorithms for the decomposition of a polygon into 
-convex polygons. European Journal of Operational Research, 121(2), 330-342. </br>
-[Original Paper Link](https://doi.org/10.1016/S0377-2217(99)00033-8)
-</br>
+In this assignment we have implemented the algorithm described in the following paper (decomposition + merging):
+
+[Fernández, J., Cánovas, L., & Pelegrın, B. (2000). Algorithms for the decomposition of a polygon into convex polygons. European Journal of Operational Research, 121(2), 330-342](https://doi.org/10.1016/S0377-2217(99)00033-8)
 #### Doubly Connected Edge List (DCEL)
 The decomposition is stored in a Doubly Connected Edge List (DCEL) Data Structure.
 DCEL consists of three main sub-data-structures, namely Vertex, Edge and Face. </br>
@@ -14,8 +12,12 @@ DCEL consists of three main sub-data-structures, namely Vertex, Edge and Face. <
 #### Visualisation of the decomposition is written in python using matplotlib
 
 
-## How to run : 
-1. Install and configure Ninja, Cmake for the project.
-2. Once configured, run the bash script for building ```./scripts/build.sh```
-3. Input Format : Number of vertices of polygon (N) in first line and coordinates of points of polygon in subsequent N lines ( **in clockwise order only** )
-4. To run use the bash script run.sh in scripts folder ```./scripts/run.sh test_file.txt```
+## Building and running:
+1. Install CMake.
+2. Run `cmake . -B build` to generate the makefile.
+3. Run `make -C build` to build.
+4. `./build/polygon_decomp` to run.
+
+    Input format: Number of vertices of polygon $N$ in first line and coordinates of points of polygon in subsequent $N$ lines (**in clockwise order only**)
+
+You can use `cmake --build build --target doxygen` to build the docs, which will be available at `build/html/index.html`
