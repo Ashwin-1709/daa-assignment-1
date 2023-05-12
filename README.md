@@ -17,4 +17,4 @@ DCEL consists of three main sub-data-structures, namely Vertex, Edge and Face. <
 1. Install and configure Ninja, Cmake for the project.
 2. Once configured, run the bash script for building ```./scripts/build.sh```
 3. Input Format : Number of vertices of polygon (N) in first line and coordinates of points of polygon in subsequent N lines ( **in clockwise order only** )
-4. To run use the bash script run.sh in scripts folder ```./scripts/run.sh < input.txt```
+4. To run use the bash script run.sh in scripts folder ```./scripts/run.sh test_file.txt```
