@@ -1,0 +1,10 @@
+Checks:
+  bugprone-*,
+  modernize-*,
+  performance-*,
+  readibility-*,
+  misc-*
+  cppcoreguidelines-special-member-functions
+  -bugprone-easily-swappable-parameters
+  -misc-no-recursion
+  -misc-non-private-member-variables-in-classes
